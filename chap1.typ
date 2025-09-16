@@ -82,8 +82,8 @@ $
   $
   利用Viral定理可以估算太阳的温度。假设太阳是由$N$个质量为$m_"sun"$的粒子组成，太阳的总质量为$M_"sun" = N m_"sun"$，半径为$R_"sun"$，则
   $
-    3/2 k_B T_B N = overline(T) = -1/2 overline(U) approx G M_"sun"^2/R_"sun"\
-    T_B tilde 10^7 K
+    3/2 k_B T_B N = overline(T) = -1/2 overline(U) tilde G M_"sun"^2/R_"sun"\
+    T_B tilde G (m M_"sun")/(3 k_B R_"sun") tilde 10^7 K
   $
 ]
 
