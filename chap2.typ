@@ -272,3 +272,367 @@ $
     mat(M+m, - m R cos theta; -m R cos theta, m R^2) mat(dot.double(X); dot.double(theta)) + mat(m R sin theta dot(theta)^2; m g R cos theta) = mat(0; 0)
   $
 ]
+
+#example(subname: [转动的杆与小球], lab: "ex2.2")[
+  对于杆上的小球，杆以任意角速度$omega$绕固定点$O$转动。
+  $
+    x = q sin alpha cos omega t\
+    y = q sin alpha sin omega t\
+    z = q cos alpha
+  $
+  D'Alembert原理为
+  $
+    - m g vb(g) dot delta vb(r) = m dot.double(vb(r)) dot delta vb(r) \
+  $
+  其中
+  $
+    dot(x) & = dot(q) sin alpha cos omega t - omega q sin alpha sin omega t \
+    dot.double(x) & = dot.double(q) sin alpha cos omega t - 2 omega dot(q) sin alpha sin omega t - omega^2 q sin alpha cos omega t \
+  $
+  代入方程有
+  $
+    dot.double(q) - omega^2 q sin^2 alpha + g cos alpha = 0\
+  $
+]
+
+== Lagrange方程
+
+对于$N$个质点体系，受到$k$个约束，有$q_1,...,q_s$个广义坐标
+$
+  delta vb(r)_i = sum_j pdv(vb(r)_i, q_j) delta q_j\
+$
+有D'Alembert原理
+$
+  sum_i vb(F)_i dot delta vb(r)_i &= sum_j pdv(vb(r)_i, q_j) delta q_j = sum_j Q_j delta q_j\
+  &= sum_i m_i dot.double(vb(r)_i) dot sum_j pdv(vb(r)_i, q_j) delta q_j = sum_j (sum_i m_i dot.double(vb(r)_i) pdv(vb(r)_i, q_j)) delta q_j
+$
+这就意味着广义力
+$
+  Q_j = sum_i m_i dot.double(vb(r)_i) pdv(vb(r)_i, q_j)
+$
+利用Lagrange关系
+$
+  dv(, t) pdv(vb(r)_i, q_j) = pdv(dot(vb(r)_i), q_j)\
+  pdv(vb(r)_i, q_j) = pdv(dot(vb(r)_i), dot(q)_j)
+$
+$
+  Q_j = sum_i m_i dot.double(vb(r)_i) pdv(vb(r)_i, q_j) &= dv(, t) (sum_i m_i dot(vb(r)_i) pdv(dot(vb(r))_i, dot(q_j))) - 2 m_i dot(vb(r)_i) pdv(dot(vb(r))_i, q_j) \
+  &= dv(, t) (sum_i m_i/2 pdv(dot(vb(r))_i^2, dot(q_j))) - sum_i m_i/2 pdv(dot(vb(r))_i^2, q_j) \
+  &= dv(, t) pdv(T, dot(q_j)) - pdv(T, q_j)
+$
+其中动能
+$
+             T & = sum_i 1/2 m_i dot(vb(r))_i^2 \
+  dot(vb(r)_i) & = sum_j pdv(vb(r)_i, q_j) dot(q)_j + pdv(vb(r)_i, t)
+$
+动能分为三项
+$
+    T & = T_0 + T_1 + T_2 \
+  T_0 & = sum_i 1/2 m_i (pdv(vb(r)_i, t))^2 \
+  T_1 & = sum_i sum_j m_i pdv(vb(r)_i, t) dot pdv(vb(r)_i, q_j) dot(q)_j \
+  T_2 & = sum_i sum_j sum_k 1/2 m_i pdv(vb(r)_i, q_j) pdv(vb(r)_i, q_k) dot(q)_j dot(q)_k \
+$
+其中$T_0$与时间有关，$T_1$与时间和广义速度线性相关，$T_2$与广义速度平方相关。得到Lagrange方程
+#theorem(subname: [Lagrange方程])[
+  对于受理想约束的质点体系，动能为$T$，广义力为$Q_j$，则有
+  $
+    dv(, t) pdv(T, dot(q_j)) - pdv(T, q_j) = Q_j
+  $
+]
+该式由D'Alembert原理直接导出，适用于理想约束和完整约束的系统。与Newton方程等价，但不含约束力。
+
+而对于有势力
+$
+  vb(F)_i & = - grad_(vb(r)_i) U(vb(r)_1, vb(r)_2, ..., vb(r)_N) \
+      Q_j & = sum_i vb(F)_i dot pdv(vb(r)_i, q_j) = - pdv(U, q_j)
+$
+代入Lagrange方程
+$
+  dv(, t) pdv(T, dot(q_j)) - pdv(T, q_j) + pdv(U, q_j) = 0\
+  dv(, t) pdv(T, dot(q_j)) - pdv((T - U), q_j) = 0
+$
+对于完整系，$vb(r)_i$不显含$dot(q)_j$，因此
+$
+  pdv(V, dot(q)_j) = sum_j grad_(vb(r)_i) V dot pdv(vb(r)_i, q_j) = 0
+$
+得到Euler-Lagrange方程
+#theorem(subname: [Euler-Lagrange方程])[
+  对于受理想约束的保守质点体系，动能为$T$，势能为$U$，则有
+  $
+    dv(, t) pdv(L, dot(q_j)) - pdv(L, q_j) = 0\
+  $
+  其中$L = T - U$为*Lagrange量*。
+]
+如果一个系统除了有势力还有非有势力，则其他力以广义力的形式加入方程右边
+$
+  dv(, t) pdv(L, dot(q_j)) - pdv(L, q_j) = Q_j^"非"
+$
+
+#example(subname: [转动的杆与小球])[
+  回到 @ex2.2 的系统，利用Lagrange方程来求解
+  $
+    L & = T - V = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) - m g z \
+      & = 1/2 m (dot(q)^2 + omega^2 q^2 sin^2 alpha) - m g q cos alpha \
+  $
+  由Lagrange方程
+  $
+    dv(, t) (m dot(q)) - (m omega^2 q sin^2 alpha - m g cos alpha) = 0\
+  $
+  得到
+  $
+    dot.double(q) - omega^2 q sin^2 alpha + g cos alpha = 0
+  $
+]
+
+#example(subname: [一维谐振子])[
+  质量为$m$的质点在一维谐振子势场中运动，势能为
+  $
+    U = 1/2 k x^2
+  $
+  则Lagrange量为
+  $
+    L = T - U = 1/2 m dot(x)^2 - 1/2 k x^2
+  $
+  Lagrange方程为
+  $
+    dv(, t) pdv(L, dot(x)) - pdv(L, x) = 0\
+    m dot.double(x) + k x = 0
+  $
+]
+
+#example(subname: [LC振荡电路])[
+  电感能量为
+  $
+    1/2 L I^2 = 1/2 L dot(Q)^2
+  $
+  电容能量为
+  $
+    Q^2 / 2C
+  $
+  则Lagrange量为
+  $
+    L = T - U = 1/2 L dot(Q)^2 - Q^2 / 2C
+  $
+  Lagrange方程为
+  $
+    dv(, t) pdv(L, dot(Q)) - pdv(L, Q) = 0\
+    dot.double(Q) + Q /(L C) = 0
+  $
+  #note[
+    在机械系统中，机械能为动能和势能之和；在电磁系统中，总能量为电能和磁能之和，而Lagrange量为磁能减去电能。
+  ]
+]
+
+== Lagrange方程的解法
+
+Lagrange方程是$s$个二阶微分方程组成的方程组
+$
+  dv(, t) pdv(L, dot(q_j)) - pdv(L, q_j) = Q_j^"非", j = 1, 2, ..., s
+$
+
+=== 循环座标、循环积分
+
+考虑
+$
+  L = L(q_1, q_2, ..., q_s, dot(q)_1, dot(q)_2, ..., dot(q)_s, t)
+$
+如果$L$不显含某个广义坐标$q_i$，则称$q_i$为*循环坐标*。
+
+#definition(subname: [正则共轭动量])[
+  对于广义坐标$q_i$，定义与其对应的*正则共轭动量* / 广义动量为
+  $
+    p_i = pdv(L, dot(q)_i)
+  $
+]
+Lagrange方程为
+$
+  dv(, t) p_i - pdv(L, q_i) = 0
+$
+对于循环坐标$q_i$，有
+$
+  pdv(L, q_i) = 0
+$
+因此
+$
+  dv(, t) p_i = pdv(L, q_i) = 0
+$
+这意味着$p_i$是*守恒量*，称为*循环积分*，是Lagrange方程的第一积分，其物理意义是动量守恒。
+
+=== 能量积分
+
+如果Lagrange量不显含时间$t$，则称系统为*孤立系统*
+$
+  pdv(L, t) = 0
+$
+就有
+$
+  dv(L, t) &= sum_i pdv(L, q_i) dot(q)_i + sum_i pdv(L, dot(q)_i) dot.double(q)_i + pdv(L, t) = sum_i (dv(, t) (pdv(L, dot(q)_i)) dot(q)_i + pdv(L, dot(q_i)) dv(, t) dot(q)_i)\
+  &= sum_i dv(, t) (pdv(L, dot(q)_i) dot(q)_i) = 0
+$
+从而
+$
+  dv(, t) (sum_i pdv(L, dot(q)_i) dot(q)_i - L) = 0
+$
+即
+$
+  H = sum_i pdv(L, dot(q)_i) dot(q)_i - L = sum_i p_i dot(q)_i - L
+$
+为守恒量，称为*能量积分*。
+#note[
+  事实上这是在$L$与时间无关的情况下，时间的共轭量为Hamilton量。
+]
+#newpara()
+
+$V$不显含$dot(q)_i$有
+$
+  sum_i pdv(U, dot(q)_i) dot(q)_i - L &= sum_i pdv(T, dot(q)_i) dot(q)_i - L \
+  &= sum_i pdv(T_0, dot(q)_i) dot(q)_i + sum_i pdv(T_1, dot(q)_i) dot(q)_i + sum_i pdv(T_2, dot(q)_i) dot(q)_i - (T - V)\
+  &= T_1 + 2 T_2 - (T_0 + T_1 + T_2) + V = T_2 - T_0 + V\
+$
+对于*稳定约束*的*完整系*，$T_0 = 0, T_1 = 0$，因此
+$
+  E = T + V
+$
+*广义能量*守恒。
+
+=== Routh函数
+
+对循环座标$q_i$，引入Routh函数
+$
+  R_i & = L(q_1, q_2, ..., q_(i-1), q_(i+1), ..., q_s, dot(q)_1, dot(q)_2, ..., dot(q)_s, t) - p_i dot(q)_i
+$
+此时$p_i$为常数，Routh函数不显含$q_i$，因此实现了降阶
+$
+  dd(R_i) & = dd(L) - p_i dd(dot(q)_i) \
+          & = sum_(j != i) (pdv(L, q_j) dd(q)_j + pdv(L, dot(q)_j) dd(dot(q)_j)) + pdv(R, t) dd(t)
+$
+
+== 关于Lagrange方程的讨论
+
+=== 点变换
+
+对于广义坐标${q_i}$，Lagrange量为$L(q_i, dot(q)_i, t)$，有Lagrange方程
+$
+  dv(, t) pdv(L, dot(q)_j) - pdv(L, q_j) = 0
+$
+有另一套广义坐标${Q_i}$
+$
+  q_i = q_i (Q_1, Q_2, ..., Q_s, t)\
+$
+是*点变换*
+$
+  L(Q_i, dot(Q)_i, t) = overline(L)(Q_i, dot(Q)_i, t) = L(q_i (Q_j, t), sum_j pdv(q_i, Q_j) dot(Q)_j + pdv(q_i, t), t) \
+$
+也有其Lagrange方程
+$
+  dv(, t) pdv(overline(L), dot(Q)_j) - pdv(overline(L), Q_j) = 0
+$
+事实上
+$
+  dv(, t) pdv(overline(L), dot(Q)_j) & = dv(, t) sum_i (pdv(L, dot(q)_i) pdv(dot(q)_i, dot(Q)_j) + pdv(L, q_i) pdv(q_i, dot(Q)_j)) = dv(, t) sum_i pdv(L, dot(q)_i) pdv(dot(q)_i, dot(Q)_j) \
+  &= dv(, t) sum_i pdv(L, dot(q)_i) pdv(q_i, Q_j) \
+  &= sum_j (dv(, t) (pdv(L, dot(q)_i)) pdv(q_i, Q_j) + pdv(L, dot(q)_i) pdv(dot(q)_i, Q_j)) \
+  &= sum_j (pdv(L, q_i) pdv(q_i, Q_j) + pdv(L, dot(q)_i) pdv(dot(q)_i, Q_j)) \
+  &= pdv(overline(L), Q_j)
+$
+
+=== Lagrange方程的通解
+
+相差一个广义坐标和时间的任意函数
+$
+  f(q,t)
+$
+的全导数的Lagrange量
+$
+  L_1 = L + dv(f, t) = L + sum_i pdv(f, q_i) dot(q)_i + pdv(f, t)
+$
+也满足Lagrange方程
+$
+  pdv(, dot(q)_j) dv(f, t) = pdv(f, q_j)\
+  dv(, t) pdv(f, q_j) = pdv(, q_j) dv(f, t)
+$
+从而
+$
+  dv(, t) pdv(, dot(q)_j) dv(f, t) - pdv(, q_j) dv(f, t) = 0
+$
+这就意味着Lagrange量并不是唯一的。
+
+=== 标度变换
+
+对于Lagrange量$L(q_i, dot(q)_i, t)$，考虑标度变换
+$
+  q'_i = alpha q_i, t' = beta t
+$
+$
+  L'(q'_i, dot(q')_i, t') = L(q_i, dot(q)_i, t) = L(q'_i / alpha, beta / alpha dot(q')_i, beta t)
+$
+则有
+$
+  dv(, t') pdv(L', dot(q')_j) - pdv(L', q'_j) = 0
+$
+
+=== 广义势函数
+
+我们只考虑了势能和速度无关的情况，现在考虑势能与速度有关的情况，广义势函数
+$
+  V = V(q_i, dot(q)_i, t)
+$
+广义力为
+$
+  Q_i = dv(, t) pdv(V, dot(q)_i) - pdv(V, q_i)
+$
+Lagrange方程为
+$
+  dv(, t) pdv(L, dot(q)_i) - pdv(L, q_i) = 0
+$
+仍然成立。
+
+#example(subname: [广义势函数])[
+  对于电磁场$vb(E),vb(B)$以及粒子$m,q$，有受力
+  $
+    vb(F) & = q (vb(E) + vb(v) times vb(B)) = m dot(vb(v)) \
+  $
+  考虑磁矢量势和电标量势
+  $
+    vb(B) = curl vb(A)\
+    vb(E) = - grad phi - pdv(vb(A), t)
+  $
+  从而
+  $
+    vb(F) = - q (grad phi + pdv(vb(A), t)) + q vb(v) times (curl vb(A))\
+  $
+  考虑到
+  $
+    grad (vb(A) dot vb(B)) = vb(A) times (curl vb(B)) + vb(B) times (curl vb(A)) + (vb(A) dot grad) vb(B) + (vb(B) dot grad) vb(A)
+  $
+  就有
+  $
+    vb(v) times (curl vb(A)) = grad (vb(A) dot vb(v)) - (vb(v) dot grad) vb(A)
+  $
+  因此
+  $
+    vb(F) & = - q (grad phi + pdv(vb(A), t)) + q (grad (vb(A) dot vb(v)) - (vb(v) dot grad) vb(A)) \
+          & = - q grad (phi - vb(A) dot vb(v)) - q (pdv(vb(A), t) + (vb(v) dot grad) vb(A))
+  $
+  有
+  $
+    F_i & = - q pdv(, x_i)(phi - vb(A) dot vb(v)) - q (pdv(A_i, t) + (vb(v) dot grad) A_i) \
+        & = - pdv(V, x_i) + dv(, t) pdv(V, dot(x)_i)
+  $
+  对于广义势函数
+  $
+    V = q (phi - vb(A) dot vb(v))\
+  $
+  有Lagrange量
+  $
+    L = T - V = 1/2 m dot(vb(x))^2 - q (phi - vb(A) dot vb(v))\
+  $
+  Lagrange方程为
+  $
+    dv(, t) pdv(L, dot(x)_i) - pdv(L, x_i) = 0
+  $
+  $
+    m dot.double(vb(x)) = - q (grad phi + pdv(vb(A), t)) + q vb(v) times (curl vb(A))
+  $
+  这就是带电粒子在电磁场中的运动方程。
+]
