@@ -274,7 +274,7 @@ $
 ]
 
 #example(subname: [转动的杆与小球], lab: "ex2.2")[
-  对于杆上的小球，杆以任意角速度$omega$绕固定点$O$转动。
+  对于杆上的小球，杆以任意角速度$omega$绕固定轴以夹角$alpha$转动。
   $
     x = q sin alpha cos omega t\
     y = q sin alpha sin omega t\
@@ -430,7 +430,7 @@ $
   dv(, t) pdv(L, dot(q_j)) - pdv(L, q_j) = Q_j^"非", j = 1, 2, ..., s
 $
 
-=== 循环座标、循环积分
+=== 循环坐标、循环积分
 
 考虑
 $
@@ -477,11 +477,7 @@ $
 $
   H = sum_i pdv(L, dot(q)_i) dot(q)_i - L = sum_i p_i dot(q)_i - L
 $
-为守恒量，称为*能量积分*。
-#note[
-  事实上这是在$L$与时间无关的情况下，时间的共轭量为Hamilton量。
-]
-#newpara()
+为守恒量，事实上$H$就是Hamilton量。
 
 $V$不显含$dot(q)_i$有
 $
@@ -495,16 +491,112 @@ $
 $
 *广义能量*守恒。
 
+#note(subname: [关于共轭的讨论])[
+  事实上上面的讨论是在说$L$与时间无关的情况下，时间的共轭量为Hamilton量。
+
+  *共轭*指的是 Legendre 对偶：对速度进行 Legendre 变换
+  $
+    H(q_i, p_i, t) = sum_i p_i dot(q)_i - L(q_i, dot(q)_i, t)
+  $
+  事实上相空间上的一形式$theta = sum_i p_i dd(q)_i$就是由Legendre变换得到的。Lagrange力学通过Legendre变换“升维”到相空间后自然形成的几何结构是辛结构。
+
+  *辛几何*中，在*相空间*上坐标由位置$q_i$和动量$p_i$组成，$2s$维相空间$(q_i, p_i)$上有自然的辛结构，Hamilton量$H$生成Hamilton流，从而系统的运动可以看作是相空间中的一条曲线。
+
+  定义典范一形式与辛二形式：
+  $
+    theta = sum_i p_i dd(q)_i\
+    omega = dd(theta) = sum_i dd(p)_i and dd(q)_i
+  $
+  $omega$是闭的非退化2-形式，即$dd(omega) = 0$。$(p_i,q_i)$是*典范坐标*，$omega$称为*辛结构*。相空间$(q_i, p_i)$是一个*辛流形*。
+]
+
+#note(subname: [关于守恒的讨论])[
+  Hamilton方程是说
+  $
+    dot(q)_i = pdv(H, p_i), dot(p)_i = - pdv(H, q_i)
+  $
+  定义$X_H$为Hamilton向量场
+  $
+    X_H = sum_i (pdv(H, p_i) pdv(, q_i) - pdv(H, q_i) pdv(, p_i))
+  $
+  就有内积算子，将2-形式降为1-形式
+  $
+    i_(X_H) omega = - dd(H) = - sum_i (pdv(H, p_i) dd(p)_i + pdv(H, q_i) dd(q)_i)
+  $
+  其中
+  $
+    i_(X_H) omega (Y) = omega(X_H, Y) = {X_H, Y}
+  $
+
+  Poisson括号是相空间中两个广义变量的一个重要结构，定义为
+  $
+    {f, g} = sum_i (pdv(f, q_i) pdv(g, p_i) - pdv(f, p_i) pdv(g, q_i))
+  $
+  其中$f, g$是相空间中的两个函数。Poisson括号满足反对称性、双线性、Leibniz法则和Jacobi恒等式。有基本正则关系
+  $
+    {q_i, q_j} = 0, {p_i, p_j} = 0, {q_i, p_j} = delta_(i j)
+  $
+  #newpara()
+
+  对于任意的可观测量$f$，Hamilton方程可以写成
+  $
+    dot(f) = {f, H} + pdv(f, t)
+  $
+  如果$f$不显含时间，则
+  $
+    dot(f) = {f, H}
+  $
+
+  #newpara()
+
+  辛变换、典范变换、正则变换是指保持辛结构$omega$不变的变换，也是保持泊松括号结构不变的变换。若该变换是系统的对称性，应当不改变动力学，即不改变Hamilton量$H$，则称该变换为*典范对称变换*。
+
+  Hamilton函数$G$对应一个Hamilton向量场$X_G$，定义为
+  $
+    i_(X_G) omega = - dd(G)
+  $
+  其中$i_(X_G)$是内积算子，任一函数$G$可以通过泊松括号生成*无穷小变换*：
+  $
+    delta f = epsilon {f, G}
+  $
+  若$G$为守恒量，则它生成的变换是系统的对称变换，这就是沿着向量场的无穷小流。
+
+  事实上Poisson括号本身就满足反对称性和Jacobi恒等式，因此Poisson括号本身就是一个Lie代数。而其每个函数$G$生成的群
+  $
+    e^(epsilon_X_G)
+  $
+  也是一个*1参数Lie群*，这样的流组成的群称为*辛群*。
+
+  Noether 定理说明了守恒量与对称变换之间的联系：每一个连续对称变换都对应一个守恒量，反之亦然。
+
+  Hamilton函数和Hamilton量的区别在于，Hamilton函数是任意的相空间函数，而Hamilton量是系统的能量函数，是动力学的生成元。这就有点像量子力学中的Hamilton算符和能量本征值的区别。
+
+  例如上面的循环坐标$q_i$，其Hamilton函数$G=q_i$，则
+  $
+    delta f = epsilon {f, q_i} = - epsilon pdv(f, p_i)
+  $
+  这就是动量的平移变换，是系统的对称性，因此$p_i$是守恒量。
+
+  以及对于时间不显含的系统，其Hamilton函数$G=H$，则
+  $
+    delta f = epsilon {f, H} = epsilon dot(f)
+  $
+  这就是时间平移变换，是系统的对称性，因此$H$是守恒量。
+]
+
+#newpara()
+
+
 === Routh函数
 
 对循环座标$q_i$，引入Routh函数
 $
-  R_i & = L(q_1, q_2, ..., q_(i-1), q_(i+1), ..., q_s, dot(q)_1, dot(q)_2, ..., dot(q)_s, t) - p_i dot(q)_i
+  R_i & = L(q_1, q_2, ..., q_(i-1), q_(i+1), ..., q_s, dot(q)_1, dot(q)_2, ..., dot(q)_(i-1), dot(q)_(i+1), ..., dot(q)_s, p_i, t) \
 $
 此时$p_i$为常数，Routh函数不显含$q_i$，因此实现了降阶
 $
   dd(R_i) & = dd(L) - p_i dd(dot(q)_i) \
-          & = sum_(j != i) (pdv(L, q_j) dd(q)_j + pdv(L, dot(q)_j) dd(dot(q)_j)) + pdv(R, t) dd(t)
+          & = sum_(j != i) (pdv(L, q_j) dd(q)_j + pdv(L, dot(q)_j) dd(dot(q)_j)) + pdv(R_i, t) dd(t)
 $
 
 == 关于Lagrange方程的讨论
@@ -617,6 +709,8 @@ $
   有
   $
     F_i & = - q pdv(, x_i)(phi - vb(A) dot vb(v)) - q (pdv(A_i, t) + (vb(v) dot grad) A_i) \
+        & = - q pdv(, x_i)(phi - sum_i dot(x)_i A_i) - q(pdv(A_i, t) + sum_j pdv(A_i, x_j) dot(x)_j) \
+        & = - q pdv(, x_i)(phi - sum_i dot(x)_i A_i) - q dv(A_i, t) \
         & = - pdv(V, x_i) + dv(, t) pdv(V, dot(x)_i)
   $
   对于广义势函数
