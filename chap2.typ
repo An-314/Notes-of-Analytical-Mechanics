@@ -591,7 +591,7 @@ $
 
 对循环座标$q_i$，引入Routh函数
 $
-  R_i & = L(q_1, q_2, ..., q_(i-1), q_(i+1), ..., q_s, dot(q)_1, dot(q)_2, ..., dot(q)_(i-1), dot(q)_(i), dot(q)_(i+1), ..., dot(q)_s, p_i, t) \
+  R_i & = L(q_1, q_2, ..., q_(i-1), q_(i+1), ..., q_s, dot(q)_1, dot(q)_2, ..., dot(q)_(i-1), dot(q)_(i), dot(q)_(i+1), ..., dot(q)_s, p_i, t) - p_i dot(q)_i
 $
 此时$p_i$为常数，Routh函数不显含$q_i$，因此实现了降阶
 $
