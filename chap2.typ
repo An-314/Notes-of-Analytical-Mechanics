@@ -458,6 +458,22 @@ $
 $
 这意味着$p_i$是*守恒量*，称为*循环积分*，是Lagrange方程的第一积分，其物理意义是动量守恒。
 
+#example(subname: [中心力场中质点])[
+  在球坐标系小段距离平方为
+  $
+    dd(s)^2 = dd(r)^2 + r^2 dd(theta)^2 + r^2 sin^2 theta dd(phi)^2
+  $
+  Lagrange量为
+  $
+    L = T - U = 1/2 m (dot(r)^2 + r^2 dot(theta)^2 + r^2 sin^2 theta dot(phi)^2) - V(r)
+  $
+  $phi$就是循环坐标，对应的守恒量为
+  $
+    p_phi = pdv(L, dot(phi)) = m r^2 sin^2 theta dot(phi)
+  $
+  这是角动量的$z$分量。
+]
+
 === 能量积分
 
 如果Lagrange量不显含时间$t$，则称系统为*孤立系统*
@@ -597,6 +613,10 @@ $
 $
   dd(R_i) & = dd(L) - p_i dd(dot(q)_i) \
           & = sum_(j != i) (pdv(L, q_j) dd(q)_j + pdv(L, dot(q)_j) dd(dot(q)_j)) + pdv(R_i, t) dd(t)
+$
+降阶后的Routh函数满足原来的Lagrange方程
+$
+  dv(, t) pdv(R_i, dot(q)_j) - pdv(R_i, q_j) = 0, j != i
 $
 
 == 关于Lagrange方程的讨论
