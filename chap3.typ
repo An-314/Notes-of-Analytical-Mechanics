@@ -19,9 +19,9 @@ $
   $
   取极值。
 ]
-Hamilton和Newton运动定律、D'Alembert原理、Lagrange方程是等价的，它们都可以做为力学的第一性原理。
+Hamilton和Newton运动定律、D'Alembert原理、Lagrange方程是等价的，它们都可以做为*力学的第一性原理*。
 
-#example(subname: [地面上运动的质点])[
+#example(subname: [地面上运动的质点], lab: "ex3.1")[
   Lagrange量为
   $
     L = T - V = 1/2 m dot(vb(r))^2 - m g z
@@ -48,13 +48,15 @@ $
 
   泛函极值问题是变分法的核心问题。
 ]
-- 泛函和符合函数的区别在于，前者的自变量是函数，后者的自变量是数值。
+泛函和符合函数的区别在于，前者的自变量是函数，后者的自变量是数值。
 
 先考虑一般函数的极值问题，设$g(x)$在$x$处有极值，则$g'(x) = 0$，且
 $
   Delta g(x) = g(x + Delta x) - g(x) = g''(x) Delta x^2 + o(Delta x^2)
 $
-在极值附近只有二阶小量。对泛函也类似，通过差值给出。如果函数$y=y(x)$在$x$处的*等时变分*为$delta y$
+在极值附近只有二阶小量。*对泛函也类似，通过差值给出。*
+
+如果函数$y=y(x)$在$x$处的*等时变分*为$delta y$
 $
   delta y = delta y(x)
 $
@@ -79,8 +81,7 @@ $
 $
 泛函极值要求变分的一阶小量为零，所以
 $
-                                                          delta I[y] & = 0 \
-  integral_(x_1)^(x_2) (pdv(f, y) - dv(, x)pdv(f, y')) delta y dd(x) & = 0
+  delta I[y] & = 0 => integral_(x_1)^(x_2) (pdv(f, y) - dv(, x)pdv(f, y')) delta y dd(x) & = 0
 $
 由于$delta y$是任意的，故
 $
@@ -99,16 +100,19 @@ $
   $
 ]
 
-这个方程和Lagrange方程形式上是一样的，如果我们把$y$看作广义坐标，$x$看作时间$t$，$f$看作Lagrange量$L$，则Euler方程就是Lagrange方程。
+这个方程和Lagrange方程形式上是一样的，如果我们把$y$看作广义坐标，$x$看作时间$t$，$f$看作Lagrange量$L$，则Euler方程就是Lagrange方程。由于其形式一致性，循环积分和能量积分也都对Euler方程成立。
 
-为了简化表示，我们引入变分算符
-$
-  (delta F)/(delta y) = pdv(F, y) - dv(, x)pdv(F, y')
-$
-如果泛函不含有$y'$，则$(delta F)/(delta y) = pdv(F, y)$，相当于普通函数的偏导数。泛函极值问题可以看作
-$
-  (delta I)/(delta y) = 0
-$
+为了简化表示，我们引入*变分算符*
+#definition(subname: [变分算符])[
+  变分算符作用在函数$f$上，定义为
+  $
+    (delta f)/(delta y) = pdv(f, y) - dv(, x)pdv(f, y')
+  $
+  如果泛函不含有$y'$，则$(delta f)/(delta y) = pdv(f, y)$，相当于普通函数的偏导数。泛函极值问题可以看作
+  $
+    (delta f)/(delta y) = 0
+  $
+]
 
 #example(subname: [最速降线])[
   在重力场中，求一条曲线，使得质点从$A$点到$B$点所需时间最短。
@@ -201,6 +205,44 @@ $
   在运动过程中$z$恒为零，质点仍然在垂直于地面的平面内运动，最速降线仍然是旋轮线。结果与二维情况相同。
 ]
 
+#example(subname: [两点之间线段最短])[
+  两点间曲线方程
+  $
+    cases(
+      y = y(x),
+      z = z(x)
+    )
+  $
+  则两点间曲线长度
+  $
+    S = integral_(x_1)^(x_2) sqrt(1 + y'^2 + z'^2) dd(x), F = sqrt(1 + y'^2 + z'^2)
+  $
+  使得曲线长度最短的条件是满足
+  $
+    (delta F)/(delta y) = 0, (delta F)/(delta z) = 0
+  $
+  即
+  $
+    pdv(F, y) - dv(, x)pdv(F, y') = 0\
+    pdv(F, z) - dv(, x)pdv(F, z') = 0
+  $
+  而$F$不含$x,y,z$，类似能量积分，有
+  $
+    y' pdv(F, y') + z' pdv(F, z') - F = c_0 => - 1/sqrt(1 + y'^2 + z'^2) = c_0
+  $
+  以及循环积分
+  $
+    pdv(F, y') = c_1 => y' / sqrt(1 + y'^2 + z'^2) = c_1\
+    pdv(F, z') = c_2 => z' / sqrt(1 + y'^2 + z'^2) = c_2
+  $
+  结合起来就有
+  $
+    y' = - c_1/c_0, z' = - c_2/c_0
+  $
+  斜率恒为常数，故两点间曲线是直线。
+]
+在Euclidean空间中，最短路径是直线。如果在一个弯曲空间，两点间不一定是直线最短。如在球面，两点间最短线是在通过两点的大圆上(是一段圆弧)。这种弯曲空间(包括平直空间)上与两点间最短距离相对应的曲线叫测地线。测地线与坐标系选择无关，它是由测地线所在空间的内禀性质决定的。测地线与坐标系选择无关，它是由测地线所在空间的内禀性质决定的。Newton力学描述引力场中运动的质点时，认为在引力作用下质点加速运动，而广义相对论的基本思想是认为引力场使空间和时间(时间是时空中的一个维数)弯曲(弯曲程度可用引力场强弱定量表示)，质点在这个弯曲时空沿测地线作惯性运动。
+
 === Hamilton原理和Lagrange方程
 
 对于三个自由度的泛函变分极值问题
@@ -215,15 +257,25 @@ $
 $
 这就是地面上自由运动的质点的Lagrange方程。
 
-代入Lagrange量
-$
-  L = T - V = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) - m g z
-$
-就可以得到质点的运动方程。
+#example(subname: [地面上的质点运动方程])[
+  @ex3.1 中代入Lagrange量
+  $
+    L = T - V = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) - m g z
+  $
+  就可以得到质点的运动方程。
+  $
+    pdv(L, x) - dv(, t)pdv(L, dot(x)) = 0 => m dot.double(x) = 0\
+    pdv(L, y) - dv(, t)pdv(L, dot(y)) = 0 => m dot.double(y) = 0\
+    pdv(L, z) - dv(, t)pdv(L, dot(z)) = 0 => m dot.double(z) = - m g
+  $
+  这就是质点在重力场中的运动方程，给出了抛物线运动。
+]
+
+#newpara()
 
 后面我们会给出更一般Lagrange方程的证明。
 
-事实上量子力学中的Feynman路径积分方法，就是基于Hamilton原理的。
+Hamilton原理指的是在任何一个局域，作用量都是取极值的，这就抛开了力学定律的具体形式，只关注系统的整体行为。事实上量子力学中的Feynman路径积分方法，就是基于Hamilton原理的。
 
 == 泛函的条件极值问题以及高维泛函和高阶导数的泛函极值问题
 
@@ -254,7 +306,7 @@ $
   pdv(F, y) + lambda pdv(G, y) = 0\
   G(x,y) = 0
 $
-这就是条件极值问题的Lagrange乘子法。
+这就是条件极值问题的*Lagrange乘子法*。
 
 回到泛函的条件极值问题，设在约束条件
 $
@@ -345,12 +397,13 @@ $
     delta S = delta integral_(t_0)^(t_1) L(q_i, dot(q_i), t) dd(t) = 0
   $
 ]
+如果把虚功原理和D'Alembert原理统称为微分变分原理，那么Hamilton原理就是一种基于泛函变分的积分变分原理。
 
 === 完整系
 
 对于$N$个质点，$k$个完整约束，自由度为$s = 3N - k$。设$s$个广义坐标为$q_1, q_2, ..., q_s$，从$A$到$B$的作用量为
 $
-  S = integral_(t_A)^(t_B) L(q_i (t), dot(q_i) (t), t) dd(t)
+  S[q_1, q_2, ..., q_s] = integral_(t_A)^(t_B) L(q_i (t), dot(q_i) (t), t) dd(t)
 $
 其中$L = T - V$，$T$是动能，$V$是势能。Hamilton原理要求
 $
@@ -375,4 +428,6 @@ $
   G_j (q_i, t) = 0, j = 1, 2, ..., k
 $
 引入Lagrange乘子$lambda_j (t)$，考虑无约束的作用量
-
+$
+  S[q_1,q_2, ... ,q_(3N)] = integral_(t_A)^(t_B) L(q_i, dot(q_i), t) dd(t)
+$
