@@ -225,7 +225,7 @@ $
   $
   给出Lagrange量
   $
-    L = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) + e dot(y) x B
+    L = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) - e dot(y) x B
   $
   事实上选取对称规范
   $
@@ -235,5 +235,349 @@ $
   $
     L = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) + e/2 (x dot(y) - y dot(x)) B
   $
-  两种规范下的Lagrange量形式不同，但描述的是同一个物理系统，最后得到的物理结论是一致的。
+  两种规范下的Lagrange量形式不同，但描述的是同一个物理系统，最后得到的物理结论是一致的。我们使用Landau规范。
+
+  + 考虑变换
+    $
+      mat(x'; y'; z') = mat(x + delta theta y; y - delta theta x; z) => mat(x; y; z) = mat(x' - delta theta y'; y' + delta theta x'; z')
+    $
+    就有
+    $
+      L(q, dot(q)) & = L'(q', dot(q)') \
+                   & = 1/2 m (dot(x)'^2 + dot(y)'^2 + dot(z)'^2) - e B dot(y)' x' - e B delta theta (x' dot(x)' - y' dot(y)') \
+                   & = L(q', dot(q')) - 1/2 e B delta theta dv(, t) eval((x'^2 - y'^2))_(theta -> 0)
+    $
+    即
+    $
+      L'(q', dot(q)') = L(q, dot(q)) = L(q', dot(q')) + dv(, t) f(q', t)\
+      f(q', t) = - 1/2 e B delta theta (x'^2 - y'^2)
+    $
+    Taylor展开得
+    $
+      L(q', dot(q')) & = L(q, dot(q)) + sum_i delta q_i pdv(L, q_i) + sum_i delta dot(q)_i pdv(L, dot(q)_i) \
+      & = L(q, dot(q)) + delta theta sum_i (pdv(L, q_i) eval(pdv(Q_i, theta))_(theta -> 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, theta))_(theta -> 0))
+    $
+    以及
+    $
+      L(q', dot(q')) & = L(q, dot(q)) -dv(, t) f(q', t) \
+    $
+    对比有
+    $
+      sum_i (pdv(L, q_i) eval(pdv(Q_i, theta))_(theta -> 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, theta))_(theta -> 0)) + dv(, t) f(q', t) = 0
+    $
+    其中
+    $
+      p_x = pdv(L, dot(x)) = m dot(x) , p_y = pdv(L, dot(y)) = m dot(y) - e B x, p_z = pdv(L, dot(z)) = m dot(z)\
+      eval(pdv(x', theta)) = y , eval(pdv(y', theta)) = - x , eval(pdv(z', theta)) = 0
+    $
+    最终得到
+    $
+      sum_i p_i eval(pdv(Q_i, theta))_(theta -> 0) + f(q', t) & = m dot(x) y - (m dot(y) - e B x) x - 1/2 e B (x^2 - y^2) \
+                                                              & = m (x dot(y) - y dot(x)) + e B (x^2 + y^2)/2 \
+                                                              & = l_z + 1/2 e B (x^2 + y^2) = "const"
+    $
+    #note[
+      事实上这里Lagrange量并不严格不变，而是多了一个时间导数项，但形式一致，仍然可以应用Noether定理。
+    ]
+
+  + 考虑变换
+    $
+      mat(x'; y'; z') = mat(x + delta a_x; y + delta a_y; z + delta a_z) => mat(x; y; z) = mat(x' - delta a_x; y' - delta a_y; z' - delta a_z)
+    $
+    就有
+    $
+      L(q, dot(q)) & = L'(q', dot(q)') \
+                   & = 1/2 m (dot(x)'^2 + dot(y)'^2 + dot(z)'^2) - e B dot(y)' (x' - delta a_x) \
+                   & = L(q', dot(q')) + e B dot(y)' delta a_x
+    $
+    有
+    $
+      L(q', dot(q)') = L(q, dot(q)) = L(q', dot(q')) + dv(, t) f(q', t)\
+      f(q', t) = e B y' delta a_x
+    $
+    从而有
+    $
+      sum_i (pdv(L, q_i) eval(pdv(Q_i, a_x))_(a_x -> 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, a_x))_(a_x -> 0)) + dv(, t) f(q', t) = 0
+    $
+    且
+    $
+      eval(pdv(f, a_x))_(a_x -> 0) = e B y
+    $
+    从而有
+    $
+      p_x + e B y = m dot(x) + e B y = "const" = p_(x 0)\
+      p_y = m dot(y) - e B x = "const" = p_(y 0)\
+      p_z = m dot(z) = "const" = p_(z 0)
+    $
+    有能量守恒
+    $
+      pdv(L, dot(q)_i) dot(q)_i - L = E = dot(x) p_x + dot(y) p_y + dot(z) p_z - L = 1/2 m (dot(x)^2 + dot(y)^2 + dot(z)^2) = "const"
+    $
+    就是动能守恒。
+
+  + 我们先前推出了
+    $
+      m (x dot(y) - y dot(x)) + e B (x^2 + y^2)/2 = "const"
+    $
+    代入$p_(x 0), p_(y 0)$有
+    $
+      (p_(x 0) - e B y) y - (p_(y 0) + e B x) x + e B (x^2 + y^2)/2 = "const"\
+      p_(x_0) y - x p_(y_0) - e B/2 (x^2 + y^2) = "const"
+    $
+    这就是圆的方程，粒子在$x-y$平面内做圆周运动，圆心坐标为
+    $
+      x_"c" = - p_(y 0)/(e B), y_"c" = p_(x 0)/(e B)
+    $
+    而$z$方向是匀速直线运动，轨迹是螺旋线。
 ]
+
+== 运动方程
+
+=== 轨道稳定性
+
+两题问题化为单体问题后，具有转动对称性，即角动量守恒。这意味着轨道在一个平面内运动。
+
+选取相对坐标系的$x-y$平面，则Lagrange量为
+$
+  L = 1/2 m (dot(r)^2 + r^2 dot(theta)^2) - V(r)
+$
+Lagrange方程给出
+$
+  dv(, t) pdv(L, dot(r)) - pdv(L, r) = 0 => m dot.double(r) - m r dot(theta)^2 + pdv(V, r) = 0\
+  dv(, t) pdv(L, dot(theta)) - pdv(L, theta) = 0 => dv(, t) (m r^2 dot(theta)) = 0
+$
+即
+$
+  dot.double(r) - r dot(theta)^2 = - 1/m pdv(V, r) = F(r)/m,\
+  m r^2 dot(theta) = l = "const"
+$
+有能量积分
+$
+  E = p_r dot(r) + p_theta dot(theta) - L = 1/2 m dot(r)^2 + l^2/(2 m r^2) + V(r) = 1/2 m dot(r)^2 + V_"eff" (r)
+$
+且有
+$
+  m dot.double(r) = - dv(V_"eff", r)
+$
+其中有效势
+$
+  V_"eff" (r) = l^2/(2 m r^2) + V(r)
+$
+
+#newpara()
+
+#proposition(subname: [轨道稳定性条件])[
+  要求轨道稳定在$vb(r)_0$附近的有限区域，有效势能应该满足
+  $
+    V'_"eff" (r_0) = 0, V''_"eff" (r_0) > 0
+  $
+]
+
+#newpara()
+
+如果有心是函数是以下齐次形式
+$
+  V(r) = - k r^n
+$
+从而
+$
+  - n k r_0^(n-1) - l^2/(m r_0^3) = 0,\
+  - n (n - 1) k r_0^(n-2) + (3 l^2)/(m r_0^4) = (n+2) l^2/(m r_0^4) > 0
+$
+就有
+$
+  n > -2
+$
+后面J.Bertrand给出更强的条件，要求所有有心力轨道都是闭合的，结果是$n = -1, 2$，即Kepler问题和简谐振子问题。
+
+事实上
+$
+  dot.double(r) = dv(dot(r), t) = dv(dot(r), r) dv(r, t) = 1/2 dv(dot(r)^2, r)
+$
+能量积分的确是
+$
+  m dot.double(r) = - dv(V_"eff", r)
+$
+的积分。
+
+=== 运动轨迹方程
+
+$
+  dv(theta, t) = dot(theta) = l/(m r^2)
+$
+轨道方程是$r(theta)$，有
+$
+  dv(r, t) = dv(r, theta) dv(theta, t) = l/(m r^2) dv(r, theta)
+$
+令
+$
+  u = 1/r
+$
+就有
+$
+  dv(r, t) = - l/m dv(u, theta)
+$
+继续求导
+$
+  dv(r, t, 2) = - l/m dv(u, theta, 2) dv(theta, t) = - l^2/(m^2) u^2 dv(u, theta, 2)
+$
+代入运动方程
+$
+  dot.double(r) - l^2/(m^2 r^3) = F(r)/m
+$
+得到*Binet方程*
+$
+  l^2/m u^2 (dv(u, theta, 2) + u) = F(1/u)
+$
+
+#newpara()
+
+当然，这里计算出来的轨道不是真是轨道，是相对坐标轨道。在质心系的两题问题的真实轨道还需要继续变换
+$
+  vb(r)_1 = - m/m_1 vb(r), vb(r)_2 = m/m_2 vb(r)
+$
+才能得到。
+
+== 运动轨道
+
+=== 平方反比力
+
+万有引力或者Coulomb力都是平方反比力
+$
+  F(r) = - k/r^2, k > 0
+$
+带入Binet方程
+$
+  dv(u, theta, 2) + u = (k m)/l^2 = 1/p
+$
+上式是谐振子方程，解为
+$
+  u(theta) = 1/p + A cos(theta - theta_0)
+$
+不妨选择极轴方向使得$theta_0 = 0$，则
+$
+  1/r = 1/p + A cos(theta) => r = p/(1 + epsilon cos(theta))
+$
+其中$epsilon = A p$是离心率。
+
+这是圆锥曲线，不同偏心率$epsilon$对应不同轨道形状：
+#align(center)[#three-line-table[
+  | 偏心率$epsilon$ | 轨道形状         |
+  |------------------|------------------|
+  | $epsilon = 0$ | 圆 |
+  | $0 < epsilon < 1$ | 椭圆 |
+  | $epsilon = 1$ | 抛物线 |
+  | $epsilon > 1$ | 双曲线 |
+]]
+
+#newpara()
+
+在近日点
+$
+  r_"min" = p/(1 + epsilon)
+$
+没有径向速度，能量为
+$
+  E = 1/2 m (dot(r)^2 + r^2 dot(theta)^2) + V(r) = l^2/(2 m r_"min"^2) - k/r_"min"
+$
+得到偏心率
+$
+  epsilon = sqrt(1 + (2 E l^2)/(m k^2))
+$
+可以得到，能量、角动量和轨道形状的关系：
+#align(center)[#three-line-table[
+  | 能量$E$         | 轨道形状         |
+  |------------------|------------------|
+  | $E < 0$ | 被限制到有限区域 |
+  | $E = - (k^2 m)/(2 l^2)$ | 圆轨道 |
+  | $- (k^2 m)/(2 l^2) < E < 0$ | 椭圆轨道 |
+  | $E = 0$ | 抛物线轨道 |
+  | $E > 0$ | 双曲线轨道 |
+]]
+
+
+=== 一般有心力情况
+
+相互作用势能对平方反比有所偏离
+$
+  V(r) = - k/r + alpha/r^2
+$
+Binet方程变为
+$
+  dv(u, theta, 2) + u = (k m)/l^2 - (2 alpha m)/l^2 u= - m/l^2 (k - 2 alpha u)
+$
+从而
+$
+  dv(u, theta, 2) + beta^2 u = (k m)/l^2, beta^2 = 1 + (2 alpha m)/l^2
+$
+解为
+$
+  u(theta) = (k m)/(beta^2 l^2) + A cos(beta (theta - theta_0))
+$
+不妨选择极轴方向使得$theta_0 = 0$，则
+$
+  1/r = (k m)/(beta^2 l^2) + A cos(beta theta) => r = p/(1 + epsilon cos(beta theta))
+$
+其中$beta = sqrt(1 + (2 alpha m)/l^2)$，$p = beta^2 l^2/(k m)$，$epsilon = sqrt(1 + (2 E beta^2 l^2)/(m k^2))$。当$alpha$足够小时，这是一个近日点进动的椭圆轨道。
+
+#note(subname: [水星近日点进动])[
+  水星事实上的近日点进动可以用上述模型解释，考虑到太阳的引力场并非完全是一个点质量，而是有一定的偏离，导致有效势能中出现了$r^2$项，从而导致轨道的近日点进动。
+  $
+    V(r) = -G integral (m rho(vb(R)) dd(V(vb(R))))/(abs(vb(r) - vb(R)))
+  $
+  在$r >> R$有
+  $
+    1/abs(vb(r) - vb(R)) = 1/r (1 + (vb(r) dot vb(R))/r^2 + (3 (vb(r) dot vb(R))^2 - r^2 R^2)/(2 r^4) + ...)
+  $
+  从而
+  $
+    V(r) = - G m/r (integral rho V + vu(r)/r dot integral vb(R) rho dd(V) + 1/(2r^2) vu(r) dot integral (3 vb(R) dot vb(R) - R^2) dot vu(r) rho dd(V) + ...)
+  $
+  第二项为偶极矩项，第三项为四极矩项。定义
+  $
+    vb(p) = (integral vb(R) rho dd(V))/M
+  $
+  $
+    Q = integral ((3 vb(R) dot vb(R) - R^2) rho dd(V))/M
+  $
+  则有
+  $
+    V(r) = - G M m/r (1 + (vu(r) dot vb(p))/r^2 + 1/(2 r^2) (vu(r) dot Q dot vu(r))/r^2 + ...)
+  $
+  由于太阳的质量分布近似球对称，故偶极矩项可以忽略，四极矩项是主要贡献项。考虑有四极矩的Binet方程
+  $
+    dv(u, theta, 2) + u = 1/p (1 + gamma u^2)
+  $
+  该方程的解可以用*摄动/微扰方法求解*，得到近日点进动。但该结果和实际结果并不完全符合， 后面Einstein的广义相对论给出了完美的解释。
+]
+
+#newpara()
+
+更一般的情况下，对有心力系统的更一般方法是，利用能量守恒和角动量守恒，得到积分形式的解。
+
+$
+  E = 1/2 m dot(r)^2 + l^2/(2 m r^2) + V(r)
+$
+有
+$
+  dot(r) = sqrt(2/m (E - V_"eff"))
+$
+$
+  dot(theta) = l/(m r^2)
+$
+从而有
+$
+  dd(t) = dd(r)/(sqrt(2/m (E - V_"eff"))))
+$
+就得到
+$
+  t = integral (dd(r)/(sqrt(2/m (E - V_"eff")))) + "const"\
+$
+且有
+$
+  dd(theta) = l/(m r^2) dd(t) = (l dd(r))/(r^2 sqrt(2 m (E - V_"eff")))
+$
+给出轨迹方程
+$
+  theta = integral ((l dd(r))/(r^2 sqrt(2 m (E - V_"eff")))) + "const"\
+$
