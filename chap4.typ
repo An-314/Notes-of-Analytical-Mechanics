@@ -427,8 +427,15 @@ $
 $
 得到*Binet方程*
 $
-  l^2/m u^2 (dv(u, theta, 2) + u) = F(1/u)
+  l^2/m u^2 (dv(u, theta, 2) + u) = - F(1/u)
 $
+
+#theorem(subname: [Binet方程])[
+  有心力系统的轨道方程满足Binet方程
+  $
+    dv(u, theta, 2) + u = - (m)/(l^2) F(1/u)
+  $
+]
 
 #newpara()
 
@@ -581,3 +588,199 @@ $
 $
   theta = integral ((l dd(r))/(r^2 sqrt(2 m (E - V_"eff")))) + "const"\
 $
+
+== 散射截面
+
+两体问题中，如果相互作用是斥力或者弱吸引力，粒子不会被束缚在一起，而是发生*散射*过程。
+
+散射截面(cross section)是近代物理中非常重要的物理概念，在研究光-电子、电子-分子、中子-中子、电子-核子、核子-核子等相互作用时，它是不可缺少的。
+
+散射截面一般在量子力学框架下研究，但经典近似比较直观，所以，本节在经典意义下讨论散射截面的概念。
+
+=== 散射截面定义
+
+#definition(subname: [立体角])[
+  设有一个单位球面，其面积为$4 pi$。在该球面上取一小块面积$dd(S)$，则该面积所对应的立体角为
+  $
+    dd(Omega) = dd(S)/r^2
+  $
+  其中$r$是球面半径。立体角的单位是*球面度*(steradian, sr)。整个球面的立体角为
+  $
+    Omega_"total" = 4 pi "sr"
+  $
+  $
+    dd(Omega) = sin theta dd(theta) dd(phi)
+  $
+]
+
+立体角可以理解为从某一点出发，覆盖某个区域所张开的角度大小。
+
+光强是单位时间穿过单位横截面的能量流密度，单位是$"W"/"m"^2$。类似地，散射截面是单位时间穿过单位立体角的粒子数，单位是$"m"^2$。
+
+#definition(subname: [微分散射界面])[
+  设有入射粒子流，其粒子数通量密度为$I$，单位是$1/("m"^2 "s")$。经过散射中心后，在立体角$dd(Omega)$范围内散射出的粒子数通量密度为$dd(N)$，则微分散射截面定义为
+  $
+    dd(sigma) = "单位时间内(因相互作用)进入立体角"dd(Omega)"内的散射粒子数"/"入射强度" = dd(N)/(I dd(Omega))
+  $
+  单位是$"m"^2$。一般粒子流的入射强度是指单位时间内穿过单位面积的粒子数目，为$I$。
+]
+
+对于轴对称散射
+$
+  dd(Omega) = 2 pi sin phi dd(phi)
+$
+当一个入射粒子与另一个静止粒子发生散射时，入射粒子在远处速度方向的延长线到散射中心的距离称为碰撞参数(impact parameter)，有时也叫瞄准距离。若碰撞参数处于$rho tilde rho + dd(rho)$的入射粒子散射到$phi tilde phi + dd(phi)$的立体角范围内，则有
+$
+  I 2pi rho dd(rho) = dd(N) = I 2 pi sigma(phi) sin phi dd(phi)
+$
+散射截面总是大于零，所以有
+$
+  sigma = rho/(sin phi) abs(dv(rho, phi))
+$
+总的散射截面为
+$
+  sigma_"tot" = integral sigma(phi) dd(Omega) = integral_0^pi 2 pi sigma(phi) sin phi dd(phi)
+$
+
+=== Rutherford散射截面
+
+历史上，Rutherford利用$alpha$粒子轰击金箔，通过分析散射截面了解到原子内部结构。$alpha$粒子与金核之间的相互作用为Coulomb平方反比斥力。更一般地考虑
+$
+  F = - k/r^2
+$
+其中$k>0$是引力，$k<0$是斥力。Binet方程为
+$
+  dv(u, theta, 2) + u = - (m)/(l^2) F(1/u) = (k m)/l^2
+$
+此时解可写成以下形式
+$
+  u = A cos theta + B sin theta + 1/p
+$
+其中
+$
+  p = l^2/(k m)
+$
+因散射粒子来自远处，其碰撞参数或瞄准距离为$rho$。容易看出从远处人射时，$theta -> pi$时，$r -> oo$
+$
+  A = 1/p
+$
+又以散射点为原点，横向为$x$轴，纵向为$y$轴，则
+$
+  y = r sin theta = (sin theta)/(1/p(1 + cos theta) + B sin theta)
+$
+而$theta->pi$时，$y-> rho$，从而
+$
+  B = 1/(rho)
+$
+就得到了
+$
+  1/r = 1/p(1 + cos theta) + 1/rho sin theta
+$
+散射角$phi$在$r->oo$时有$theta->phi$，其中$phi$是入射方向与散射方向的夹角，从而有
+$
+  1/p (1 + cos phi) + 1/rho sin phi = 0
+$
+求得
+$
+  1/rho = - (1 + cos phi)/(p sin phi) = - 1/p cot phi/2
+$
+设粒子在远处速率为$v_oo$则有
+$
+  l = m v_oo rho\
+  1/p = (m k)/(l^2) = (k)/(m v_oo^2 rho^2)
+$
+有
+$
+  rho = - (k)/(m v_oo^2) cot phi/2
+$
+求得微分散射截面为
+$
+  sigma(phi) = rho/(sin phi) abs(dv(rho, phi)) = (k/(m v_oo^2))^2 (cot phi/2)/(sin phi) abs(dv(cot phi/2, phi)) = (k/(2 m v_oo^2))^2 csc^4 phi/2
+$
+这就是著名的Rutherford散射截面公式。
+
+#theorem(subname: [Rutherford散射截面])[
+  Coulomb斥力作用下的经典散射截面为
+  $
+    sigma(phi) = (k/(2 m v_oo^2))^2 csc^4 phi/2
+  $
+  其中$k$是Coulomb力常数，$m$是入射粒子质量，$v_oo$是入射粒子远处速度。
+]
+
+如果对上式进行积分，试图计算总散射截面时会遇到积分发散问题，这主要是因为Coulomb力是长程力的缘故。实际应用时，核电荷总是被周围电子屏蔽，考虑屏蔽效应就不会出现发散问题。
+
+有了Rutherford散射截面公式，就可以通过实验测量散射粒子在不同角度的分布情况，进而反推出入射粒子与靶核之间的相互作用力，从而了解原子核的结构。Rutherford正是通过这种方法发现了原子核的存在。后面就据此提出了Rutherford原子模型，即原子中有一个带正电的原子核，电子围绕原子核运动。
+
+=== 一般有心力场中的散射
+
+对于一般有心力场中的散射问题，粒子从无限远处入射，经过近日点(离中心最近位置)，再出射到无限远。散射角
+$
+  delta = pi - 2 phi
+$
+其中$phi$是粒子从无限远处入射到近日点或从近日点出射到无限远扫过的角度。我们前面得到了$theta$的积分公式
+$
+  theta = integral (l dd(r))/(r^2 sqrt(2 m (E - V_"eff"))) + "const"\
+$
+就有
+$
+  phi = (pi - delta)/2 = integral_(r_"min")^(oo) (l dd(r))/(r^2 sqrt(2 m (E - V_"eff")))
+$
+由于$l = m v_oo rho$，所以上式就建立了$rho$和$phi$之间的联系。
+
+== 实验室系和质心系
+
+通常实验值都是在实验室系测量的数据，而两体散射的公式中用的都是相对坐标，为了方便实验和理论的比较，需要将相对坐标系的公式转化为实验室系下的形式。
+
+在质心系，*两粒子速度总是反向的*，因此散射角实际是粒子入射时相对速度与粒子散射远离的相对速度之间的夹角，而相对速度与坐标系选择无关，所以说相对坐标系下的散射角实际上就是质心系的散射角。
+
+这样问题就化为如何寻找*质心系的散射角和实验室系散射角之间的关系*。
+
+轴对称情况下微分散射截面是散射角的函数，只要散射角之间的关系确定，两个系之间的散射截面的关系也就确定了。
+
+设入射粒子以$v_oo$水平入射，则质心速度沿水平方向
+$
+  V = (m_1 v_oo)/(m_1 + m_2)
+$
+出射粒子速度在质心系与实验室系的关系为
+$
+  vb(v)_1 = vb(V) + vb(v)'_1\
+$
+即
+$
+  v_1 sin phi_1 = v'_1 sin theta\
+  v_1 cos phi_1 = V + v'_1 cos theta
+$
+其中$phi_1$为入射粒子在实验室系的散射角，$theta$为质心系的散射角。有
+$
+  tan phi_1 = (v'_1 sin theta)/(V + v'_1 cos theta) = (sin theta)/(cos theta + (m_1)/(m_2))
+$
+其中用到了
+$
+  V = m/m_2 v_oo, v'_1 = m/m_1 v_oo
+$
+锁定某一固定小区域,散射到该区域的粒子数在实验室系为
+$
+  I sigma_1(phi_1) dd(Omega)_1 = I sigma(theta) dd(Omega)
+$
+从而
+$
+  sigma_1(phi_1) dd(Omega)_1 = sigma(theta) dd(Omega)\
+  sigma_1(phi_1) = (sin theta)/(sin phi_1) abs(dv(theta, phi_1)) sigma(theta)
+$
+散射截面可用不同坐标系的坐标表示。
+- $m_1<<m_2, phi_1 = theta$
+  $
+    sigma_1(phi_1) = sigma(theta)
+  $
+- $m_1 = m_2, phi_1 = theta/2$
+  $
+    sigma_1(phi_1) = 4 sigma(2 phi_1) cos phi_1
+  $
+- 全同粒子(identical particals)情形，$m_1 = m_2$，但无法区分入射粒子和靶粒子，此时$theta$的散射截面是$sigma(theta) + sigma(pi - theta)$，从而
+  $
+    sigma_"identical" (phi) = sigma_1(phi) + sigma_1(pi - phi) = 4 (sigma(2 phi) + sigma(2 (pi - phi)))cos phi
+  $
+  以相同粒子的散射为例，比如电子-电子散射，Rutherford散射截面为
+  $
+    sigma_"identical" (phi) = (k/(m v_oo^2))^2 (1/(sin^4 phi) + 1/(cos^4 phi)) cos phi
+  $
