@@ -12,7 +12,7 @@
 $
   eval(pdv(V, q))_(q=q_0) = 0
 $
-在$q_0$附近做泰勒展开，有
+在$q_0$附近做Taylor展开，有
 $
   V(q) = V(q_0) + 1/2 eval(pdv(V, q, 2))_(q=q_0) (q - q_0)^2 + ...
 $
@@ -504,52 +504,48 @@ $
 
 ==== 简正频率非简并
 
-设$omega$的$s$个正根为$omega_1, omega_2, ..., omega_s$，方程对应的特征向量分别为$A^((1)), A^((2)), ..., A^((s))$。
+设$omega$的$s$个正根为$omega_1, omega_2, ..., omega_s$，方程对应的特征向量分别为$vb(A)^((1)), vb(A)^((2)), ..., vb(A)^((s))$。
 
 由于方程线性齐次方程组的非平凡解不确定，需要其他条件。
 $
-  (v - omega_l^2 t) A^((l)) = 0, l = 1,2,...,s <=>\
+  (cal(v) - omega_l^2 cal(t)) vb(A)^((l)) = 0, l = 1,2,...,s <=>\
   sum_(beta) (v_(alpha beta) - omega_l^2 t_(alpha beta)) A^((l))_beta = 0, alpha = 1,2,...,s
 $
 统一形式做差得到
 $
   (omega_l^2 - omega_k^2) sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0\
-  <=> (omega_l^2 - omega_k^2) A^(TT(l)) t A^((k)) = 0
+  <=> (omega_l^2 - omega_k^2) vb(A)^(TT(l)) cal(t) vb(A)^((k)) = 0
 $
 对于$l != k$，有
 $
-  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0\
-  <=> A^(TT(l)) t A^((k)) = 0
+  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0 <=> vb(A)^(TT(l)) cal(t) vb(A)^((k)) = 0
 $
 而对于$l = k$，可以归一化
 $
-  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^(TT(l))_beta = 1\
-  <=> A^(TT(l)) t A^(TT(l)) = 1
+  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^(TT(l))_beta = 1 <=> vb(A)^(TT(l)) cal(t) vb(A)^(TT(l)) = 1
 $
 从而
 $
-  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = delta_(l k)\
-  <=> A^(TT(l)) t A^((k)) = delta_(l k)
+  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = delta_(l k) <=> vb(A)^(TT(l)) cal(t) vb(A)^((k)) = delta_(l k)
 $
 此即正交归一条件。则有
 $
-  sum_(alpha,beta) A^(TT(l))_alpha v_(alpha beta) A^((k))_beta = omega_l^2 delta_(l k)\
-  <=> A^(TT(l)) v A^((k)) = omega_l^2 delta_(l k)
+  sum_(alpha,beta) A^(TT(l))_alpha v_(alpha beta) A^((k))_beta = omega_l^2 delta_(l k) <=> vb(A)^(TT(l)) cal(v) vb(A)^((k)) = omega_l^2 delta_(l k)
 $
 这样方程的通解可以表示为可能解的线性组合
 $
   q_beta = sum_(l=1)^s C_l A^((l))_beta cos (omega_l t + phi_l), beta = 1,2,...,s \
-  <=> q = sum_(l=1)^s C_l A^((l)) cos (omega_l t + phi_l) = A diag(C_1, C_2, ..., C_s) cos (omega t + phi)
+  <=> vb(q) = sum_(l=1)^s C_l vb(A)^((l)) cos (omega_l t + phi_l)
 $
 式中$A$已经确定，$C$则是由初始条件决定的任意系数。对于初值问题，由
 $
-  q_beta(0) = sum_(l=1)^s C_l A^((l))_beta cos (phi_l)\
-  dot(q)_beta(0) = - sum_(l=1)^s C_l omega_l A^((l))_beta sin (phi_l)
+  q_beta (0) = sum_(l=1)^s C_l A^((l))_beta cos (phi_l) <=> vb(q) (0) = sum_(l=1)^s C_l vb(A)^((l)) cos (phi_l) \
+  dot(q)_beta (0) = - sum_(l=1)^s C_l omega_l A^((l))_beta sin (phi_l) <=> dot(vb(q)) (0) = - sum_(l=1)^s C_l omega_l vb(A)^((l)) sin (phi_l)
 $
 利用正交归一条件
 $
-  sum_(beta,alpha) A^(TT(k))_beta t_(beta alpha) q_alpha(0) = C_k cos (phi_k)\
-  sum_(beta,alpha) A^(TT(k))_beta t_(beta alpha) dot(q)_alpha(0) = - C_k omega_k sin (phi_k)
+  sum_(beta,alpha) A^(TT(k))_beta t_(beta alpha) q_alpha(0) = C_k cos (phi_k) <=> vb(A)^(TT(k)) cal(t) vb(q) (0) = C_k cos (phi_k) \
+  sum_(beta,alpha) A^(TT(k))_beta t_(beta alpha) dot(q)_alpha(0) = - C_k omega_k sin (phi_k) <=> vb(A)^(TT(k)) cal(t) dot(vb(q)) (0) = - C_k omega_k sin (phi_k)
 $
 就可以给出$C_k$和$phi_k$的值。
 
@@ -560,17 +556,17 @@ $
 $Q_l$为*简正坐标*(normal coordinates)，$omega_l$为*简正频率*(normal frequencies)，每个频率对应一种振动模式。得
 $
   q_beta = sum_(l=1)^s A^((l))_beta Q_l, beta = 1,2,...,s\
-  q = A Q
+  vb(q) = cal(A) vb(Q)
 $
 而Lagrange量为
 $
-  L = 1/2 sum_(alpha) (dot(Q)_alpha^2 - omega_alpha^2 Q_alpha^2)
+  L = 1/2 sum_(alpha) (dot(Q)_alpha^2 - omega_alpha^2 Q_alpha^2) = 1/2 dot(vb(Q))^TT dot(vb(Q)) - 1/2 vb(Q)^TT cal(Omega) vb(Q)
 $
 这就是$s$个独立简谐振动的总和。
 
 同时可以得到
 $
-  Q_k = sum_(alpha beta) A^(TT(k))_alpha t_(alpha beta) q_beta = A^(TT(k)) t q
+  Q_k = sum_(alpha beta) A^(TT(k))_alpha t_(alpha beta) q_beta = vb(A)^(TT(k)) cal(t) vb(q)
 $
 
 #example()[
@@ -610,21 +606,21 @@ $
   $
   对应的特征向量为
   $
-    A^((1)) = mat(1; 1; 1), A^((2)) = mat(1; 1; - m/M), A^((3)) = mat(1; -1; 0)
+    vb(A)^((1)) = mat(1; 1; 1), vb(A)^((2)) = mat(1; 1; - m/M), vb(A)^((3)) = mat(1; -1; 0)
   $
   归一化条件为
   $
-    sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((l))_beta = 1
+    sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((l))_beta = 1 <=> vb(A)^(TT(l)) cal(t) vb(A)^(TT(l)) = 1
   $
   得到归一化的特征向量为
   $
-    A^((1)) & = 1/sqrt(2 m + M) mat(1; 1; 1) \
-    A^((2)) & = sqrt(M/(2 m (M + 2 m))) mat(1; 1; - m/M) \
-    A^((3)) & = 1/sqrt(2 m) mat(1; -1; 0)
+    vb(A)^((1)) & = 1/sqrt(2 m + M) mat(1; 1; 1) \
+    vb(A)^((2)) & = sqrt(M/(2 m (M + 2 m))) mat(1; 1; - m/M) \
+    vb(A)^((3)) & = 1/sqrt(2 m) mat(1; -1; 0)
   $
   因此简正坐标为
   $
-    Q_k = sum_(alpha beta) A^(TT(k))_alpha t_(alpha beta) q_beta
+    Q_k = sum_(alpha beta) A^(TT(k))_alpha t_(alpha beta) q_beta = vb(A)^(TT(k)) cal(t) vb(q)
   $
   给出
   $
