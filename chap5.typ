@@ -370,6 +370,11 @@ $
 
 == 多自由度力学系统的微振动
 
+#note[
+  下面的讨论中，我们约定，标量用普通字母表示，向量用粗体小写字母表示，矩阵用花体字母表示。
+]
+
+
 === 势能
 
 系统具有$s$个自由度，势能为
@@ -394,20 +399,24 @@ $
 $
 将系数记成Jacobi矩阵
 $
-  v = mat(v_(11), v_(12), ..., v_(1s); v_(21), v_(22), ..., v_(2s); dots.v, dots.v, dots.down, dots.v, ; v_(s 1), v_(s 2), ..., v_(s s))
+  cal(v) = mat(v_(11), v_(12), ..., v_(1s); v_(21), v_(22), ..., v_(2s); dots.v, dots.v, dots.down, dots.v, ; v_(s 1), v_(s 2), ..., v_(s s))
 $
-显然$v$是实对称矩阵，而且它还是正定的。
+显然$v$是实对称矩阵，而且它还是正定的。势能是一个二次型
+$
+  V = 1/2 sum_(alpha,beta) v_(alpha beta) q_alpha q_beta = 1/2 vb(q)^TT cal(v) vb(q)
+$
 
 #proof[
-  实对称矩阵$A$必有一正交矩阵$U$，$U^TT = U^(-1)$，使得$U A U^TT = Lambda$，其中$Lambda$为对角矩阵，其对角元为$A$的特征值。运用到矩阵$v$，即存在正交矩阵$U$，使得
+  实对称矩阵$cal(A)$必有一正交矩阵$cal(U)$，$cal(U)^TT = cal(U)^(-1)$，使得$cal(U) cal(A) cal(U)^TT = cal(Lambda)$，其中$cal(Lambda)$为对角矩阵，其对角元为$cal(A)$的特征值。运用到矩阵$cal(v)$，即存在正交矩阵$cal(U)$，使得
   $
+    cal(U)^TT cal(v) cal(U) = cal(Lambda) =>\
     sum_(alpha,beta) U^TT_(i alpha) v_(alpha beta) U_(beta j) = lambda_i delta_(i j)
   $
-  作坐标变换$Q_alpha = sum_(beta) U^TT_(alpha beta) q_beta$，逆变换为$q_alpha = sum_(beta) U_(alpha beta) Q_beta$，则势能为
+  作坐标变换$Q_alpha = sum_(beta) U^TT_(alpha beta) q_beta$即$vb(Q) = cal(U)^TT vb(q)$，逆变换为$q_alpha = sum_(beta) U_(alpha beta) Q_beta$即$vb(q) = cal(U) vb(Q)$，则势能为
   $
     V = 1/2 sum_(i,j) lambda_i delta_(i j) Q_i Q_j = 1/2 sum_i lambda_i Q_i^2 > 0
   $
-  由于当$q_alpha$不全为0时，$V>0$，所以所有特征值$lambda_i > 0$，因此矩阵$v$是正定的。
+  由于当$q_alpha$不全为0时，$V>0$，所以所有特征值$lambda_i > 0$，因此矩阵$cal(v)$是正定的。
 ]
 
 === 动能
@@ -416,10 +425,10 @@ $
 $
   dot(vb(r))_i = sum_(alpha) pdv(vb(r)_i, q_alpha) dot(q)_alpha
 $
-动能则为速度的二次项
+动能则为速度的二次项，是一个二次型
 $
   T &= 1/2 sum_(i) m_i dot(vb(r))_i^2 = 1/2 sum_(alpha,beta) a_(alpha beta) (sum_i m_i pdv(vb(r)_i, q_alpha) pdv(vb(r)_i, q_beta)) dot(q)_alpha dot(q)_beta\
-  &= 1/2 sum_(alpha,beta) t_(alpha beta) dot(q)_alpha dot(q)_beta
+  &= 1/2 sum_(alpha,beta) t_(alpha beta) dot(q)_alpha dot(q)_beta = 1/2 dot(vb(q))^TT cal(t) dot(vb(q))
 $
 其中
 $
@@ -427,65 +436,68 @@ $
 $
 这里也应该保留到二阶小量，所以方程只能是保留零阶，即取所有广义坐标零点的值。同样地，动能系数也可以记成矩阵
 $
-  t = mat(t_(11), t_(12), ..., t_(1s); t_(21), t_(22), ..., t_(2s); dots.v, dots.v, dots.down, dots.v, ; t_(s 1), t_(s 2), ..., t_(s s))
+  cal(t) = mat(t_(11), t_(12), ..., t_(1s); t_(21), t_(22), ..., t_(2s); dots.v, dots.v, dots.down, dots.v, ; t_(s 1), t_(s 2), ..., t_(s s))
 $
-与势能同理，因为动能是速度的二次型，矩阵$t$也是实对称矩阵，并且它还是正定的。
+与势能同理，因为动能是速度的二次型，矩阵$cal(t)$也是实对称矩阵，并且它还是正定的。
 
 === 运动方程
 
 具有$s$个自由度系统在平衡位置附近的Lagrange量为
 $
-  L = T - V = 1/2 sum_(alpha,beta) t_(alpha beta) dot(q)_alpha dot(q)_beta - 1/2 sum_(alpha,beta) v_(alpha beta) q_alpha q_beta
+  L &= T - V = 1/2 sum_(alpha,beta) t_(alpha beta) dot(q)_alpha dot(q)_beta - 1/2 sum_(alpha,beta) v_(alpha beta) q_alpha q_beta\
+  &= 1/2 dot(vb(q))^TT cal(t) dot(vb(q)) - 1/2 vb(q)^TT cal(v) vb(q)
 $
 Lagrange方程为
 $
-  sum_(beta) (t_(alpha beta) dot.double(q)_beta - v_(alpha beta) q_beta) = 0, alpha = 1,2,...,s
+  sum_(beta) (t_(alpha beta) dot.double(q)_beta - v_(alpha beta) q_beta) = 0, alpha = 1,2,...,s\
+  => cal(t) dot.double(vb(q)) - cal(v) vb(q) = 0
 $
 
 === 简正频率
 
 试探简谐振动解
 $
-  q_beta = A_beta cos (omega t + phi)
+  q_beta = A_beta cos (omega t + phi)\
+  => vb(q) = vb(A) cos (omega t + phi)
 $
 代入
 $
   sum_(beta) (v_(alpha beta) - omega^2 t_(alpha beta)) A_beta = 0, alpha = 1,2,...,s\
-  => (v - omega^2 t) A = 0
+  => (cal(v) - omega^2 cal(t)) vb(A) = 0
 $
 这是齐次线性方程组，有非零解的条件是系数行列式为零，即
 $
-  det(v - omega^2 t) = 0
+  det(cal(v) - omega^2 cal(t)) = 0
 $
-因$v - omega^2 t$为实对称矩阵，所以这个特征方程有$s$个实特征值$omega_1^2, omega_2^2, ..., omega_s^2$，且各不相等。
+因$cal(v) - omega^2 cal(t)$为实对称矩阵，所以这个特征方程有$s$个实特征值$omega_1^2, omega_2^2, ..., omega_s^2$，且各不相等。
 
 #proof[
-  对矩阵$v - omega^2 t$乘以$A$的复共轭转置$A^dagger$，有
+  对矩阵$cal(v) - omega^2 cal(t)$乘以$vb(A)$的复共轭转置$vb(A)^dagger$，有
   $
-    A^dagger (v - omega^2 t) A = 0
+    vb(A)^dagger (cal(v) - omega^2 cal(t)) vb(A) = 0
   $
-  取复共轲有
+  取复共轭有
   $
-    A^TT (v - omega^(*2) t) A^* = 0
+    vb(A)^TT (cal(v) - omega^(*2) cal(t)) vb(A)^* = 0
   $
-  两式相减，因为$v,t$都是实对称的，$A^dagger v A = A^TT v A^*$，从而
+  两式相减，因为$cal(v), cal(t)$都是实对称的，$vb(A)^dagger cal(v) vb(A) = vb(A)^TT cal(v) vb(A)^*$，从而
   $
-    (omega^2 - omega^(*2)) A^dagger t A = 0
+    (omega^2 - omega^(*2)) vb(A)^dagger cal(t) vb(A) = 0
   $
-  而动能项矩阵$t$是正定的，因此$A^dagger t A != 0$，所以$omega^2 = omega^(*2)$。这意味着$omega^2$是实数。
+  而动能项矩阵$cal(t)$是正定的，因此$vb(A)^dagger cal(t) vb(A) != 0$，所以$omega^2 = omega^(*2)$。这意味着$omega^2$是实数。
 
   进一步地
   $
-    A^dagger (v - omega^2 t) A = 0 => omega^2 = (A^dagger v A)/(A^dagger t A)
+    vb(A)^dagger (cal(v) - omega^2 cal(t)) vb(A) = 0 => omega^2 = (vb(A)^dagger cal(v) vb(A))/(vb(A)^dagger cal(t) vb(A))
   $
-  设实正交矩阵$U$使$v$对角化
+  设实正交矩阵$cal(U)$使$cal(v)$对角化
   $
-    U v U^TT = Lambda
+    cal(U) cal(v) cal(U)^TT = cal(Lambda)
   $
   $
-    A^dagger v A = A^dagger U U^TT v U U^TT A = (U^TT A)^dagger Lambda (U^TT A) = sum_i lambda_i abs(U^TT A)_i^2 > 0
+    vb(A)^dagger cal(v) vb(A) = vb(A)^dagger cal(U) cal(U)^TT cal(v) cal(U) cal(U)^TT vb(A) = (cal(U)^TT vb(A))^dagger cal(Lambda) (cal(U)^TT vb(A)) = sum_i lambda_i abs(cal(U)^TT vb(A))_i^2 > 0
   $
-  因为$v$是正定矩阵，所以所有特征值$lambda_i > 0$，因此$A^dagger v A > 0$。同理可证$A^dagger t A > 0$，所以$omega^2 > 0$。
+  因为$v$是正定矩阵，所以所有特征值$lambda_i > 0$，因此$vb(A)^dagger cal(v) vb(A) > 0$。同理可证$vb(A)^dagger cal(t) vb(A) > 0$，所以$omega^2 > 0$。
 ]
 
 === 简正坐标
@@ -496,34 +508,38 @@ $
 
 由于方程线性齐次方程组的非平凡解不确定，需要其他条件。
 $
-  (v - omega_l^2 t) A^((l)) = 0, l = 1,2,...,s
-$
-$
+  (v - omega_l^2 t) A^((l)) = 0, l = 1,2,...,s <=>\
   sum_(beta) (v_(alpha beta) - omega_l^2 t_(alpha beta)) A^((l))_beta = 0, alpha = 1,2,...,s
 $
 统一形式做差得到
 $
-  (omega_l^2 - omega_k^2) sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0
+  (omega_l^2 - omega_k^2) sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0\
+  <=> (omega_l^2 - omega_k^2) A^(TT(l)) t A^((k)) = 0
 $
 对于$l != k$，有
 $
-  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0
+  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = 0\
+  <=> A^(TT(l)) t A^((k)) = 0
 $
 而对于$l = k$，可以归一化
 $
-  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^(TT(l))_beta = 1
+  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^(TT(l))_beta = 1\
+  <=> A^(TT(l)) t A^(TT(l)) = 1
 $
 从而
 $
-  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = delta_(l k)
+  sum_(alpha,beta) A^(TT(l))_alpha t_(alpha beta) A^((k))_beta = delta_(l k)\
+  <=> A^(TT(l)) t A^((k)) = delta_(l k)
 $
 此即正交归一条件。则有
 $
-  sum_(alpha,beta) A^(TT(l))_alpha v_(alpha beta) A^((k))_beta = omega_l^2 delta_(l k)
+  sum_(alpha,beta) A^(TT(l))_alpha v_(alpha beta) A^((k))_beta = omega_l^2 delta_(l k)\
+  <=> A^(TT(l)) v A^((k)) = omega_l^2 delta_(l k)
 $
 这样方程的通解可以表示为可能解的线性组合
 $
-  q_beta = sum_(l=1)^s C_l A^((l))_beta cos (omega_l t + phi_l), beta = 1,2,...,s
+  q_beta = sum_(l=1)^s C_l A^((l))_beta cos (omega_l t + phi_l), beta = 1,2,...,s \
+  <=> q = sum_(l=1)^s C_l A^((l)) cos (omega_l t + phi_l) = A diag(C_1, C_2, ..., C_s) cos (omega t + phi)
 $
 式中$A$已经确定，$C$则是由初始条件决定的任意系数。对于初值问题，由
 $
@@ -554,7 +570,7 @@ $
 
 同时可以得到
 $
-  Q_k = sum_(alpha beta) A^(TT(k))_alpha t_(alpha beta) q_beta
+  Q_k = sum_(alpha beta) A^(TT(k))_alpha t_(alpha beta) q_beta = A^(TT(k)) t q
 $
 
 #example()[
