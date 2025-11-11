@@ -560,9 +560,26 @@ $
 $
 而Lagrange量为
 $
-  L = 1/2 sum_(alpha) (dot(Q)_alpha^2 - omega_alpha^2 Q_alpha^2) = 1/2 dot(vb(Q))^TT dot(vb(Q)) - 1/2 vb(Q)^TT cal(Omega) vb(Q)
+  L &= 1/2 sum_(alpha beta) t_(alpha beta) dot(q)_alpha dot(q)_beta - 1/2 sum_(alpha beta) v_(alpha beta) q_alpha q_beta = 1/2 dot(vb(q))^TT cal(t) dot(vb(q)) - 1/2 vb(q)^TT cal(v) vb(q)\
 $
-这就是$s$个独立简谐振动的总和。
+考虑到
+$
+  vb(Q) = cal(A)^TT vb(q) => vb(q) = cal(A) vb(Q) \
+$
+且$cal(A)$能把矩阵$cal(v), cal(t)$对角化，即
+$
+  cal(A)^TT cal(v) cal(A) = cal(Omega)\
+  cal(A)^TT cal(t) cal(A) = I\
+$
+从而
+$
+  L = 1/2 dot(vb(Q))^TT cal(A)^TT cal(t) cal(A) dot(vb(Q)) - 1/2 vb(Q)^TT cal(A)^TT cal(v) cal(A) vb(Q) = 1/2 dot(vb(Q))^TT dot(vb(Q)) - 1/2 vb(Q)^TT cal(Omega) vb(Q)
+$
+这就是$s$个独立简谐振动的总和。广义能量
+$
+  E = sum_l dot(Q)_l pdv(L, dot(Q)_l) - L = 1/2 sum_l (dot(Q)_l^2 + omega_l^2 Q_l^2) = sum_l E_l
+$
+守恒。
 
 同时可以得到
 $
@@ -628,5 +645,91 @@ $
     Q_2 & = sqrt(M/(2 m (M + 2 m))) (m q_1 + m q_2 - m q_3) \
     Q_3 & = 1/sqrt(2 m) (m q_1 - m q_2)
   $
+  #newpara()
+  可以用再生坐标
+  $
+    x_1 = q_2 - q_1\
+    x_2 = q_3 - q_1\
+    X = (m (q_1 + q_2) + M q_3)/(2 m + M)
+  $
+  表示原来的广义坐标
+  $
+    q_1 = X - (m x_1 + M x_2)/(2 m + M)\
+    q_2 = X + (m x_1 - M (x_1 - x_2))/(2 m + M)\
+    q_3 = X + (m (2x_2 - x_1))/(2 m + M)
+  $
+  可以表示Lagrange量
+  $
+    T & = 1/2 m (dot(q)_1^2 + dot(q)_2^2) + 1/2 M dot(q)_3^2 \
+      & = 1/2 (2 m + M) dot(X)^2 + 1/2 m/(2 m + M) ((m + M) dot(x)_1^2 + (2 m + M) dot(x)_2^2 - 2 M dot(x)_1 dot(x)_2) \
+    V & = 1/2 k (q_1 - q_2)^2 + 1/2 k (q_2 - q_3)^2 + 1/2 k (q_3 - q_1)^2 \
+  $
+  可以看到$X$是循环坐标，对应简正频率$omega_0 = 0$，表示质心的平动；而$x_1, x_2$则表示相对坐标，对应简正频率$omega_1, omega_2$，表示质点间的相对振动。可以写出矩阵
+  $
+    cal(t) = m/(2 m + M) mat(m + M, - M; - M, 2 m + M) \
+    cal(v) = k mat(2, -1; -1, 2)
+  $
+  方程
+  $
+    det(cal(v) - omega^2 cal(t)) = 0
+  $
+  为
+  $
+    det mat(lambda (m + M) - 2, - M lambda + 1; - M lambda + 1, 2 lambda M - 2) = 0
+  $
+  解得
+  $
+    lambda_1 = 3/(2m + M), lambda_2 = 1/M => omega_1 = sqrt((3 k)/(2 m + M)), omega_2 = sqrt(k (2/M + 1/m))
+  $
+  进一步得到
+  $
+    vb(A)^((1)) = mat(2; 1), vb(A)^((2)) = mat(0; 1)
+  $
+  有正交关系
+  $
+    vb(A)^(TT(1)) cal(t) vb(A)^((2)) = 0
+  $
+  然后得到简正坐标
+  $
+    Q_1 = vb(A)^(TT(1)) cal(t) vb(x) = (2m + M) x_1 => q_2 - q_1 \
+    Q_2 = vb(A)^(TT(2)) cal(t) vb(x) = M (2x_2 - x_1) => 2q_3 - q_1 - q_2
+  $
 ]
+
 ==== 简正频率简并(模式退化)
+
+如果方程有简正频率简并，例如$omega_1 = omega_2$，称为简正频率简并或模式退化，即两种或多种模式有相同的简正频率。此时仍旧可以选择一组正交归一的特征向量作为简正坐标的基矢，但这些特征向量不是唯一的，可以任意线性组合。
+
+#example()[
+  在刚才的例子中，设$m = M$，求简正频率和简正坐标。
+]
+#solution[
+  可以看到此时有两个简正频率是相等的
+  $
+    lambda_1 = lambda_2 = 1/m
+  $
+  由于这是重根，对应的本征矢量任意。任选其中的某一矢量为
+  $
+    vb(A)^((1)) = mat(1; 1)
+  $
+  要求正交条件
+  $
+    vb(A)^(TT(1)) cal(t) vb(A)^((2)) = 0
+  $
+  则得到另一个矢量为
+  $
+    vb(A)^((2)) = mat(1; -1)
+  $
+  从而能得到
+  $
+    Q_1 = vb(A)^(TT(1)) cal(t) vb(x) = q_2 + q_3 - 2 q_1 \
+    Q_2 = vb(A)^(TT(2)) cal(t) vb(x) = q_2 - q_3
+  $
+  初始条件给出
+  $
+    C_k cos (phi_k) = vb(A)^(TT(k)) cal(t) vb(q) (0) \
+    - C_k omega_k sin (phi_k) = vb(A)^(TT(k)) cal(t) dot(vb(q)) (0)
+  $
+  可以解得$C_k$和$phi_k$。
+]
+
