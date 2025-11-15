@@ -87,7 +87,7 @@ $
 $
 以及
 $
-  pdv(dot(vb(r)_i), dot(q)_k) = pdv(vb(r)_i, q_k)
+  pdv(dot(vb(r)_i), dot(q)_k) = pdv(, dot(q)_k) (sum_j pdv(vb(r)_i, q_j) dot(q)_j + pdv(vb(r)_i, t)) = pdv(vb(r)_i, q_k)
 $
 
 == 虚功原理
@@ -186,6 +186,9 @@ $
   事实上这个过程等价于力矩为零。
 ]
 
+#newpara()
+
+进一步可以推导
 $
   sum_i vb(F)_i dot delta vb(r)_i & = sum_i vb(F)_i dot sum_j pdv(vb(r)_i, q_j) delta q_j \
                                   & = sum_j (sum_i vb(F)_i dot pdv(vb(r)_i, q_j)) delta q_j = 0 \
@@ -303,20 +306,20 @@ $
 $
 有D'Alembert原理
 $
-  sum_i vb(F)_i dot delta vb(r)_i &= sum_j pdv(vb(r)_i, q_j) delta q_j = sum_j Q_j delta q_j\
-  &= sum_i m_i dot.double(vb(r)_i) dot sum_j pdv(vb(r)_i, q_j) delta q_j = sum_j (sum_i m_i dot.double(vb(r)_i) pdv(vb(r)_i, q_j)) delta q_j
+  sum_i vb(F)_i dot delta vb(r)_i &= sum_i vb(F)_i dot sum_j pdv(vb(r)_i, q_j) delta q_j = sum_j Q_j delta q_j\
+  &= sum_i m_i dot.double(vb(r)_i) dot sum_j pdv(vb(r)_i, q_j) delta q_j = sum_j (sum_i m_i dot.double(vb(r)_i) dot pdv(vb(r)_i, q_j)) delta q_j
 $
 这就意味着广义力
 $
-  Q_j = sum_i m_i dot.double(vb(r)_i) pdv(vb(r)_i, q_j)
+  Q_j = sum_i m_i dot.double(vb(r)_i) dot pdv(vb(r)_i, q_j)
 $
 利用Lagrange关系
 $
-  dv(, t) pdv(vb(r)_i, q_j) = pdv(dot(vb(r)_i), q_j)\
-  pdv(vb(r)_i, q_j) = pdv(dot(vb(r)_i), dot(q)_j)
+  dv(, t) pdv(vb(r)_i, q_j) = pdv(dot(vb(r)_i), q_j), pdv(vb(r)_i, q_j) = pdv(dot(vb(r)_i), dot(q)_j)
 $
+有
 $
-  Q_j = sum_i m_i dot.double(vb(r)_i) pdv(vb(r)_i, q_j) &= dv(, t) (sum_i m_i dot(vb(r)_i) pdv(dot(vb(r))_i, dot(q_j))) - 2 m_i dot(vb(r)_i) pdv(dot(vb(r))_i, q_j) \
+  Q_j = sum_i m_i dot.double(vb(r)_i) dot pdv(vb(r)_i, q_j) &= sum_i (m_i dv(, t) (dot(vb(r)_i) dot pdv(dot(vb(r))_i, dot(q_j))) - m_i dot(vb(r)_i) dot pdv(dot(vb(r))_i, q_j)) \
   &= dv(, t) (sum_i m_i/2 pdv(dot(vb(r))_i^2, dot(q_j))) - sum_i m_i/2 pdv(dot(vb(r))_i^2, q_j) \
   &= dv(, t) pdv(T, dot(q_j)) - pdv(T, q_j)
 $
@@ -699,7 +702,7 @@ $
 $
 仍然成立。
 
-#example(subname: [广义势函数])[
+#example(subname: [带电粒子在电磁场中的Lorentz力])[
   对于电磁场$vb(E),vb(B)$以及粒子$m,q$，有受力
   $
     vb(F) & = q (vb(E) + vb(v) times vb(B)) = m dot(vb(v)) \
