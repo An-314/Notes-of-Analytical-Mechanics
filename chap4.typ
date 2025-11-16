@@ -433,7 +433,7 @@ $
 #theorem(subname: [Binet方程])[
   有心力系统的轨道方程满足Binet方程
   $
-    dv(u, theta, 2) + u = - (m)/(l^2) F(1/u)
+    dv(u, theta, 2) + u = - (m)/(l^2 u^2) F(1/u)
   $
 ]
 
