@@ -166,7 +166,7 @@ $
 
 == 刚体的转动惯量张量
 
-*本体坐标系原点选在刚体质心时的转动惯量张量*
+=== 本体坐标系原点选在刚体质心时的转动惯量张量
 
 设实验室参考系$K'$为惯性参考系，实验室系刚体质心位矢为$vb(R)$，本体坐标系$K$的原点选在质心，刚体角速度为$vb(omega)$，刚体上任意点$i$的坐标为
 $
@@ -248,3 +248,391 @@ $
     vb(J) = cal(I) vb(omega)
   $
 ]
+
+#newpara()
+
+=== 本体坐标系原点没有选在刚体质心时的转动惯量张量
+
+考虑一质量$M$的刚体绕某个定点转动，选该定点作为本体坐标系$K$的原点，此时若质心在$vb(a)$处，相对于质心的位矢若用$vb(r)'_i$表示，则$vb(r)'_i + vb(a) = vb(r)_i$则相对于原点的角动量可以写成
+$
+  vb(J) & = sum_i Delta m_i vb(r)_i times (vb(omega) times vb(r)_i) \
+        & = M vb(a) times (vb(omega) times vb(a)) + sum_i Delta m_i vb(r)'_i times (vb(omega) times vb(r)'_i) \
+$
+写成分量
+$
+  J_alpha & = M (omega_alpha a^2 - a_alpha sum_beta omega_beta a_beta) + sum_beta I_(alpha beta "cm") omega_beta \
+$
+其中$I_(alpha beta "cm")$是质心系下的转动惯量张量，可以得到刚体相对远点的转动惯量张  量为
+$
+  I_(alpha beta) = M (a^2 delta_(alpha beta) - a_alpha a_beta) + I_(alpha beta "cm")
+$
+利用动能也可以得到同样的表达式，而刚体定点(非质心)转动的动能则仍用
+$
+  T_"rot" = 1/2 vb(omega)^TT cal(I) vb(omega) = 1/2 vb(omega)^TT cal(I)_"cm" vb(omega) + 1/2 M vb(dot(a))^2
+$
+表示。
+
+对于定轴转动，假设定轴是$z$轴，则定轴的转动惯量应为$I_33$，则$a^2 - a_3^2$是定轴到平行于定轴且穿过质心的轴的距离平方，因此定轴转动的转动惯量为
+$
+  I_33 = M d^2 + I_(33 "cm")
+$
+这就是*平行轴定理*。
+
+=== 转动惯量和转动惯量张量
+
+假设刚体上一点到瞬时轴的距离为$R_i$，利用矢量积的定义计算刚体转动的动能为
+$
+  T = 1/2 sum_i Delta m_i (vb(omega) times vb(r)_i)^2 = 1/2 sum_i Delta m_i r_i^2 sin^2 theta_i omega^2 = 1/2 omega^2 sum_i Delta m_i R_i^2
+$
+引入绕瞬时轴的转动惯量
+$
+  I = sum_i Delta m_i R_i^2
+$
+于是
+$
+  T = 1/2 I omega^2
+$
+这个公式和绕固定轴转动情况下的公式相仿，不同点在于，一般情况下，瞬时轴是随时间变动的，因此$I$一般为变量。
+
+通过引入角速度方向的单位矢量$vu(e)$，则
+$
+  vb(omega) = omega vu(e)
+$
+从而
+$
+  T = 1/2 vb(omega)^TT cal(I) vb(omega) = 1/2 omega^2 I
+$
+从而有
+$
+  I = vu(e)^T cal(I) vu(e)
+$
+特别地，若取$vu(e) = vu(i)$则有
+$
+  I_11 = vu(i)^T cal(I) vu(i)
+$
+类似可得
+$
+  I_22 = vu(j)^T cal(I) vu(j)\
+  I_33 = vu(k)^T cal(I) vu(k)
+$
+即$I_11, I_22, I_33$为转动惯量张量的三个主对角元，分别为绕$x, y, z$轴的转动惯量。
+
+== 惯量主轴和惯量椭球
+
+=== 惯量主轴
+
+转动惯量张量$cal(I)$的矩阵是个实对称矩阵，可以选择适当的本体坐标系使其对角化，即使其惯量积为零。因动能是标量，不随转动变化，而矢量变换
+$
+  vb(A)' = cal(U)^TT vb(A), vb(A) = cal(U) vb(A)'
+$
+所以
+$
+  T_"rot" & = 1/2 vb(omega)^TT cal(I) vb(omega) \
+          & = 1/2 vb(omega)'^TT cal(U) cal(I) cal(U)^TT vb(omega)' \
+          & = 1/2 vb(omega)'^TT cal(I)' vb(omega)'
+$
+容易看出
+$
+  cal(I)' = cal(U) cal(I) cal(U)^TT
+$
+选择合适的$cal(U)$可以使转动惯量张量对角化
+$
+  cal(I)' = mat(
+    I_1, 0, 0;
+    0, I_2, 0;
+    0, 0, I_3
+  )
+$
+其中$I_1, I_2, I_3$为称为主转动惯量(principal moments)，此时本体坐标轴称为惯量主轴(principal axes)。*主转动惯量是转动惯量张量的三个本征值，对应的本征矢量为惯量主轴*。
+
+容易看出角动量和动能的公式可以简化为
+$
+  J_alpha = I_alpha omega_alpha\
+  T_"rot" = 1/2 sum_alpha I_alpha omega_alpha^2
+$
+#newpara()
+
+因$cal(I)$是实对称矩阵，又$vb(omega)$可以任意，动能大于零，要求本征值$I_1, I_2, I_3$均大于零，即正定。因此使转动惯量张量对角化的转动矩阵$cal(U)$满足下式
+$
+  cal(I)' = cal(U) cal(I) cal(U)^TT => (cal(I) - cal(I)' ) cal(U)^TT = 0 => sum_beta (I_(alpha beta) - I_alpha delta_(alpha beta)) U_(k beta) = 0
+$
+$cal(U)$矩阵某一行$mat(U_(k 1), U_(k 2), U_(k 3))$为某一主轴方向的分量，为对应本征值$I_k$的本征矢量。
+
+因为$cal(U)$是实正交矩阵，所以不同主轴方向的本征矢量正交归一化。这个结果是自然的，因为本体坐标轴之间本来就相互垂直。
+
+以惯量主轴为坐标轴的本体参考系称为*惯量主轴本体参考系*。
+
+*物理上寻找刚体的主轴和数学上把转动惯量张量的矩阵对角化是一回事*。转动惯量张量的主轴体现了刚体质量分布的某种对称性。如果刚体的密度是常数，很容易从刚体的几何对称性直接找到主轴。如果刚体的形状没有对称性，且刚体的质量密度分布不规则，则刚体的主轴不容易直观地直接找到。但是实对称矩阵的对角化总是可能的，因此主轴一定是存在的，只是要通过计算找到。
+
+=== 角动量的方向
+
+在质点动力学中，动量和速度的方向是相同的。刚体转动时，角动量和角速度的方向是否也相同呢？刚体转动的情形
+$
+  vb(J) = cal(I) vb(omega)
+$
+角动量和角速度一般不在同一个方向，这与动量与速度的关系不同。
+
+这正是由于转动惯量张量的性质导致的。只有当刚体的角速度沿刚体的某一主轴时，角动量才和角速度的方向一致。例如：角速度沿$z$轴，且是惯量主轴，即
+$
+  vb(omega) = mat(0; 0; omega_z)
+$
+在惯量主轴本体坐标系，角动量
+$
+  vb(J) = I_33 omega_z vu(k) = I_33 vb(omega)
+$
+#newpara()
+
+=== 惯量椭球
+
+有
+$
+  (I_1 omega_1^2 + I_2 omega_2^2 + I_3 omega_3^2) / (I omega^2) = 1
+$
+引入一个新矢量
+$
+  vb(rho) = vu(e)/sqrt(I)
+$
+由于
+$
+  vb(e) = vb(omega)/omega
+$
+容易得到
+$
+  rho_1 = vu(e)/sqrt(I) dot vu(i) = omega_1 / (sqrt(I) omega)\
+  rho_2 = vu(e)/sqrt(I) dot vu(j) = omega_2 / (sqrt(I) omega)\
+  rho_3 = vu(e)/sqrt(I) dot vu(k) = omega_3 / (sqrt(I) omega)
+$
+就有
+$
+  I_1 rho_1^2 + I_2 rho_2^2 + I_3 rho_3^2 = 1
+$
+这是一个椭球面方程，其长短轴长是主转动惯量开方倒数$1/sqrt(I_k)$，称为*惯量椭球*，是$vb(rho)$空间的椭球面。
+
+== Euler动力学方程
+
+由于刚体的特殊性，若不考虑其平动，只考虑其绕定点的转动，则它只有3个自由度。*运用角动量定理的3个分量方程，就可以描述刚体的整体运动。*由于内力矩在角动量定理中相互抵消，而刚体又不能形变，不必考虑内力所做的功和内力的势能，因此动力学方程中只需考虑外力矩的作用即可。
+
+为了使方程形式简单，选用惯量主轴本体坐标系，坐标系原点选在质心或固定点，以保证转动惯量张量为常量，且角动量定理有简单的形式。假设外力矩为$vb(M)$，选本体坐标轴为惯量主轴(即惯量积为零)，角动量定理具体表示为
+$
+  vb(M) &= dv(, t) (I_1 omega_1 vu(i) + I_2 omega_2 vu(j) + I_3 omega_3 vu(k))\
+  &= I_1 dot(omega)_1 vu(i) + I_2 dot(omega)_2 vu(j) + I_3 dot(omega)_3 vu(k) + I_1 omega_1 (vb(omega) times vu(i)) + I_2 omega_2 (vb(omega) times vu(j)) + I_3 omega_3 (vb(omega) times vu(k))\
+  & = cal(I) dot(vb(omega)) + vb(omega) times vb(J)\
+$
+整理成分量形式
+$
+  I_1 dot(omega)_1 - (I_2 - I_3) omega_2 omega_3 = M_1\
+  I_2 dot(omega)_2 - (I_3 - I_1) omega_3 omega_1 = M_2\
+  I_3 dot(omega)_3 - (I_1 - I_2) omega_1 omega_2 = M_3
+$
+这就是刚体的Euler动力学方程。
+
+利用Lagrange方程同样可以推得Euler动力学方程组。当本体坐标轴选在惯量主轴上时，对于自由刚体定点转动，动能就是拉格朗日量：
+$
+  L = T = 1/2 (I_1 omega_1^2 + I_2 omega_2^2 + I_3 omega_3^2)
+$
+选择3个Euler角作为广义坐标，此时角速度3个分量由
+$
+  vb(omega) = mat(
+    dot(theta) cos psi + dot(psi) sin theta cos phi;
+    -dot(theta) sin psi + dot(psi) sin theta sin phi;
+    dot(theta) cos theta + dot(psi)
+  )
+$
+给出，Euler角$psi$是绕本体坐标系$z$轴的自转，其对应的广义力为沿$z$轴的力矩分量，从而
+$
+  dv(, t) (pdv(L, dot(psi))) - pdv(L, psi) = Q_psi = M_3
+$
+其中
+$
+  pdv(L, dot(psi)) & = sum_i I_i omega_i pdv(omega_i, dot(psi)) \
+       pdv(L, psi) & = sum_i I_i omega_i pdv(omega_i, psi)
+$
+可计算得
+$
+  pdv(vb(omega), psi) = mat(omega_2; -omega_1; 0), pdv(vb(omega), dot(psi)) = mat(0; 0; 1)
+$
+整理得
+$
+  I_3 dot(omega)_3 - (I_1 - I_2) omega_1 omega_2 = M_3
+$
+只有角速度3个分量和3个主转动惯量以及力矩的第三分量。由于坐标轴的选择有任意性，3个主轴中任意1个都可以选作$z$轴，所以，通过轮换坐标轴，就可以得到另2个方程
+$
+  I_1 dot(omega)_1 - (I_2 - I_3) omega_2 omega_3 = M_1\
+  I_2 dot(omega)_2 - (I_3 - I_1) omega_3 omega_1 = M_2
+$
+#newpara()
+
+Euler动力学方程的形式看起来很简练，但因为是关于角速度分量的*非线性方程组*，解起来其实很困难。到现在只有如下特殊(对外力矩或刚体形状作某些限制)情形可以有解析解。
+- Euler-Poinsot运动：自由刚体无外力矩作用下的转动。
+- Lagrange-Poisson运动：对称刚体在重力场中绕固定点转动。
+- Kovalevskaya运动：具有特定惯量比的刚体在重力场中绕固定点转动。
+在此只简要地介绍前两种情形。
+
+== 刚体的自由转动 Euler-Poinsot运动
+
+=== 自由转动或惯性转动
+
+自由转动或惯性转 动是指外力矩为零的情形。在重力场中刚体的定点自由转动，定点一定与质心重合，否则重力矩不能为零。如果是一般运动，可以分别考虑刚体质心的平动和绕质心的转动，重力矩自动为零。
+
+以地球为例，因地球的线度比起日地距离要小得多，太阳引力的合力可认为近似作用于地球的质心，以质心为基点分解地球的运动，平动部分系在太阳引力的作用下作公转(以质心为代表的质点运动)，转动部分系围绕质心作自转(质心参考系中的定点转动)，此时外力矩为零，为自由转动。
+
+自由转动是因惯性而运动。转动惯性与转动惯量张量相联系，因此比较复杂，与平动时的惯性不同。
+
+=== 自由定点转动积分形式的解
+
+自由定点转动，由于外力矩为零，Euler动力学方程组
+$
+  I_1 dot(omega)_1 - (I_2 - I_3) omega_2 omega_3 = 0\
+  I_2 dot(omega)_2 - (I_3 - I_1) omega_3 omega_1 = 0\
+  I_3 dot(omega)_3 - (I_1 - I_2) omega_1 omega_2 = 0
+$
+式中第一个方程乘以$2 I_1 omega_1$,第二个方程乘以$2 I_2 omega_2$,第三个方程乘以$2 I_3 omega_3$，然后将三式相加，得到
+$
+  dv(, t) (I_1^2 omega_1^2 + I_2^2 omega_2^2 + I_3^2 omega_3^2) = 0
+$
+积分得
+$
+  I_1^2 omega_1^2 + I_2^2 omega_2^2 + I_3^2 omega_3^2 = vb(J)^2 = "const"
+$
+即角动量大小为常量，角动量定理也给出
+$
+  vb(dot(J)) = dv(, t) (I_1 omega_1 vu(i) + I_2 omega_2 vu(j) + I_3 omega_3 vu(k)) = vb(M) = 0
+$
+则角动量矢量在空间中是定向不变的。
+
+注意这里因为是本体坐标系，坐标单位矢量是随时间变化的。
+
+第一个方程乘以$omega_1$,第二个方程乘以$omega_2$,第三个方程乘以$omega_3$，然后将三式相加，得到
+$
+  dv(, t) (I_1 omega_1^2 + I_2 omega_2^2 + I_3 omega_3^2) = 0
+$
+积分得
+$
+  I_1 omega_1^2 + I_2 omega_2^2 + I_3 omega_3^2 = 2 T = "const"
+$
+
+=== Euler-Poinsot运动的几何解释
+
+对刚体自由定点转动的一般情形，可以不解方程而用几何方法直观描述刚体运动。在$vb(omega)$空间内定义一函数
+$
+  F(vb(omega)) = omega_1^2/((2 T)/I_1) + omega_2^2/((2 T)/I_2) + omega_3^2/((2 T)/I_3) = 1
+$
+$F=1$就是
+$
+  T = 1/2 (I_1 omega_1^2 + I_2 omega_2^2 + I_3 omega_3^2)
+$
+即动能守恒。此时在$vb(omega)$空间表示椭球面，这个特定曲面叫惯性椭球面(inertia ellipsoid)，与惯量椭球面类似，只是长短轴的长度变成了$sqrt((2 T)/I_k)$。*$vb(omega)$的端点在椭球面上，椭球面上任一点到球心的距离，表示角速度的大小。*
+
+以$vb(omega)$的端点为切点做一个椭球面的切平面，切面的外法向可通过梯度求得
+$
+  grad_omega F = mat(
+    (omega_1 I_1) / T;
+    (omega_2 I_2) / T;
+    (omega_3 I_3) / T
+  ) = vb(J) / T
+$
+由于角动量守恒、动能守恒，所以梯度方向固定。另一方面，椭球心距该切面的距离为
+$
+  "OP" = vb(omega) dot vb(J)/J = (2 T)/J = "const"
+$
+因此该切面相对椭球固定，称为不变面或Poinsot平面。
+
+$vb(omega)$的端点既在切面上，又在椭球面上，而$vb(omega)$矢量是瞬时轴，$vb(omega)$的端点瞬时速度为零，这意味着惯量椭球在保持与Poinsot面距离不变的情况下，在Poinsot面作*纯滚动*。惯量主轴是固定在刚体上的，惯量椭球的运动十分形象地给出了自由刚体的运动。
+
+#grid(columns: (1fr, 1fr))[
+  #figure(
+    image("pic/2025-11-18-11-52-44.png", width: 100%),
+    numbering: none,
+  )
+][
+  #figure(
+    image("pic/2025-11-18-11-54-39.png", width: 100%),
+    numbering: none,
+  )
+]
+
+切点在惯量椭球面上的轨迹叫*本体瞬心迹(polhode)*，不变切面上的曲线叫*空间瞬心迹(herpolhode)*。
+
+事实上由于我们选择是主轴，惯性椭球的运动意味着$vb(omega)$的坐标架的变化，从而也有主轴坐标系的变化。通过惯量椭球的运动，可以得到主轴坐标系相对于空间参考系的变化，从而得到刚体的转动。
+$
+  vb(omega)_1 = omega_1 vu(i), vb(omega)_2 = omega_2 vu(j), vb(omega)_3 = omega_3 vu(k)
+$
+
+=== 轴对称刚体的角速度
+
+如果是轴对称刚体，假设为
+$
+  I_1 = I_2 != I_3
+$
+惯量椭球面是对第三轴对称的一个旋转椭球面。这个椭球面在Poinsot面上滚动时，以椭球中心与Poinsot面距离保持不变的形式作纯滚动时，容易看出本体瞬心迹和空间瞬心迹都是圆，亦即运动过程圆锥母线长和高都不变 ,代表角速度大小和它的第三轴分量也都不变。
+
+实际此时刚体角速度矢量相对角动量矢量作进动，但没有章动。
+$
+  vb(J) = cal(I) vb(omega)
+$
+#newpara()
+
+这个结论也可以通过计算得到
+$
+  dot(omega)_3 & = ((I_1 - I_2) / I_3) omega_1 omega_2 = 0 \
+$
+$
+  omega_3 = Omega = "const" \
+$
+代人
+$
+  dot(omega)_1 & = (1 - I_3/I_1) omega_2 Omega \
+  dot(omega)_2 & = (I_3/I_1 - 1) omega_1 Omega \
+$
+令
+$
+  (I_3/I_1 - 1) Omega = n
+$
+则
+$
+  dot(omega)_1 & = -n omega_2 \
+  dot(omega)_2 & = n omega_1 \
+$
+对式时间求导，再整理得
+$
+  dot.double(omega)_1 + n^2 omega_1 = 0\
+  dot.double(omega)_2 + n^2 omega_2 = 0
+$
+有
+$
+  omega_1 = omega_perp cos abs(n)t
+$
+为简便起见推导中选择合适的初始时间使得初相为零。代回有
+$
+  omega_2 = cases(omega_perp sin abs(n)t\, n > 0\, I_3>I_1, -omega_perp sin abs(n)t\, n < 0\, I_3<I_1)
+$
+显然有
+$
+  omega_perp^2 = omega_1^2 + omega_2^2
+$
+由于动能是守恒量，因此
+$
+  T = 1/2 (I_1 omega_perp^2 + I_3 Omega^2) = "const" => \
+  omega_perp = sqrt((2 T - I_3 Omega^2)/I_1) = "const"
+$
+角速度
+$
+  omega^2 = omega_perp^2 + Omega^2 = (2 T - I_3 Omega^2)/I_1 + Omega^2 = (2 T + (I_1 - I_3) Omega^2)/I_1 = "const"
+$
+进一步讨论方向，$vb(omega)$与对称轴$vu(k)$的夹角为$beta$，则
+$
+  tan beta = omega_perp / Omega = "const"
+$
+从而$vb(omega)$绕对称轴转动且以角速度$abs(n)$进动。惯量椭球为一旋转椭球
+$
+  (omega_1^2 + omega_2^2) / ((2 T)/I_1) + omega_3^2 / ((2 T)/I_3) = 1
+$
+由于$omega_1^2 + omega_2^2 = omega_perp^2$为常量，因此本体瞬心迹为绕对称轴的圆。另一方面，由于$vb(omega)$大小不变，又
+$
+  vb(omega) dot vb(J)/J = (2 T)/J = "const"
+$
+即$vb(omega)$在$vb(J)$方向投影不变意味着角速度在切面投影值亦不变，因此空间瞬心迹也是绕$vb(J)$的圆。另外有
+$
+  vb(J) dot (vb(omega) times vu(k)) = (I_1 omega_1 vu(i) + I_2 omega_2 vu(j) + I_3 omega_3 vu(k)) dot (- omega_2 vu(i) + omega_1 vu(j)) = 0
+$
+所以$vb(J), vb(omega), vu(k)$三者共面。另外，在垂直于$vu(k)$方向$vb(J)_perp = I_1 vb(omega)_perp$，而沿着$vu(k)$方向$vb(J)_parallel = I_3 omega_parallel$，因此$vb(J), vb(omega)$一定在$vu(k)$的同一侧。
