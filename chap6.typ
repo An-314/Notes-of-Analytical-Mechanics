@@ -17,6 +17,76 @@ $
 $
 则有$vb(r)_(i j) perp dot(vb(r))_(i j)$。
 
+若刚体只作平动，则各点运动的速度相同，必有$dot(vb(r))_(i j) = 0$。若$dot(vb(r))_(i j) != 0$，意味着刚体必还伴随着转动。此时既然$vb(v)_(i j) = dot(vb(r))_(i j) perp vb(r)_(i j)$就可引入一个矢量$vb(omega)_(i j)$使得
+$
+  dot(vb(r))_(i j) = vb(omega)_(i j) times vb(r)_(i j)
+$
+这个矢量必定和转动有关，且具有$[T]^(-1)$的量纲。实际上引入的矢量$vb(omega)_(i j)$就是角速度，其方向由 右手螺旋定则确定。角速度矢量是一个轴矢量(与极矢量镜像对称性不同)，与*无限小转动角度*对应。有限角度的转动不能构成矢量，因为它无法满足加法的交换律。
+
+*角速度矢量对刚体的任何点都是同一个值。*证明：考虑刚体上另一点$k$，则
+$
+  vb(v)_(i j) = vb(omega)_(i j) times vb(r)_(i j)\
+  vb(v)_(i k) = vb(omega)_(i k) times vb(r)_(i k)\
+  vb(v)_(j k) = vb(omega)_(j k) times vb(r)_(j k)
+$
+合在一起，容易得到
+$
+  vb(omega)_(j k) times (vb(r)_(i k) - vb(r)_(i j)) = vb(omega)_(i k) times vb(r)_(i k) - vb(omega)_(i j) times vb(r)_(i j)
+$
+两边点积$vb(r)_(i j)$，整理得
+$
+  (vb(omega)_(j k) - vb(omega)_(i k)) dot (vb(r)_(i k) times vb(r)_(i j)) = 0
+$
+从而
+$
+  vb(omega)_(j k) = vb(omega)_(i k) = vb(omega)_(i j)
+$
+由于$i,j,k$点任意，故刚体上任何一点角速度都是一样的。事实上，由于刚体不变形，转动都是整体的，因此*角速度是属于整个刚体的物理量*，简单地记为$vb(omega)$即可。
+
+=== 运动描述
+
+刚体的运动通常可分为平动、定轴转动、平面平行运动、定点转动和一般运动。
+
+最一般地，刚体的任意运动是平动和转动的叠加，这就是Chasles定理。刚体的平动可以选一个代表点(刚体上任意点)描述，其他点相对这个代表点的运动其实是转动。这个代表点的不同选择从运动学的角度来看是完全等价的(虽然代表点的不同选择可能导致颇为不相同的平动)，然而从动力学的角度来看，选质点组的质心为代表点将使动力学方程得到简化,因而往往优先选用。就转动部分而言，绕定点的转动是最一般的情况，定轴转动显然是其特殊情况。
+
+在定轴转动情形，经常用类比的方法处理，即它与一维平动运动规律相对应，但这种类比不能任意推广到定点转动。典型的例子是，自由平动物体的速度不变，但自由定点转动刚体的角速度有可能随时间变化；平动物体的动量与速度同向，但一般刚体运动的角速度与角动量经常是不同向的。原因是转动与平动有本质的差异，平动惯性相关的是*质量标量*，而与转动惯性相关的是转动*惯量张量*。
+
+=== 速度和加速度
+
+刚体上任意点的速度和加速度，可以通过平动和转动的叠加得到。
+
+作平动的刚体，任一点的线速度是相同的，任一点的线加速度也是相同的。因此可以用代表点的速度和加速度来描述整个刚体的速度和加速度。
+
+对于转动的刚体，刚体上任意两点间相对速度$vb(v)_(i j) = vb(omega) times vb(r)_(i j)$。若$O$是固定点，刚体上任意点相对该固定点的位置为$vb(r)_i$，则其线速度为
+$
+  vb(v)_i = vb(omega) times vb(r)_i
+$
+它与作定轴转动的刚体上任一点的线速度的表达式是一致的，两者的差别仅在于：作定轴转动的刚体的转动轴既固定于空间，又固定于刚体，定点转动刚体的转动轴可以随时间而变动，一般只有瞬时转动轴，没有固定的转动轴。
+
+瞬时转动轴上所有点的速度在某个时刻都是零，因此该时刻角速度方向沿着瞬时轴。
+
+常模矢量$vb(A)$有类似关系(固定于刚体即以$vb(omega)$转动而且长度不变的矢量，其始点不限于在固定点，也不限于量纲为长度)
+$
+  dv(vb(A), t) = vb(omega) times vb(A)
+$
+或算符关系
+$
+  dv(, t) = vb(omega) times
+$
+#newpara()
+
+如果参考点$O$不是固定点(可以是刚体中的任意点)，$vb(r)_0$不是常矢量，$dot(vb(r))_0 = vb(v)_0$，则其他点速度为
+$
+  vb(v) = vb(v)_0 + vb(omega) times vb(r)_i
+$
+其中
+$
+  vb(r) = vb(r)_0 + vb(r)_i
+$
+$O$点加速度设为$vb(a)_0 = dot(vb(v))_0$，则其他点加速度为
+$
+  vb(a)_i = vb(a)_0 + dot(vb(omega)) times vb(r)_i + vb(omega) times (vb(omega) times vb(r)_i) = vb(a)_0 + dot(vb(omega)) times vb(r)_i + vb(omega) times (vb(omega) times vb(r)_i)
+$
 
 == Euler定理与转动
 
@@ -262,9 +332,10 @@ $
 $
   J_alpha & = M (omega_alpha a^2 - a_alpha sum_beta omega_beta a_beta) + sum_beta I_(alpha beta "cm") omega_beta \
 $
-其中$I_(alpha beta "cm")$是质心系下的转动惯量张量，可以得到刚体相对远点的转动惯量张  量为
+其中$I_(alpha beta "cm")$是质心系下的转动惯量张量，可以得到刚体相对远点的转动惯量张量为
 $
-  I_(alpha beta) = M (a^2 delta_(alpha beta) - a_alpha a_beta) + I_(alpha beta "cm")
+  I_(alpha beta) = M (a^2 delta_(alpha beta) - a_alpha a_beta) + I_(alpha beta "cm")\
+  cal(I) = M (a^2 I - vb(a) vb(a)^TT) + cal(I)_"cm"
 $
 利用动能也可以得到同样的表达式，而刚体定点(非质心)转动的动能则仍用
 $
