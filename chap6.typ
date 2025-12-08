@@ -1050,7 +1050,7 @@ $
       dot(u)^2 = (1 - u)^2 (beta (1 + u) - (a^2)(1 + u)) = (1 - u)^2 (beta - a^2)(1 + u) = 0
     $
     显然$u = +1$只能是重根，因此这个情形不合理。
-  - $u_1 = 1$是$f(u)$的根又是拐点，因此$f(1)=0, f'(1)=0, f''(1)=0$即这个根是三重根。这要求$a=b, alpha = beta$另外满足$a^2/beta = 2$。此时$theta = 0, eval(dot(theta))_(theta=0) = 0, eval(dot.double(theta))_(theta=0) = 0$，因此*陀螺将保持直立转动*。
+  - $u_1 = 1$是$f(u)$的根又是拐点，因此$f(1)=0, f'(1)=0, f''(1)=0$即这个根是三重根。这要求$a=b, alpha = beta$另外满足$a^2/beta = 2$。此时$theta = 0, eval(dot(theta))_(theta=0) = 0, eval(dot.double(theta))_(theta=0) = 0$，因此*陀螺将保持直立转动*
   - $u_1 = cos theta_1$是切点，因此是重根。此时
     $
       f(u) = beta (u - u_1)^2 (u - u_2)
@@ -1060,3 +1060,28 @@ $
       eval(dot(phi))_(theta=theta_1) = (b - a cos theta_1) / (sin^2 theta_1)
     $
 - $f(u)$在区间$[-1,+1]$有两个根且有解的可能情形
+  #figure(
+    image("pic/2025-12-08-15-23-59.png", width: 80%),
+    numbering: none,
+  )
+  - 根$u_2 =+1$情况，类似(1)情形曲线1，同样不合理
+  - 此时$u_2 = +1$是重根，$alpha = beta, a = b$，满足$f'(+1)=0, u_1 = a^2 / beta - 1$，因此有
+    $
+      dot(phi) = beta/a, dot(psi) = beta/a + (I_1/I_3 - 1) a
+    $
+    另一方面，由于$-1<u_1<+1$，因此$0 < a^2 / alpha < 2$，且在$u_1 != - 1, u_2 = +1$之间满足$dot(u)^2 = f(u) > 0$，因此$theta$在$0 < theta < arccos u_1$之间摆动，*陀螺作章动*
+  - 分下面三种情况
+    - 设初始条件保证$b/a > u_2$，则总有$b - a cos theta > 0$，因此$dot(phi) > 0$，陀螺*正向进动*；而且在$theta_1 = arccos u_1, theta_2 = arccos u_2$处$dot(theta)=0$，陀螺*在$theta_1 ,theta_2$之间摆动*；如(a)所示
+    - 设初始条件保证$u_1 < b/a < u_2$，此时$dot(phi)$不总大于零，若平均起来$dot(phi)$大于零，则*平均净进动*；如(b)所示
+    - 设初始条件保证$b/a = u_2$，这时$dot(phi)$在$theta_2$为零；如(c)所示
+    #figure(
+      image("pic/2025-12-08-15-38-13.png", width: 80%),
+      numbering: none,
+    )
+- $f(u)$在区间$[-1,+1]$有三个根且有解的可能情形
+  #figure(
+    image("pic/2025-12-08-15-38-00.png", width: 80%),
+    numbering: none,
+  )
+  - 但在此情形$+1$不是重根，与(1)情形曲线1类似，不合理
+- 综合以上讨论，重刚体只有(1)情形中的曲线2、曲线3及(2)情形中的曲线2、曲线3对应的运动形式。
