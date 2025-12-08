@@ -1,6 +1,6 @@
 #import "@preview/scripst:1.1.1": *
 
-= Lagrange方程
+= Lagrange方程 <Lagrange-Dynamics>
 
 == 完整系
 
