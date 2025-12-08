@@ -206,9 +206,9 @@ $
 在本体参考系中
 $
   vb(omega) = U_3 U_2 mat(dot(theta); 0; dot(phi)) + U_3 mat(0; 0; dot(psi)) = mat(
-    dot(theta) cos psi + dot(psi) sin theta cos phi;
-    -dot(theta) sin psi + dot(psi) sin theta sin phi;
-    dot(theta) cos theta + dot(psi)
+    dot(theta) cos psi + dot(phi) sin theta sin psi;
+    -dot(theta) sin psi + dot(phi) sin theta cos psi;
+    dot(phi) cos theta + dot(psi)
   )
 $
 这就是刚体绕定点转动的Euler运动学方程，其中
@@ -227,9 +227,9 @@ $
   $
   $
     vb(omega) = mat(
-      dot(theta) cos psi + dot(psi) sin theta cos phi;
-      -dot(theta) sin psi + dot(psi) sin theta sin phi;
-      dot(theta) cos theta + dot(psi)
+      dot(theta) cos psi + dot(phi) sin theta sin psi;
+      -dot(theta) sin psi + dot(phi) sin theta cos psi;
+      dot(phi) cos theta + dot(psi)
     )
   $
 ]
@@ -706,4 +706,357 @@ $
 $
   vb(J) dot (vb(omega) times vu(k)) = (I_1 omega_1 vu(i) + I_2 omega_2 vu(j) + I_3 omega_3 vu(k)) dot (- omega_2 vu(i) + omega_1 vu(j)) = 0
 $
-所以$vb(J), vb(omega), vu(k)$三者共面。另外，在垂直于$vu(k)$方向$vb(J)_perp = I_1 vb(omega)_perp$，而沿着$vu(k)$方向$vb(J)_parallel = I_3 omega_parallel$，因此$vb(J), vb(omega)$一定在$vu(k)$的同一侧。
+所以$vb(J), vb(omega), vu(k)$三者共面（一般取角动量为实验室系第3轴）。另外，在垂直于$vu(k)$方向$vb(J)_perp = I_1 vb(omega)_perp$，而沿着$vu(k)$方向$vb(J)_parallel = I_3 omega_parallel$，因此$vb(J), vb(omega)$一定在$vu(k)$的同一侧。
+
+我们取$vb(J), vu(k)$的夹角为$alpha$，$vb(omega), vu(k)$的夹角为$beta$，则
+- $I_1 < I_3$
+  $
+    tan alpha = J_perp/J_parallel = sqrt(J_1^2 + J_2^2)/J_3 = (I_1 omega_perp) / (I_3 omega_parallel) = (I_1/I_3) tan beta < tan beta => alpha < beta
+  $
+  例如，地球可看作是旋转扁椭球$I_3/I_1 - 1 = 0.00327 => n approx Omega/306$，$vb(omega)$沿天文地轴方向，$vu(k)$是地理地轴方向，即在北极。天文地极绕地理地极的进动周期 大约是306天或10个月。但因为地球不是理想刚体，实际这个周期要更长，大约是14个月。
+- $I_1 > I_3$
+  $
+    tan alpha = J_perp/J_parallel = sqrt(J_1^2 + J_2^2)/J_3 = (I_1 omega_perp) / (I_3 omega_parallel) = (I_1/I_3) tan beta > tan beta => alpha > beta
+  $
+
+  #figure(
+    image("pic/2025-12-08-10-34-07.png", width: 80%),
+    numbering: none,
+  )
+
+=== 轴对称刚体的角速度及Euler角速度
+
+刚体角速度$vb(omega)$和Euler的角速度之间由Euler运动学方程相联系。
+$
+  vb(omega) = mat(
+    dot(theta) cos psi + dot(phi) sin theta sin psi;
+    -dot(theta) sin psi + dot(phi) sin theta cos psi;
+    dot(phi) cos theta + dot(psi)
+  )
+$
+
+作为例子，考查惯量椭球为扁椭球情形($n>0,I_3>I_1=I_2$)。由于角动量守恒，可以假设角动量方向沿实验室系$z$轴方向，这样可以简化问题。在本体坐标系，角速度的3个分量为
+$
+  vb(omega) = mat(
+    omega_perp cos n t;
+    omega_perp sin n t;
+    Omega
+  )
+$
+此时$theta = alpha$，从而$dot(theta) = 0$得到
+$
+  mat(
+    omega_perp cos n t;
+    omega_perp sin n t;
+    Omega
+  ) = mat(
+    dot(phi) sin alpha sin psi;
+    dot(phi) sin alpha cos psi;
+    dot(phi) cos alpha + dot(psi)
+  )
+$
+前两个式子相除
+$
+  cot n t = tan psi
+$
+取最简单结果有
+$
+  psi = pi/2 - n t => dot(psi) = -n = -(I_3/I_1 - 1) Omega
+$
+代入最后一个式子
+$
+  dot(phi) cos alpha = I_3/I_1 Omega\
+  dot(phi) = (I_3 Omega)/(I_1 cos alpha) = J / I_1 = sqrt(omega_perp^2 + I_3^2/I_1^2 Omega^2) = sqrt(omega^2 + (I_3^2/I_1^2 - 1)Omega^2)
+$
+也可以从另一个角度考虑，$dot(phi)$是刚体绕实验室系$z$轴的进动角速度，而$dot(psi)$是绕本体坐标系$z$轴的自转角速度，因此有
+$
+  vb(omega) = dot(phi) vu(k)' + dot(psi) vu(k)
+$
+#figure(
+  image("pic/2025-12-08-10-55-20.png", width: 80%),
+  numbering: none,
+)
+简单从三角形正弦定理可得
+$
+  dot(phi)/(sin beta) = (- dot(psi))/(sin (beta - alpha)) = omega / (sin alpha)
+$
+由此求$dot(phi), dot(psi)$，考虑到
+$
+  tan alpha = (I_1/I_3) tan beta, tan beta = omega_perp / Omega
+$
+可得
+$
+  dot(phi) & = (J/I_1) = sqrt(omega^2 + (I_3^2/I_1^2 - 1) Omega^2) \
+  dot(psi) & = -(I_3/I_1 - 1) Omega
+$
+
+#example(subname: [])[
+  有一匀质的薄圆盘，质量$m$，半径$r$，盘本身绕自身对称轴$omega_0$自转，绕竖直轴以恒角速度$Omega$转动，圆盘对称轴与竖直方向角度$alpha$不变，竖直轴穿过圆盘中心O点。选择O点作为原点，本体坐标系$z$轴与圆盘对称轴重合，$x-y$轴选在圆盘面内，选竖直方向做实验室坐标系 $z'$轴，且在$y-z$平面内。求：
+  + 本体坐标系下的角速度
+  + 动能、本体坐标系下的角动量
+  + 本体系O点的力矩
+  + 实验室系O点的力矩、角动量
+  + 突然撤去力矩，进动的角速度
+]
+
+#solution[
+  + 从Euler角考虑，取$phi$为绕实验室系$z'$轴的进动角，$theta = alpha$，$psi$为绕本体坐标系$z$轴的自转角，则
+    $
+      vb(omega) & = dot(phi) vu(k)' + dot(psi) vu(k) \
+                & = Omega vu(k)' + omega_0 vu(k)
+    $
+    考虑本体坐标系下
+    $
+      vb(omega) & = mat(
+                    dot(theta) cos psi + dot(phi) sin theta sin psi;
+                    -dot(theta) sin psi + dot(phi) sin theta cos psi;
+                    dot(phi) cos theta + dot(psi)
+                  ) & = mat(
+                        Omega sin alpha sin omega_0 t;
+                        Omega sin alpha cos omega_0 t;
+                        Omega cos alpha + omega_0
+                      )
+    $
+  + 动能在主轴本体系为
+    $
+      T &= 1/2 (I_1 omega_1^2 + I_2 omega_2^2 + I_3 omega_3^2) = 1/2 (1/4 m r^2 (Omega^2 sin^2 alpha) + 1/2 m r^2 (Omega cos alpha + omega_0)^2)\
+      &= 1/8 m r^2 (Omega^2 sin^2 alpha + 2 (Omega cos alpha + omega_0)^2)
+    $
+    以及角动量
+    $
+      vb(J) & = I_1 omega_1 vu(i) + I_2 omega_2 vu(j) + I_3 omega_3 vu(k) \
+      & = 1/4 m r^2 Omega sin alpha sin omega_0 t vu(i) + 1/4 m r^2 Omega sin alpha cos omega_0 t vu(j) + 1/2 m r^2 (Omega cos alpha + omega_0) vu(k) \
+      &= 1/4 m r^2 mat(
+        Omega sin alpha sin omega_0 t;
+        Omega sin alpha cos omega_0 t;
+        2 (Omega cos alpha + omega_0)
+      )
+    $
+  + 本体坐标系O点的力矩，根据Euler动力学方程
+    $
+      vb(M) & = mat(
+                I_1 dot(omega)_1 - (I_2 - I_3) omega_2 omega_3;
+                I_2 dot(omega)_2 - (I_3 - I_1) omega_3 omega_1;
+                I_3 dot(omega)_3 - (I_1 - I_2) omega_1 omega_2
+              )
+    $
+    得到
+    $
+      M_1 & = I_1 dot(omega)_1 - (I_2 - I_3) omega_2 omega_3 \
+          & = I_1 omega_0 omega_2 + I_1 omega_2 omega_3 \
+          & = 1/4 m r^2 Omega sin alpha cos omega_0 t (2omega_0 + Omega cos alpha) \
+    $
+    $
+      M_2 & = I_2 dot(omega)_2 - (I_3 - I_1) omega_3 omega_1 \
+          & = - I_2 omega_0 omega_1 - I_2 omega_1 omega_3 \
+          & = -1/4 m r^2 Omega sin alpha sin omega_0 t (2omega_0 + Omega cos alpha) \
+    $
+    $
+      M_3 & = I_3 dot(omega)_3 - (I_1 - I_2) omega_1 omega_2 = 0 \
+    $
+    得到
+    $
+      vb(M) = 1/4 m r^2 Omega sin alpha (2omega_0 + Omega cos alpha) mat(
+        cos omega_0 t;
+        -sin omega_0 t;
+        0
+      )
+    $
+  + 实验室系O点的力矩，根据力矩变换公式
+    $
+      vb(M)' = cal(U)^TT vb(M), cal(U)^TT = cal(U)_1^TT cal(U)_2^TT cal(U)_3^TT\
+    $
+    其中
+    $
+      cal(U)_3^TT = mat(
+        cos psi, -sin psi, 0;
+        sin psi, cos psi, 0;
+        0, 0, 1
+      ) = mat(
+        cos omega_0 t, -sin omega_0 t, 0;
+        sin omega_0 t, cos omega_0 t, 0;
+        0, 0, 1
+      )\
+      cal(U)_3^TT mat(cos omega_0 t; -sin omega_0 t; 0) = mat(1; 0; 0)
+    $
+    $
+      cal(U)_2^TT = mat(
+        1, 0, 0;
+        0, cos alpha, sin alpha;
+        0, -sin alpha, cos alpha
+      )\
+      cal(U)_2^TT mat(1; 0; 0) = mat(1; 0; 0)
+    $
+    $
+      cal(U)_1^TT = mat(
+        cos phi, -sin phi, 0;
+        sin phi, cos phi, 0;
+        0, 0, 1
+      ) = mat(
+        cos (Omega t + phi_0), -sin (Omega t + phi_0), 0;
+        sin (Omega t + phi_0), cos (Omega t + phi_0), 0;
+        0, 0, 1
+      )\
+      cal(U)_1^TT mat(1; 0; 0) = mat(cos (Omega t + phi_0); sin (Omega t + phi_0); 0)
+    $
+    因此
+    $
+      vb(M)' = 1/4 m r^2 Omega sin alpha (2omega_0 + Omega cos alpha) mat(
+        cos (Omega t + phi_0);
+        sin (Omega t + phi_0);
+        0
+      )
+    $
+    同理可以算出实验室系O点的角动量
+    $
+      vb(J)' = 1/4 m r^2 mat(
+        sin alpha (Omega cos alpha + 2 omega_0) cos (Omega t + phi_0);
+        - sin alpha (Omega cos alpha + 2 omega_0) sin (Omega t + phi_0);
+        Omega (1 + cos^2 alpha) + 2 omega_0 cos alpha
+      )
+    $
+  + 突然撤去力矩，不妨在$Omega t + phi_0 = 2 k pi + pi = tau$时刻撤去力矩，变成了自由刚体转动，此时角动量为
+    $
+      vb(J)' = 1/4 m r^2 mat(
+        0;
+        sin alpha (Omega cos alpha + 2 omega_0);
+        Omega (1 + cos^2 alpha) + 2 omega_0 cos alpha
+      )
+    $
+    角动量守恒，$gamma$为角动量与实验室系$z'$轴夹角，则有
+    $
+      tan gamma = J_2 / J_3 = (sin alpha (Omega cos alpha + 2 omega_0)) / (Omega (1 + cos^2 alpha) + 2 omega_0 cos alpha)
+    $
+    $alpha'$是角动量与本体系$z(3)$轴夹角，$beta$为角速度与本体系$z(3)$轴夹角，则有
+    $
+      tan beta = omega/Omega\
+      tan alpha' = I_1/I_3 tan beta = 1/2 tan beta
+    $
+    在本体系角动量为
+    $
+      vb(J) = 1/4 m r^2 mat(
+        Omega sin alpha sin omega_0 tau;
+        Omega sin alpha cos omega_0 tau;
+        2Omega cos alpha + 2 omega_0
+      )
+    $
+    因为角动量守恒，$vb(J)$方向不变，此时$vb(omega)$为
+    $
+      vb(omega) = mat(
+        Omega sin alpha sin omega_0 tau;
+        Omega sin alpha cos omega_0 tau;
+        Omega cos alpha + omega_0
+      )
+    $
+    因此进动角速度为
+    $
+      dot(phi) = sqrt(omega_perp^2 + (I_3^2/I_1^2) omega_3^2) = sqrt(Omega^2 sin^2 alpha + 4(omega_0 + Omega cos alpha)^2)
+    $
+]
+
+== 有一固定点的对称陀螺
+
+陀螺的运动不同于自由刚体运动，因受到重力矩的作用，它也叫*重刚体*问题。
+#figure(
+  image("pic/2025-12-08-12-20-10.png", width: 30%),
+  numbering: none,
+)
+考虑陀螺的定点转动，假设陀螺质量$m$，重心离定点距离$l$，选惯量主轴为本体坐标轴，则轴对称质量分布的陀螺的势能和动能可表示为
+$
+  I_1 = I_2 != I_3\
+  V = m g l cos theta\
+  T = 1/2 I_1 (omega_1^2 + omega_2^2) + 1/2 I_3 omega_3^2
+$
+为了方便讨论，选择Euler角作为描述刚体运动的广义坐标
+$
+  vb(omega) = mat(
+    dot(theta) cos psi + dot(phi) sin theta sin psi;
+    -dot(theta) sin psi + dot(phi) sin theta cos psi;
+    dot(phi) cos theta + dot(psi)
+  )
+$
+$
+  T = 1/2 I_1 (dot(theta)^2 + dot(phi)^2 sin^2 theta) + 1/2 I_3 (dot(phi) cos theta + dot(psi))^2\
+$
+Lagrange量为$L = T - V$，$psi, phi$为循环坐标可以得到对应的广义动量守恒
+$
+  p_psi & = pdv(L, dot(psi)) = I_3 (dot(phi) cos theta + dot(psi)) = I_3 omega_3 = J_3 = "const" \
+  p_phi & = pdv(L, dot(phi)) = I_1 dot(phi) sin^2 theta + I_3 (dot(phi) cos theta + dot(psi)) cos theta = "const"
+$
+以及广义能量守恒
+$
+  E = T + V = 1/2 I_1 (dot(theta)^2 + dot(phi)^2 sin^2 theta) + 1/2 I_3 (dot(phi) cos theta + dot(psi))^2 + m g l cos theta = "const"
+$
+由于有*3个守恒量，为可积系统*，足够求得积分形式的解。令
+$
+  a = J_3 / I_1 = p_psi / I_1 \
+  b = p_phi / I_1 \
+  E' = E - 1/2 I_3 omega_3^2
+$
+均为常量，则
+$
+  dot(phi) & = (b - a cos theta) / sin^2 theta \
+  dot(psi) & = J_3/I_3 - dot(phi) cos theta = I_1 / I_3 a - (b - a cos theta)/(sin^2 theta) cos theta\
+  E' &= 1/2 I_1 dot(theta)^2 + 1/2 I_1 ((b - a cos theta)^2) / (sin^2 theta) + m g l cos theta = 1/2 I_1 dot(theta)^2 + V_"eff" (theta)
+$
+其中等效势能为
+$
+  V_"eff" (theta) = 1/2 I_1 ((b - a cos theta)^2) / (sin^2 theta) + m g l cos theta
+$
+从而
+$
+  dot(theta) = sqrt(2/I_1 (E' - V_"eff" (theta)))
+$
+积分得
+$
+  t = integral dd(theta) / sqrt(2/I_1 (E' - V_"eff" (theta)))
+$
+且有
+$
+  dv(phi, theta) = dot(phi)/dot(theta) = (b - a cos theta) / (sin^2 theta sqrt(2/I_1 (E' - V_"eff" (theta))))\
+$
+积分得
+$
+  phi = integral (b - a cos theta) / (sin^2 theta sqrt(2/I_1 (E' - V_"eff" (theta)))) dd(theta)
+$
+同理也能得到$psi$的积分形式解。
+
+也可以不具体计算，只是根据 3 个守恒量，分析 3 个Euler角随时间变化的情况，就可定性地得到刚体的运动形式。为了讨论方便，令
+$
+  u = cos theta, dot(u) = - sin theta dot(theta)\
+  dot(theta)^2 = dot(u)^2 / (1 - u^2)
+$
+注意到$theta -> 0$有$a=b$，无需担心奇点问题。我们设
+$
+  alpha = (2 E')/I_1,
+  beta = (2 m g l) / I_1
+$
+有
+$
+  dot(u)^2 = (1 - u^2)(alpha - beta u) - (b - a u)^2 = f(u)
+$
+方程右边是关于$u$的三次函数。由于$dot(u)^2>=0$，须在$abs(u)<=1$区间使得$f(u)>=0$才能有物理意义的解。由于在定义域的端点
+$
+  u = plus.minus 1, f(plus.minus 1) = - (b minus.plus a)^2 <= 0
+$
+而三次项系数$beta>0 => f(plus.minus oo) -> plus.minus oo$，因此三次方程有解的条件是：$f(u)$在$[-1,+1]$有实根。
+- $f(u)$在区间$[-1,+1]$有一个实根$u_1$有解的可能情形
+  #figure(
+    image("pic/2025-12-08-12-45-43.png", width: 80%),
+    numbering: none,
+  )
+  - $u_1 = 1$，即$theta = 0$，$a = b, E' = m g l, alpha = beta$有
+    $
+      dot(u)^2 = (1 - u)^2 (beta (1 + u) - (a^2)(1 + u)) = (1 - u)^2 (beta - a^2)(1 + u) = 0
+    $
+    显然$u = +1$只能是重根，因此这个情形不合理。
+  - $u_1 = 1$是$f(u)$的根又是拐点，因此$f(1)=0, f'(1)=0, f''(1)=0$即这个根是三重根。这要求$a=b, alpha = beta$另外满足$a^2/beta = 2$。此时$theta = 0, eval(dot(theta))_(theta=0) = 0, eval(dot.double(theta))_(theta=0) = 0$，因此*陀螺将保持直立转动*。
+  - $u_1 = cos theta_1$是切点，因此是重根。此时
+    $
+      f(u) = beta (u - u_1)^2 (u - u_2)
+    $
+    容易得到$theta = theta_1, eval(dot(theta))_(theta=theta_1) = 0, eval(dot.double(theta))_(theta=theta_1) = 0$，因此*因此陀螺作无章动的进动*，进动角速度为
+    $
+      eval(dot(phi))_(theta=theta_1) = (b - a cos theta_1) / (sin^2 theta_1)
+    $
+- $f(u)$在区间$[-1,+1]$有两个根且有解的可能情形
