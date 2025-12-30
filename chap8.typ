@@ -1,4 +1,5 @@
 #import "@preview/scripst:1.1.1": *
+#import "@preview/physica:0.9.7": *
 
 = 正则变换与参考系变换
 
@@ -543,7 +544,7 @@ $
 $
 这意味着正则变换后Lagrange量还是变换前惯性系的量，只是其中坐标用了$S'$系的坐标而已。这说明我们并非做了“参考系”变换，而仅仅是坐标变换而已。
 
-#example[
+#example(subname: [平动加速系变换])[
   对Hamilton量
   $
     H = vb(p)^2/(2m) + V(x,y,z)
@@ -628,6 +629,38 @@ $
 $
 式适用于多粒子情形。原子核结构理论中有一个著名的推转模型，就是利用了这个式子。
 
+#example(subname: [转动系变换])[
+  对Hamilton量
+  $
+    H = vb(p)^2/(2m) + V(x,y,z)
+  $
+  变换前Hamilton量不显含时间，是守恒量。作旋转系正则变换，新的Hamilton量为
+  $
+    H^* = H - vb(Omega) dot vb(J)'
+  $
+  正则方程
+  $
+    dot(r)'_i = pdv(H^*, p'_i) = p'_i/m - (vb(Omega) times vb(r)')_i\
+    dot(p)'_i = - pdv(H^*, r'_i) = - pdv(V, r_i) - (vb(Omega) times vb(p)')_i
+  $
+  其中
+  $
+    - pdv(V, r_i) = sum_j (- pdv(V, r'_j))_(r) pdv(r'_j, r_i) = sum_j U_(j i)(- pdv(V, r'_j))_(r)
+  $
+  按照力的写法
+  $
+    F'_i = sum_j U_(j i) F_j
+  $
+  考虑匀角速度的情况，对广义坐标求二次导数，有
+  $
+    dot.double(r)'_i & = dot(p)'_i/m - (vb(Omega) times dot(vb(r))')_i \
+                     & = F'_i/m - 2 (vb(Omega) times dot(vb(r))')_i - (vb(Omega) times (vb(Omega) times vb(r)'))_i
+  $
+  其中，第二项是Coriolis力，第三项是离心力。
+]
+我们没有非惯性系的Lagrange力学，但利用坐标变换的正则变换，我们可以得到离心力和Coriolis力的正确表达式。
+
+
 == Poisson括号
 
 === Poisson括号
@@ -647,3 +680,407 @@ $
   pdv(q_i, q_j) = delta_(i j), pdv(q_i, p_j) = 0, pdv(q_i, t) = 0\
   dot(q)_i = dv(q_i, t), dot(p)_i = dv(p_i, t), dv(, t) = pdv(, t) + sum_i (pdv(, q_i) dot(q)_i + pdv(, p_i) dot(p)_i)
 $
+下面列出比较常用的简单公式
+$
+  & {u, u} = 0 \
+  & {u, v} = - {v, u} \
+  & {a u + b v, w} = a {u, w} + b {v, w} \
+  & {u v, w} = {u, w} v + u {v, w} \
+  & {u,{v,w}} + {v,{w,u}} + {w,{u,v}} = 0 \
+$
+特别是，当函数中$phi, psi$用正则变量${q_i, p_i}$代替时，得到正则变量满足的Poisson括号
+$
+  {q_j, q_k}_(q,p) = {p_j, p_k}_(q,p) = 0\
+  {q_j, p_k}_(q,p) = - {p_j, q_k}_(q,p) = delta_(j k)
+$
+
+=== Poisson括号的意义
+
+运用Poisson括号能够把运动方程表达得更加简洁。设$s$自由度系统Hamilton量为$H$，任给力学量 $A = A(q_1, ..., q_s, p_1, ..., p_s, t)$，则
+$
+  dv(A, t) & = pdv(A, t) + sum_(i=1)^s (pdv(A, q_i) dot(q)_i + pdv(A, p_i) dot(p)_i) \
+           & = sum_i (pdv(A, q_i) pdv(H, p_i) - pdv(A, p_i) pdv(H, q_i)) + pdv(A, t) \
+$
+所以有
+$
+  dv(A, t) = {A, H} + pdv(A, t)
+$
+若$A$是守恒量，则要求
+$
+  {A, H} + pdv(A, t) = 0
+$
+$A$不显含时间时，要求${A ,H}= 0$。特别地，$A=H$时，由于${H, H} = 0$，所以
+$
+  dv(H, t) = pdv(H, t)
+$
+#newpara()
+因为$p_i,q_i$均是独立变量，不可能显含时间$t$，所以对于力学量$q_i, p_i$，有
+$
+  dot(q)_i = {q_i, H} + pdv(q_i, t) = {q_i, H}\
+  dot(p)_i = {p_i, H} + pdv(p_i, t) = {p_i, H}
+$
+这就是Hamilton方程的Poisson括号形式，其形式对称。
+
+对于Hamilton系统，在相空间相点数密度不随时间改变，这就是Liouville定理
+$
+  dv(rho, t) = pdv(rho, t) + sum_(i=1)^s (pdv(rho, q_i) dot(q)_i + pdv(rho, p_i) dot(p)_i) = 0
+$
+用Poisson括号表示为
+$
+  dv(rho, t) = {rho, H} + pdv(rho, t) = 0
+$
+#newpara()
+
+#note[
+  在量子力学中，Poisson括号有重要意义，经典力学中的Poisson括号对应于量子力学中的对易子，即
+  $
+    {A, B} <=> 1/(i hbar) [hat(A), hat(B)] = 1/(i hbar) (hat(A) hat(B) - hat(B) hat(A))
+  $
+  其中Heisenberg方程为
+  $
+    dv(hat(A), t) = 1/(i hbar) [hat(A), hat(H)] + pdv(hat(A), t)
+  $
+]
+
+#theorem(subname: [Poisson定理])[
+  如果$u, v$是守恒量，则它们的Poisson括号也是守恒量。
+]
+
+#proof[
+  由守恒量定义，有
+  $
+    {u, H} + pdv(u, t) = 0,\
+    {v, H} + pdv(v, t) = 0
+  $
+  则
+  $
+    dv({u, v}, t) & = { {u, v}, H } + pdv({u, v}, t) \
+                  & = - {{u, H}, v } - {{v, H}, u } + { pdv(u, t), v } + { u, pdv(v, t) } \
+                  & = - { {u, H} + pdv(u, t), v } - { {v, H} + pdv(v, t), u } \
+                  & = - {dv(u, t), v } - { dv(v, t), u } = 0
+  $
+]
+
+#example(subname: [构造守恒量])[
+  考虑$phi$守恒，Hamilton量$H$不显含时间的情形，则Hamilton量守恒。则
+  $
+    {phi, H} = - pdv(phi, t) = 0
+  $
+  也守恒，但构造的守恒量${phi, H}$恒等于零，没有什么意义。我们可以构造出一些守恒量，但是这样的守恒量没有实际意义。
+]
+
+=== Poisson括号与可积系统
+
+$s$自由度可积系统，要求有$s$个相容的守恒量，即，在$2s$维相空间有共同的$s$维子曲面。
+
+*这个条件等价于所有守恒量之间的Poisson括号为零。*
+
+为了简单说明这一点，考虑两个自由度系统，假设两个守恒量
+$
+  F(q_1, q_2, p_1, p_2) = f\
+  G(q_1, q_2, p_1, p_2) = g
+$
+都不显含时间，其中$f$和$g$是常量。
+
+显然两个方程分别代表四维相空间中的三维曲面。假设两个守恒量代表的三维曲面有交集，这个交集一般构成二维曲面。假设这样的二维子曲面存在，则要求其上的某一任意矢量既在三维曲面$F$上，同时还在三维曲面$G$上。为了找到这个条件的数学表示，考虑四维相空间中的梯度算符
+$
+  grad = mat(pdv(, q_1); pdv(, q_2); pdv(, p_1); pdv(, p_2))
+$
+根据梯度的几何含义，$grad F$表示垂直于曲面$F$法线方向该守恒量的变化率，因此$grad F$的方向沿曲面的法向；同理对$grad G$。再新定义一个与梯度正交的算符
+$
+  "sgrad" = mat(- pdv(, p_1); pdv(, q_1); -pdv(, p_2); pdv(, q_2))
+$
+很容易看出
+$
+  "sgrad" F dot grad F = 0,\
+  "sgrad" G dot grad G = 0
+$
+即$"sgrad"(F)$与曲面$F(q_1, q_2, p_1, p_2) = f$的法向垂直，说明$"sgrad"(F)$沿着该曲面。同理，$"sgrad"(G)$在曲面$G$上。
+
+若用两个矢量$"sgrad"(F)$, $"sgrad"(G)$构造一个二维曲面，并要求该二维曲面是两个守恒量的共同子曲面，该二维曲面则应该同时与法向$grad F$和$grad G$垂直，即要求
+$
+  "sgrad"(F) dot grad(G) = 0,\
+  "sgrad"(G) dot grad(F) = 0
+$
+上式整理得
+$
+  {F, G} = {G, F} = 0
+$
+这就是所谓两个守恒量是相容的条件。
+
+推广到$s$自由度可积系统，就是所有$s$个守恒量，它们的任意两个Poisson括号都等于零。
+
+以后在量子力学有类似的结果，只不过那时不再是Poisson括号，而是对易关系。
+
+=== Poisson括号与正则变换
+
+先考虑自由度$1$的系统，此时接触变换为
+$
+  Q = Q(q, p, t), P = P(q, p, t)
+$
+对应的正则坐标变换Jacobi矩阵为
+$
+  J = mat(pdv(Q, q), pdv(Q, p); pdv(P, q), pdv(P, p))
+$
+对于
+$
+  F(q, p, t) = F'(Q, P, t)\
+  G(q, p, t) = G'(Q, P, t)
+$
+它们的Poisson括号对旧的正则坐标
+$
+  {F, G}_(q,p) = pdv(F, q) pdv(G, p) - pdv(F, p) pdv(G, q)
+$
+而对新的正则坐标
+$
+  {F', G'}_(Q,P) = pdv(F', Q) pdv(G', P) - pdv(F', P) pdv(G', Q)
+$
+下面是简单证明。
+#proof[
+  $
+    {F,G}_(q,p) & = pdv(F, q) pdv(G, p) - pdv(F, p) pdv(G, q) \
+                & = mat(pdv(F, q), pdv(F, p)) mat(0, 1; -1, 0) mat(pdv(G, q); pdv(G, p)) \
+  $
+  用符号表示为
+  $
+    partial_(q p) F = mat(pdv(F, q); pdv(F, p))\
+    Gamma = mat(0, 1; -1, 0)
+  $
+  则
+  $
+    {F, G}_(q,p) = partial_(q p) F^TT Gamma partial_(q p) G
+  $
+  利用Jacobi矩阵变换到新坐标
+  $
+    partial_(q p) F & = mat(pdv(F, q); pdv(F, p)) \
+                    & = mat(pdv(Q, q), pdv(P, q); pdv(Q, p), pdv(P, p)) mat(pdv(F', Q); pdv(F', P)) \
+                    & = J^TT partial_(Q P) F'
+  $
+  从而
+  $
+    {F, G}_(q,p) & = partial_(Q P) F'^TT J Gamma J^TT partial_(Q P) G' \
+  $
+  而
+  $
+    J Gamma J^TT &= mat(pdv(Q, q), pdv(Q, p); pdv(P, q), pdv(P, p)) mat(0, 1; -1, 0) mat(pdv(Q, q), pdv(P, q); pdv(Q, p), pdv(P, p)) \
+    &= mat(0, pdv(Q, q) pdv(P, p) - pdv(Q, p) pdv(P, q); pdv(P, q) pdv(Q, p) - pdv(P, p) pdv(Q, q), 0) = {Q, P}_(q,p) Gamma
+  $
+  从而
+  $
+    {F, G}_(q,p) & = {Q, P}_(q,p) partial_(Q P) F'^TT Gamma partial_(Q P) G' \
+                 & = {Q, P}_(q,p) {F', G'}_(Q,P)
+  $
+  由正则变换的充分条件
+  $
+    (pdv(P(q,Q,t), q))_Q = - (pdv(p(q,Q,t), Q))_q\
+  $
+  另一方面
+  $
+    (pdv(P, p))_q = (pdv(P(q,Q(q,p,t),t), p))_q = (pdv(P(q,Q(q,p,t),t), Q))_q (pdv(Q(q,p,t), p))_q\
+    (pdv(P, q))_p = (pdv(P(q,Q(q,p,t),t), q))_p = (pdv(P(q,Q(q,p,t),t), q))_Q + (pdv(P(q,Q(q,p,t),t), Q))_q (pdv(Q(q,p,t), q))_p
+  $
+  从而
+  $
+    (pdv(P, q))_p = - (pdv(p(q,Q(q,p,t),t), Q))_q + (pdv(P(q,Q(q,p,t),t), Q))_q (pdv(Q(q,p,t), q))_p
+  $
+  因此，利用上面式子
+  $
+    {Q, P}_(q,p) = (pdv(Q, q))_p (pdv(P, p))_q - (pdv(Q, p))_q (pdv(P, q))_p = (pdv(Q, p))_q (pdv(p, Q))_q = 1
+  $
+  事实上这一步也可以利用无穷小变换
+  $
+    Q = q + epsilon pdv(Phi, p), P = p - epsilon pdv(Phi, q)
+  $
+  验证正则变换条件，并计算Poisson括号，结果也是$1$。综上所述，
+  $
+    {F, G}_(q,p) = {F', G'}_(Q,P)
+  $
+]
+
+对于多自由度系统，可以扩充到$s$自由度情形
+$
+  partial_(q p) F = mat(pdv(F, q_1); pdv(F, p_1); dots.v; pdv(F, q_s); pdv(F, p_s))\
+$
+$Gamma$则为
+$
+  Gamma = mat(0, 1, 0, 0, dots, dots, dots; -1, 0, 0, 0, dots, dots, dots; 0, 0, 0, 1, dots, dots, dots; 0, 0, -1, 0, dots, 0, 0; dots.v, dots.v, dots.v, dots.v, dots.down, 0, 0; dots.v, dots.v, dots.v, 0, 0, 0, 1; dots.v, dots.v, dots.v, 0, 0, -1, 0)\
+$
+这个矩阵对角线上的元素是由$2times 2$阶矩阵$mat(0, 1; -1, 0)$组成的块矩阵。有$Gamma^TT = - Gamma$，$Gamma^TT Gamma = I$。类似地，对于新的正则变量${Q_i, P_i}$，有
+$
+  P_i = P_i (q_1, ..., q_s, p_1, ..., p_s, t)\
+  Q_i = Q_i (q_1, ..., q_s, p_1, ..., p_s, t)
+$
+Jacobi矩阵为
+$
+  J = pdv((Q_1, p_1, ..., Q_s, P_s), (q_1, p_1, ..., q_s, p_s)) = mat(pdv(Q_1, q_1), pdv(Q_1, p_1), ..., pdv(Q_1, q_s), pdv(Q_1, p_s); pdv(P_1, q_1), pdv(P_1, p_1), ..., pdv(P_1, q_s), pdv(P_1, p_s); dots.v, dots.v, dots.down, dots.v, dots.v; pdv(Q_s, q_1), pdv(Q_s, p_1), ..., pdv(Q_s, q_s), pdv(Q_s, p_s); pdv(P_s, q_1), pdv(P_s, p_1), ..., pdv(P_s, q_s), pdv(P_s, p_s))\
+$
+从而有
+$
+  partial_(q p) F & = J^TT partial_(Q P) F' \
+     {F, G}_(q,p) & = partial_(Q P) F'^TT J Gamma J^TT partial_(Q P) G'
+$
+同上，正则关系给出
+$
+  (pdv(P_i (q_1, ..., q_s, Q_1, ..., Q_s, t), q_i))_(q, Q) = - (pdv(p_i (q_1, ..., q_s, Q_1, ..., Q_s, t), Q_i))_(q, Q)
+$
+同样可以得到
+$
+  {Q_i, P_j}_(q,p) = delta_(i j)
+$
+从而有
+$
+  J Gamma J^TT = Gamma
+$
+于是对于任意两个函数
+$
+  {F, G}_(q,p) = {F', G'}_(Q,P)
+$
+因此，在正则变换下Poisson括号下角标都可以忽略。
+
+那些在原来正则坐标下得到的Poisson括号值，对正则变换后的新正则变量都成立。如
+$
+  {Q_j, Q_k}_(q,p) = {P_j, P_k}_(q,p) = 0\
+  {Q_j, P_k}_(q,p) = - {P_j, Q_k}_(q,p) = delta_(j k)
+$
+反过来，对于某一变换，如果新的正则变量满足
+$
+  {Q_j, Q_k}_(q,p) = {P_j, P_k}_(q,p) = 0\
+  {Q_j, P_k}_(q,p) = - {P_j, Q_k}_(q,p) = delta_(j k)
+$
+则该变换为正则变换，这是正则变换的又一个判据。对于正则变换，由于Poisson括号无论对原来  正则变量还是新的正则变量结果相同，以后Poisson括号右下变量角标可以缺省。
+
+还可得到
+$
+  det(J Gamma J^TT) = det(Gamma) => (det J)^2 det(Gamma) = det(Gamma) => det(J) = plus.minus 1
+$
+一个直接的推论是下面的积分等式
+$
+  I & = integral dd(q_1, p_1, ..., q_s, p_s) = integral abs(det(J)) dd(Q_1, P_1, ..., Q_s, P_s) \
+    & = integral dd(Q_1, P_1, ..., Q_s, P_s)
+$
+称为*通用积分不变量*，意味着相空间体积在正则变换下不变。
+
+考虑$t -> t +dd(t)$的无穷小正则变换，积分$I$是常量，实际就是Liouville定理。
+
+对于自由度为$1$的系统，$I$可化为
+$
+  integral dd(q, p) = integral dd(Q, P) = "const" => integral.cont p dd(q) = integral.cont P dd(Q) = "const"
+$
+其中用到格林公式
+$
+  integral.cont_c (X dd(x) + Y dd(y)) = integral.cont_s (pdv(Y, x) - pdv(X, y)) dd(x, y)
+$
+
+== Hamilton-Jacobi方程
+
+=== Hamilton-Jacobi方程、Hamilton主函数与作用量
+
+正则变换的目的是使尽可能多的正则变量成为循环坐标，以得到尽可能多的循环积分，使正则方程变得比较容易求解。
+
+最极端的情况是使所有正则变量都成为循环坐标，即作一正则变换，使得新的Hamilton 量为零，$H^* =0$，于是
+$
+  dot(Q)_i = dot(P)_i = 0 => Q_i = xi_i = "const", P_i = eta_i = "const"
+$
+这些常数由初始条件决定。
+
+对于$s$自由度系统，利用第二种正则变换充分条件
+$
+  sum_(i = 1)^s (p_i dd(q_i) - P_i dd(Q_i)) + (H - H^*) dd(t) = dd(F_2 (q_1, ..., q_s, P_1, ..., P_s, t))
+$
+希望在经过正则变换以后，得到$H^* = 0$，即所有正则变量都是循环坐标。这就要求生成函数
+$
+  H + pdv(F_2, t) = H^* = 0
+$
+因为
+$
+  Q_i = pdv(F_2, P_i) = xi_i, P_i = - pdv(F_2, q_i) = eta_i
+$
+从而
+$
+  H(q_1, pdv(F_2, q_1), ..., q_s, pdv(F_2, q_s), t) + pdv(F_2(q_1, eta_1, ..., q_s, eta_s, t), t) = 0
+$
+由于方程中只含生成函数的偏导数，不含生成函数本身，所以，生成函数加减任意常数仍满足上式。可以用$S$表示生成函数
+$
+  S(q_1, eta_1, ..., q_s, eta_s, t) = F_2(q_1, eta_1, ..., q_s, eta_s, t) + C
+$
+方程则可以改写为
+$
+  H(q_1, pdv(S, q_1), ..., q_s, pdv(S, q_s), t) + pdv(S, t) = 0
+$
+这就是著名的*Hamilton-Jacobi方程*，$S$称为Hamilton主函数。
+#theorem(subname: [Hamilton-Jacobi方程])[
+  Hamilton-Jacobi方程为
+  $
+    H(q_1, pdv(S, q_1), ..., q_s, pdv(S, q_s), t) + pdv(S, t) = 0
+  $
+  其中$S(q_1, eta_1, ..., q_s, eta_s, t)$是Hamilton主函数，$eta_i$是积分常数。
+]
+
+一方面，Hamilton主函数是正则变换中的生成函数；另一方面，容易求得
+$
+  dv(S, t) = sum_i pdv(S, q_i) dot(q)_i + pdv(S, t) = sum_i p_i dot(q)_i - H
+$
+即
+$
+  S = integral L dd(t)
+$
+实际上，这就是积分限不确定的Hamilton作用量。
+
+我们还可以利用其他的正则变换形式，得到类似于哈密顿-雅可比方程的方程，如，利用第一、三种和第四种正则变换形式推导。由第一种和第二种正则变换得到的Hamilton主函数同样都是积分限不确定的Hamilton作用量，但由第三种和第四种正则变换得到的Hamilton主函数，其含义不同。
+
+=== Hamilton-Jacobi方程的解法
+
+在求得Hamilton-Jacobi方程的完全解$S$以后，我们可以直接求得
+$
+  pdv(S(q_1, eta_1, ..., q_s, eta_s, t), q_i) = p_i\
+  pdv(S(q_1, eta_1, ..., q_s, eta_s, t), eta_i) = xi_i
+$
+可以证明上式就是正则方程
+$
+  dot(q)_i = pdv(H, p_i), dot(p)_i = - pdv(H, q_i)
+$
+的全部$2s$个积分。利用$2s$个积分常数$xi_i, eta_i$，可以解出$q_i (t), p_i (t)$
+$
+  q_i = q_i (xi_1, ..., xi_s, eta_1, ..., eta_s, t)\
+  p_i = p_i (xi_1, ..., xi_s, eta_1, ..., eta_s, t)
+$
+其为正则方程的积分显式，或者反过来表示为
+$
+  xi_i = xi_i (q_1, ..., q_s, p_1, ..., p_s, t)\
+  eta_i = eta_i (q_1, ..., q_s, p_1, ..., p_s, t)
+$
+是其隐函数形式。这两是也是正则变换关系，被称为*Hamilton-Jacobi定理*。
+
+对于某些问题，可设$S$具有分离变量的形式
+$
+  S(q,eta,t) = - E t + W + C
+$
+其中
+$
+  W = sum_i W_i (q_i)
+$
+例如，Hamilton量若有简单形式
+$
+  H = sum_i H_i (q_i, p_i)
+$
+Hamilton-Jacobi方程可分离变量，变为$s$个常微分方程
+$
+  H_i (q_i, pdv(W_i, q_i)) = alpha_i
+$
+其中，$alpha_i$都是常量，满足
+$
+  E = sum_i alpha_i
+$
+
+#example(subname: [Kepler问题])[
+  取平面极坐标，中心力场下的Hamilton量
+  $
+    H = p_r^2/(2m) + p_theta^2/(2m r^2) - alpha/r
+  $
+  其中$p_theta$为角动量，是循环积分；同样，Hamilton量不显含时间，因此Hamilton量守恒，此时为能量守恒。
+
+  于是Hamilton-Jacobi方程为
+  $
+    1/(2m) (pdv(S, r))^2 + 1/(2m r^2) (pdv(S, theta))^2 - alpha/r + pdv(S, t) = 0
+  $
+]
