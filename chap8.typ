@@ -993,7 +993,7 @@ $
 $
 因为
 $
-  Q_i = pdv(F_2, P_i) = xi_i, P_i = - pdv(F_2, q_i) = eta_i
+  Q_i = pdv(F_2, P_i), p_i = pdv(F_2, q_i), Q_i = xi_i, P_i = eta_i
 $
 从而
 $
@@ -1026,7 +1026,7 @@ $
 $
 实际上，这就是积分限不确定的Hamilton作用量。
 
-我们还可以利用其他的正则变换形式，得到类似于哈密顿-雅可比方程的方程，如，利用第一、三种和第四种正则变换形式推导。由第一种和第二种正则变换得到的Hamilton主函数同样都是积分限不确定的Hamilton作用量，但由第三种和第四种正则变换得到的Hamilton主函数，其含义不同。
+我们还可以利用其他的正则变换形式，得到类似于Hamilton-雅可比方程的方程，如，利用第一、三种和第四种正则变换形式推导。由第一种和第二种正则变换得到的Hamilton主函数同样都是积分限不确定的Hamilton作用量，但由第三种和第四种正则变换得到的Hamilton主函数，其含义不同。
 
 === Hamilton-Jacobi方程的解法
 
@@ -1082,5 +1082,428 @@ $
   于是Hamilton-Jacobi方程为
   $
     1/(2m) (pdv(S, r))^2 + 1/(2m r^2) (pdv(S, theta))^2 - alpha/r + pdv(S, t) = 0
+  $
+  这个方程可用分离变量法来求解，事实上
+  $
+    S(r, theta, t) = - E t + W_1 (r) + W_2 (theta) + C
+  $
+  由Hamilton-Jacobi可知，此时$E$就是能量，代入方程得
+  $
+    - ((dv(W_1, r))^2 + 2m (E + alpha/r))r^2 = (dv(W_2, theta))^2
+  $
+  等式左边与$theta$无关，右边与$r$无关，所以它们只能都等于常数。由右边式子不为负，常数可设为$J^2$，则上式左右分别有
+  $
+    - ((dv(W_1, r))^2 + 2m (E + alpha/r))r^2 = J^2\
+    (dv(W_2, theta))^2 = J^2
+  $
+  分别积分得
+  $
+    W_1 (r) = plus.minus integral sqrt(2m(E + alpha/r) - J^2/r^2) dd(r)\
+    W_2 (theta) = plus.minus J theta + C
+  $
+  合在一起得
+  $
+    W(r, theta) = plus.minus integral sqrt(2m(E + alpha/r) - J^2/r^2) dd(r) + plus.minus J theta
+  $
+  又
+  $
+    p_r = pdv(S, r) = plus.minus sqrt(2m(E + alpha/r) - J^2/r^2)\
+    p_theta = pdv(S, theta) = plus.minus J
+  $
+  令$P_1=E,P_2=J$，即$P_1, P_2$分别是能量$E$和角动量$J$。根据生成函数的性质及上面结果
+  $
+    Q_1 = pdv(S, P_1) = pdv(S, E) = - t plus.minus integral m/dd(r) sqrt(2m(E + alpha/r) - J^2/r^2)\
+  $
+  可设$Q_1=-t_0$，$t_0$是计算$t$的零点
+  $
+    t = t_0 plus.minus integral (m dd(r)) /sqrt(2m(E + alpha/r) - J^2/r^2)
+  $
+  又
+  $
+    Q_2 = pdv(S, P_2) = pdv(S, J) = pdv(W_1, J) plus.minus theta = plus.minus integral (-J dd(r)) / (r^2 sqrt(2m(E + alpha/r) - J^2/r^2)) plus.minus theta
+  $
+  因此可设$Q_2 = plus.minus theta_0$是计算$theta$的零点，则进一步积分得
+  $
+    theta - theta_0 = plus.minus integral ( - dd((J/r - (m alpha)/J)))/sqrt(2 m E + (m^2 alpha^2)/J^2 - (J/r - (m alpha)/J)^2) = plus.minus arccos((J/r - (m alpha)/J)/sqrt(2 m E + (m^2 alpha^2)/J^2))
+  $
+  令
+  $
+    p = J^2/(m alpha), e = sqrt(1 + (2 E J^2)/(m alpha^2))
+  $
+  则轨道方程为
+  $
+    r = p/(1 + e cos(theta - theta_0))
+  $
+]
+#newpara()
+Hamilton量不显含时间的情况，即$pdv(H, t) = 0$的情况下(这是相当常见的一大类情况)，可对Hamilton主函数进行分离变量
+$
+  S(q_1, ..., q_s, P_1, ..., P_s, t) = - alpha_1 t + W(q_1, ..., q_s, P_1, ..., P_s) + C
+$
+Hamilton-Jacobi方程变为
+$
+  H(q_1, pdv(S, q_1), ..., q_s, pdv(S, q_s)) = alpha_1
+$
+$alpha_1$就是Hamilton量，它有时对应系统能量。由于
+$
+  pdv(S, q_i) = pdv(W, q_i)
+$
+新选择$W = W(q_1, ..., q_s, P_1, P_2, ..., P_s)$作为新的正则变换生成函数，则
+$
+  p_i = pdv(W, q_i), Q_i = pdv(W, P_i)
+$
+新的Hamilton量
+$
+  H^* = H + pdv(W, t) = H(q_1, pdv(W, q_1), ..., q_s, pdv(W, q_s)) + pdv(W, t)
+$
+但新的生成函数$W$不显含时间，因此新旧Hamilton量相等
+$
+  H(q_1, pdv(W, q_1), ..., q_s, pdv(W, q_s)) = H^* = alpha_1
+$
+称为Hamilton-Jacobi方程的第二种形式。此时生成函数$W$称为*Hamilton特性函数*。它的时间微分
+$
+  dv(W, t) = sum_i pdv(W, q_i) dot(q)_i = sum_i p_i dot(q)_i = L + H
+$
+不存主Hamilton函数与作用量之间的关联。其时间积分一方面
+$
+  W = integral (L + H) dd(t) = integral L dd(t) + alpha_1 t = S + alpha_1 t
+$
+另一方面
+$
+  W = integral sum_i p_i dot(q_i) dd(t) = sum_i integral p_i dd(q_i)
+$
+#newpara()
+求解方程比较简便的做法是假设
+$
+  P_1 = alpha_1 = "const"
+$
+则$H^* = H = alpha_1$，由Hamilton方程
+$
+  dot(P)_i & = - pdv(H^*, Q_i) = 0 => P_i = alpha_i = "const" (i = 1, ..., s) \
+  dot(Q)_i & = pdv(H^*, P_i) = delta_(i,1) \
+       Q_1 & = t + beta_1, \
+       Q_i & = beta_i (i = 2, ..., s) = "const"
+$
+以及生成函数性质
+$
+  t + beta_1 = Q_1 = pdv(W, P_1) = pdv(W, alpha_1)\
+  beta_i = Q_i = pdv(W, P_i) = pdv(W, alpha_i) (i = 2, ..., s)
+$
+#example(subname: [Kepler问题])[
+  Hamilton-Jacobi方程的第二种形式可表为
+  $
+    H(q_1, pdv(W, q_1), ..., q_s, pdv(W, q_s)) = alpha_1 = E
+  $
+  $
+    1/(2m) (pdv(W, r))^2 + 1/(2m r^2) (pdv(W, theta))^2 - alpha/r = E
+  $
+  这个方程可用分离变量法来求解，事实上，设$W = W_1 (r) + W_2 (theta)$，则
+  $
+    - ((dv(W_1, r))^2 + 2m (E + alpha/r))r^2 = (dv(W_2, theta))^2 = J^2
+  $
+  积分得
+  $
+    W_1 (r) = plus.minus integral sqrt(2m(E + alpha/r) - J^2/r^2) dd(r)\
+    W_2 (theta) = plus.minus J theta + C
+  $
+  合在一起得
+  $
+    W(r, theta) = plus.minus integral sqrt(2m(E + alpha/r) - J^2/r^2) dd(r) + plus.minus J theta
+  $
+  由生成函数性质
+  $
+    p_r = pdv(W, r) = plus.minus sqrt(2m(E + alpha/r) - J^2/r^2)\
+    p_theta = pdv(W, theta) = plus.minus J
+  $
+  令$P_1 = alpha_1 = E$，由Hamilton方程
+  $
+    dot(Q)_1 = pdv(H^*, P_1) = 1 => Q_1 = t + beta_1\
+  $
+  再由
+  $
+    t + beta_1 = Q_1 = pdv(W, P_1) = pdv(W, E) = plus.minus integral (m dd(r)) /sqrt(2m(E + alpha/r) - J^2/r^2)
+  $
+  再令$P_2 = J$则
+  $
+    beta_2 = Q_2 = pdv(W, P_2) = pdv(W, J) = plus.minus integral (-J dd(r)) / (r^2 sqrt(2m(E + alpha/r) - J^2/r^2)) plus.minus theta
+  $
+  只要令$beta_1 = - t_0, beta_2 = plus.minus theta_0$，就得到与前面相同的结果。
+]
+
+=== Hamilton-Jacobi方程的意义
+
+- 给出了解正则方程和正则变换的又一种方法，可与其他方法互为补充。
+  - 在处理简单问题时，看 不出其优越性，但处理较复杂问题，例如三体问题，Hamilton-Jacobi方程就有优势。
+- 处理质点系力学问题，都会用到常微分方程(组)，例如，Newton方程、Lagrange方程、正则方程等，而Hamilton-Jacobi方程是偏微分方程，可用来处理无限多个自由度的力学体系问题，例如波、连续介质等。
+  - 常微分方程(组)和偏微分方程之间的联系，或许是一种启示：粒子和波之间可能有某种联系。
+  - 事实上，Hamilton-Jacobi方程在量子力学的建立过程中，起到重要的作用，Schrödinger方程的发现与Hamilton-Jacobi方程密切相关。
+
+== 一维振动的作用量-角变量
+
+=== 作用量-角变量
+
+自然界的多数运动形式是周期性的，如天体、微振动等。有一种坐标处理这类运动比较容易，就是作用量-角变量，这是一对共轭变量$I, Psi$。
+
+假设*一维系统Hamilton量不显含时间*，即$H = H(q,p)$. 利用正则变换使得$Psi$在Hamilton量缺省，即
+$
+  tilde(H) = tilde(H)(I)
+$
+这时$I$就是循环积
+$
+  dot(I) = - pdv(tilde(H), Psi) = 0 => I = "const"
+$
+而
+$
+  dot(Psi) = pdv(tilde(H), I) = omega(I) = "const"\
+  Psi = omega(I) t + phi
+$
+$I$和$Psi$分别称为*作用量*(action variable)和*角变量*(angle variable)。假设是通过第一种形式的正则变换，此时生成函数也不应显含时间，即$tilde(W) = tilde(W)(q, Psi)$，则
+$
+  I = - pdv(tilde(W), Psi), p = pdv(tilde(W), q)
+$
+即$q,p$可由作用量-角变量表示，因此有
+$
+  tilde(H)(I) = H(q(I, Psi), p(I, Psi))
+$
+角变量经过一个周期后并不回到原来的值，而是随时间线性增长。由于标度变换不影响对系统的描述，可以人为地归一化$Psi = omega(I) t + phi$，使系统经历一个周期变化后，角变量增长$2pi$值。
+
+利用正则变换，有
+$
+  integral.cont p dd(q) = integral.cont I dd(Psi)
+$
+按上面的约定$Psi -> 0 tilde 2pi$，相当于在$(q,p)$相空间经历闭合路径，沿此闭合路径积分就是对一个周期运动进行积分。由于$I$是常数，得到作用量
+$
+  I = 1/(2pi) integral.cont p dd(q) = 1/(2pi) integral.double_Omega dd(q, p)
+$
+
+#example(subname: [单摆])[
+  算摆长为$R$的单摆的作用量-角变量。
+
+  Lagrange量为
+  $
+    L = 1/2 m R^2 dot(theta)^2 - m g R (1 - cos theta)
+  $
+  广义动量为
+  $
+    p = pdv(L, dot(theta)) = m R^2 dot(theta)
+  $
+  Hamilton量为
+  $
+    H = p^2/(2 m R^2) + m g R (1 - cos theta)
+  $
+  因Hamilton量不显含时间，此时系统能量守恒
+  $
+    H = T + V = E = "const" > 0
+  $
+  又
+  $
+    E - m g R (1 - cos theta) & = p^2/(2 m R^2) \
+  $
+  $
+    cos theta >= 1 - E/(m g R)
+  $
+  #newpara()
+  当$D/(m g R) >=2$时，单摆可以绕支点做完整旋转运动，此时$theta$的取值范围为$-pi tilde pi$。
+
+  但如果$0 < E/(m g R) < 2$，则单摆只能在某一范围内振荡，此时$theta$的取值范围为$-theta_0 <= theta <= theta_0$，其中
+  $
+    cos theta_0 = 1 - E/(m g R) => theta_0 = arccos(1 - E/(m g R))
+  $
+  相空间的闭合路径积分就是沿着闭合路径使$theta$完成一个周期的变化。
+
+  对于$E/(m g R) >= 2$的情况，相空间的闭合路径积分就是沿着上半段曲线然后再沿着下半段曲线积分，连接这两个曲线的路径是在曲线的端点垂直于横轴，这段路径积分由于角度没有变化贡献当然为零。
+
+  对于以上任何情形，计算作用量
+  $
+    I = 1/(2pi) integral.cont p dd(theta) = 1/(2pi) integral.cont sqrt(2 m R^2 (E - m g R (1 - cos theta))) dd(theta)
+  $
+  由对称性
+  $
+    I = (2 m R sqrt(2 g R))/pi integral_0^theta_0 sqrt(cos theta - 1 + E/(m g R)) dd(theta)
+  $
+  其中
+  $
+    theta_0 = cases(
+      arccos(1 - E/(m g R)) & \, "if" 0 < E/(m g R) < 2,
+      pi & \, "if" E/(m g R) >= 2
+    )
+  $
+  有
+  $
+    pdv(E, I) = omega(I) = "const"
+  $
+  上面积分式对$I$求导，求得
+  $
+    omega = pi sqrt(g/(2R)) 1/(integral_0^theta_0 dd(theta) / sqrt(cos theta - 1 + E/(m g R)))
+  $
+  小角度近似下，单摆是谐振子，此时不仅$E/(m g R) < 2$，而且$theta_0 << 1$
+  $
+    theta_0 approx sqrt((2 E)/(m g R))
+  $
+  代入$I$的积分式
+  $
+    I & approx (2 m R sqrt(2 g R))/pi integral_0^theta_0 sqrt(theta_0^2/2 - theta^2/2) dd(theta) \
+      & = (4 E)/pi sqrt(R/g) integral_0^1 sqrt(1 - u^2) dd(u) = E sqrt(R/g)
+  $
+  对$I$求导，得
+  $
+    omega = pdv(E, I) = sqrt(g/R)
+  $
+  即单摆振动角频率。代回上面结果，得到
+  $
+    E = I sqrt(g/R), I = E/omega
+  $
+  角变量
+  $
+    Psi = omega t + phi
+  $
+  可以看出$Psi$是相位。此时Hamilton量为
+  $
+    H = p^2/(2 m R^2) + 1/2 m g R theta^2 = I sqrt(g/R)
+  $
+  一维结果比较，相当于$Q <-> Psi, P <-> I$，而正则变换的生成函数为
+  $
+    F_1 (theta, Psi) = 1/2 m omega theta^2 cot Psi
+  $
+]
+
+#figure(
+  image("pic/2025-12-31-16-26-20.png", width: 40%),
+  caption: [单摆运动相图],
+)
+
+=== 绝热近似
+
+Einstein曾研究过摆线长度$l=l(t)$随时间*缓慢变化*的单摆运动。
+
+根据摆长具体的变化形式，这个问题当然通过数值计算可以得到解答。若利用摆长缓慢变化这个前提，利用作用量-角变量也可以比较简单地近似求解。
+
+一般地，如果系统Hamilton量通过一个参量$alpha(t)$随时间变化，而*$alpha$缓慢随时间变化*，可以证明这时*作用量是一个近似不变量*。所谓缓慢变化，可以理解为时间变化率$dot(alpha)$是小量，因此有 $dot.double(alpha) tilde 0$。假设Hamilton量为
+$
+  H = H(q,p,alpha)
+$
+这时生成函数也应通过参量$alpha(t)$显含时间，因此正则变换后的Hamilton量也是$alpha(t)$的函数。若是利用第一种形式的正则变换，作用量-角变量的Hamilton量为
+$
+  tilde(H) = tilde(H)(I, alpha(t)) = H(q, p, alpha) + pdv(tilde(W)(q, Psi, alpha), t)
+$
+如果忽略$alpha(t)$随时间的变化，式第二项则应被忽略，因此第一项中不应含角变量，即
+$
+  H(q,p,alpha) = H(q(I,Psi,alpha), p(I,Psi,alpha), alpha) = macron(H)(I, alpha)
+$
+因此
+$
+  pdv(H, Psi) = pdv(macron(H), Psi) = 0
+$
+考虑$alpha(t)$随时间的变化，根据Hamilton方程
+$
+  dot(I) = - pdv(tilde(H), Psi) = - pdv(tilde(W), Psi, t) = - pdv(tilde(W), Psi, alpha) dot(alpha)
+$
+一个准周期下的平均值
+$
+  expval(dot(I)) & = - 1/(2 pi) integral_0^(2 pi) pdv(tilde(W), Psi, alpha) dot(alpha) dd(Psi)
+$
+由于$alpha(t)$缓慢随时间变化，因此可以近似地认为，一个周期$T$过后，其变化率基本不变，即$dot(alpha)(0) approx dot(alpha)(T)$，于是
+$
+  expval(dot(I)) & = - 1/(2 pi) dot(alpha) eval(pdv(tilde(W), alpha))_0^(2pi) approx - dot(alpha)/(2pi) (pdv(tilde(W)(q, 2pi, alpha(T)), alpha) - pdv(tilde(W)(q, 0, alpha(0)), alpha)) \
+$
+由于它是振动，而$tilde(W)$对于$Psi$是周期函数，因此上式可以简化为
+$
+  expval(dot(I)) approx - dot(alpha)/(2pi) (pdv(tilde(W)(q, 0, alpha(T)), alpha) - pdv(tilde(W)(q, 0, alpha(0)), alpha)) approx - dot(alpha)/(2pi) pdv(tilde(W), alpha, 2) T approx 0
+$
+即作用量在一个准周期内的变化是$alpha(t)$变化量的二阶小量。利用这个结果，就是所谓的*绝热近似*。
+
+#example(subname: [摆长缓慢变化的单摆])[
+  摆长$l$缓慢变化的单摆能量如何变化。
+
+  对单摆，Lagrange量为
+  $
+    L = 1/2 m dot(l)^2 + 1/2 m l^2 dot(theta)^2 - m g l (1 - cos theta)
+  $
+  利用摆长$l$缓慢变化的近似$dot(l)^2 approx 0$，Lagrange量近似为
+  $
+    L = 1/2 m l^2 dot(theta)^2 - m g l (1 - cos theta)
+  $
+  此时Hamilton量
+  $
+    H = p_theta^2/(2 m l^2) + m g l (1 - cos theta)
+  $
+  小角度近似下
+  $
+    H = p_theta^2/(2 m l^2) + 1/2 m g l theta^2
+  $
+  根据绝热近似，作用量近似看作不变量
+  $
+    H = E = I omega = I sqrt(g/l) => I = E/sqrt(g/l)
+  $
+  $I$缓慢变化时，作用量近似不变，得到
+  $
+    dot(E)/E approx - 1/2 dot(l)/l
+  $
+  也可以讨论最大幅角变化规律，因
+  $
+    theta_m = sqrt(2 E/(m g l)) prop l^(-3/4)
+  $
+  所以有
+  $
+    dot(theta)_m / theta_m = - 3/4 dot(l)/l
+  $
+]
+
+
+#example(subname: [电子在匀强磁场中运动])[
+  电子(电荷$e$)在匀强磁场中运动，磁场缓慢随时间变化时的Hamilton量。
+
+  若忽略场能，式此时Lagrange量为
+  $
+    L = 1/2 m v^2 + e vb(A)(vb(r), t) dot vb(v)
+  $
+  这里可以选
+  $
+    vb(A)(vb(r), t) = x B_0 (t) vu(j)
+  $
+  正则共轭动量为
+  $
+    vb(p) = pdv(L, vb(v)) = m vb(v) + e vb(A)(vb(r), t)
+  $
+  Hamilton量为
+  $
+    H = 1/(2m) (vb(p) - e vb(A)(vb(r), t))^2 = (p_x^2 + (p_y - e x B_0 (t))^2 + p_z^2)/(2m)
+  $
+  $y$和$z$是循环坐标，因此
+  $
+    p_y = m dot(y) + e x B_0 (t) = "const"\
+    p_z = m dot(z) = "const"
+  $
+  上面的Hamilton量改写为
+  $
+    H = p_x^2/(2m) + p_z^2/(2m) + 1/2 m ((e B_0)/m)^2 (x - (p_y)/(e B_0))^2
+  $
+  重新选择原点，使得
+  $
+    x' = x - (p_y)/(e B_0), p_x' = p_x, omega = (e B_0)/m
+  $
+  就有
+  $
+    H' = H - p_z^2/(2m) = p_x'^2/(2m) + 1/2 m omega^2 x'^2
+  $
+  由于$B_0$缓慢变化，这是频率$omega$缓慢变化的谐振子，作用量$I$在绝热近似下不变
+  $
+    H' = I omega = I (e B_0)/m
+  $
+  电子能量
+  $
+    E = p_z^2/(2m) + I (e B_0)/m
+  $
+  显然有
+  $
+    dot(E) prop dot(B)_0
+  $
+  容易计算最大振幅
+  $
+    x_m = sqrt((2I)/(m omega)) = sqrt((2 I)/(e B_0))
+  $
+  这实际是电子回旋半径，其随时间的变化为
+  $
+    dot(x)_m / x_m = - 1/2 dot(B)_0 / B_0
   $
 ]
