@@ -96,7 +96,7 @@ $
 $
 虽取未知函数为$q_i, p_i$，但$L$还为$q_alpha, dot(q)_alpha, t$的函数，这对求解很不方便。
 
-为此，定义Hamilton量$H$为$L$关于$dot(q)_i$的Legendre变换
+为此，*定义Hamilton量$H$为$L$关于$dot(q)_i$的Legendre变换*
 $
   H(q_i, p_i, t) & = sum_(i=1)^s p_i dot(q)_i - L(q_i, dot(q)_i, t) \
   dd(H) & = sum_i p_i dd(dot(q)_i) + dot(q)_i dd(p_i) - pdv(L, q_i) dd(q_i) - pdv(L, dot(q)_i) dd(dot(q)_i) - pdv(L, t) dd(t) \
@@ -104,9 +104,9 @@ $
 $
 就有
 $
-  dot(q)_i = (pdv(H, p_i))_(q_j, p_j (j != i)) = (pdv(L, dot(q)_i))_(q_j, dot(q)_j (j != i)) \
-  dot(p)_i = - (pdv(H, q_i))_(q_j, p_j (j != i)) = (pdv(L, q_i))_(q_j, dot(q)_j (j != i)) \
-  pdv(H, t) = - pdv(L, t)
+   dot(q)_i & = (pdv(H, p_i))_(q_j, p_j (j != i)) \
+   dot(p)_i & = - (pdv(H, q_i))_(q_j, p_j (j != i)) = (pdv(L, q_i))_(q_j, dot(q)_j (j != i)) \
+  pdv(H, t) & = - pdv(L, t)
 $
 我们称其为*正则方程*，称$q_i, p_i$为*正则变量(或正则共轭坐标)*。
 
@@ -407,7 +407,7 @@ Liouville定理指出
 $
   vb(v) = (dot(q)_1, dot(q)_2,...,dot(q)_s, dot(p)_1, dot(p)_2,...,dot(p)_s)
 $
-现假定$2s$维相空间有一体积$V$，其表面$S$，相点数密度$n$，则在单位时间里该体积内相点数的增量等于在单位时间里从外面净流入的相点个数。假设相点的速度$vb(c)$则
+现假定$2s$维相空间有一体积$V$，其表面$S$，相点数密度$n$，则在单位时间里该体积内相点数的增量等于在单位时间里从外面净流入的相点个数。假设相点的速度$vb(v)$则
 $
   dv(, t) integral_V n dd(V) = - integral_S n vb(v) dot dd(vb(S))
 $
