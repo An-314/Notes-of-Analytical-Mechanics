@@ -51,12 +51,12 @@ $
 $
 因为
 $
-  (pdv(tilde(L), Q_i))_(Q,P) &= sum_j (pdv(tilde(L), dot(Q)_j))_(Q, dot(Q)) (pdv(dot(Q)_j, Q_i))_(Q,P) + (pdv(tilde(L), q_i))_(q, dot(q)) (pdv(q_i, Q_i))_(Q,P)\
-  &= dv(, t) (pdv(q_i, Q_i))_(Q,P) + sum_j P_j (pdv(dot(Q)_j, Q_i))_(Q,P)
+  (pdv(tilde(L), Q_i))_(Q,P) &= sum_j (pdv(tilde(L), dot(Q)_j))_(Q, dot(Q)) (pdv(dot(Q)_j, Q_i))_(Q,P) + (pdv(tilde(L), Q_i))_(Q, dot(Q))\
+  &= sum_j P_j (pdv(dot(Q)_j, Q_i))_(Q,P) + dv(, t) (pdv(tilde(L), dot(Q)_i))_(Q, dot(Q))\
 $
 所以
 $
-  pdv(tilde(H), Q_i) = - dv(, t) (pdv(q_i, Q_i))_(Q,P) = - dot(P)_i
+  pdv(tilde(H), Q_i) = - dv(, t) (pdv(tilde(L), dot(Q)_i))_(Q, dot(Q)) = - dot(P)_i
 $
 得到的运动微分方程仍然为正则方程，因此，*点变换是正则变换*。
 
@@ -116,7 +116,7 @@ $
                              & = - lambda dot(p)_i + dv(, q_i) (dv(f, t)) \
                              & = - dv(, t)(P_i + pdv(f, q_i)) = - dot(P)_i
 $
-正则方程仍成立。因此，*坐标不变而形的动量变换是正则变换*。
+正则方程仍成立。因此，*坐标不变的动量变换是正则变换*。
 
 === 接触变换
 
@@ -130,7 +130,7 @@ $
   q_i = q_i (Q_1, ..., Q_s, P_1, ..., P_s, t), i = 1, ..., s\
   p_i = p_i (Q_1, ..., Q_s, P_1, ..., P_s, t), i = 1, ..., s
 $
-这当 然比起点变换或广义动量变换要普遍得多。此时，新的变量空间下正则方程不一定满足。若要  求新的变量满足Hamilton方程，即新一组变量是新的正则变量，就必须有一定的条件加以限制。
+这当然比起点变换或广义动量变换要普遍得多。此时，新的变量空间下*正则方程不一定满足*。若要求新的变量满足Hamilton方程，即新一组变量是新的正则变量，就必须有一定的条件加以限制。
 
 === 正则变换
 
@@ -215,7 +215,7 @@ $
   Q_i = Q_i (q_1, ..., q_s, p_1, ..., p_s, t), i = 1, ..., s\
   P_i = P_i (q_1, ..., q_s, p_1, ..., p_s, t), i = 1, ..., s
 $
-的接触变换，这时总可以得到新的Hamilton量
+的*接触变换*，这时总可以得到新的Hamilton量
 $
   H^* (Q_1, ..., Q_s, P_1, ..., P_s, t) = H(q_1, ..., q_s, p_1, ..., p_s, t)
 $
@@ -236,7 +236,7 @@ $
   lambda (sum_(i=1)^s p_i dot(q)_i - H) = sum_(i=1)^s P_i dot(Q)_i - H^* + dv(F(q_1, ..., q_s, Q_1, ..., Q_s, t), t)
 $
 其中，$F$是适当的新的和旧的广义坐标的函数。实际上，这就是判断正则变换的*充要条件*。它的严格证明超出了本课程的范围，我们不在这里给出。只给出以下几点说明。
-- 对于Lagrange量一般正则变换使得
+- 正则变换的充要条件就给出了再坐标变换前后Lagrange量之间的关系
   $
     L^* (Q_1, dot(Q)_1, ..., Q_s, dot(Q)_s, t) = lambda L(q_1, dot(q)_1, ..., q_s, dot(q)_s, t) - dv(F(q_1, ..., q_s, Q_1, ..., Q_s, t), t)
   $
@@ -327,13 +327,13 @@ $
 $
   (pdv(F_1, t))_(q,Q) = (pdv(F_2, t))_(q,P) = (pdv(F_3, t))_(p,Q) = (pdv(F_4, t))_(p,P) = H^* - H
 $
-看起来相似，但细节不同，可以验证它们相同，如
+看起来相似，但细节不同。可以验证它们值相同，如
 $
   (pdv(F_3, t))_(p,Q) &= (pdv(F_1, t))_(p,Q) - (pdv(, t) sum_i p_i q_i)_(p,Q)\
   &= (pdv(F_1, t))_(q,Q) + sum_(i=1)^s (pdv(F_1, q_i))_(Q, t) (pdv(q_i, t))_(p,Q) - sum_(i=1)^s p_i (pdv(q_i, t))_(p,Q)\
   &= (pdv(F_1, t))_(q,Q)
 $
-利用上述四种形式的变换不仅能用来判定正则变换，而且能用生成函数简洁地给定一个正则变换。但是上述四种形式并非囊括所有正则变换的情况，还有其他形式的正则变换，这里不再列举。有些情况，生成函数是存在的，且不恒等于零，只是难以表为显函数。
+*利用上述四种形式的变换不仅能用来判定正则变换，而且能用生成函数简洁地给定一个正则变换。*但是上述四种形式并非囊括所有正则变换的情况，还有其他形式的正则变换，这里不再列举。有些情况，生成函数是存在的，且不恒等于零，只是难以表为显函数。
 
 #example(subname: [点变换])[
   任何点变换
@@ -588,7 +588,7 @@ $cal(U)$是实正交矩阵，则
 $
   r'_i = sum_j U_(i j)(t) r_j
 $
-显然这是点变换，是正则变换，可选看生成函数的第二种形式
+显然这是点变换，是正则变换，可选生成函数的第二种形式
 $
   F_2 = sum_(i j) U_(i j)(t) p'_i r_j
 $
@@ -935,19 +935,21 @@ $
 $
   {F, G}_(q,p) = {F', G'}_(Q,P)
 $
-因此，在正则变换下Poisson括号下角标都可以忽略。
+因此，*在正则变换下Poisson括号下角标都可以忽略*。
 
 那些在原来正则坐标下得到的Poisson括号值，对正则变换后的新正则变量都成立。如
 $
   {Q_j, Q_k}_(q,p) = {P_j, P_k}_(q,p) = 0\
   {Q_j, P_k}_(q,p) = - {P_j, Q_k}_(q,p) = delta_(j k)
 $
-反过来，对于某一变换，如果新的正则变量满足
+反过来，对于某一变换，*如果新的正则变量满足*
 $
   {Q_j, Q_k}_(q,p) = {P_j, P_k}_(q,p) = 0\
   {Q_j, P_k}_(q,p) = - {P_j, Q_k}_(q,p) = delta_(j k)
 $
-则该变换为正则变换，这是正则变换的又一个判据。对于正则变换，由于Poisson括号无论对原来  正则变量还是新的正则变量结果相同，以后Poisson括号右下变量角标可以缺省。
+*则该变换为正则变换，这是正则变换的又一个判据。*
+
+对于正则变换，由于Poisson括号无论对原来正则变量还是新的正则变量结果相同，以后Poisson括号右下变量角标可以缺省。
 
 还可得到
 $
@@ -966,7 +968,7 @@ $
 $
   integral dd(q, p) = integral dd(Q, P) = "const" => integral.cont p dd(q) = integral.cont P dd(Q) = "const"
 $
-其中用到格林公式
+其中用到Green公式
 $
   integral.cont_c (X dd(x) + Y dd(y)) = integral.cont_s (pdv(Y, x) - pdv(X, y)) dd(x, y)
 $
@@ -977,7 +979,7 @@ $
 
 正则变换的目的是使尽可能多的正则变量成为循环坐标，以得到尽可能多的循环积分，使正则方程变得比较容易求解。
 
-最极端的情况是使所有正则变量都成为循环坐标，即作一正则变换，使得新的Hamilton 量为零，$H^* =0$，于是
+最极端的情况是*使所有正则变量都成为循环坐标*，即作一*正则变换*，*使得新的Hamilton 量为零，$H^* =0$*，于是
 $
   dot(Q)_i = dot(P)_i = 0 => Q_i = xi_i = "const", P_i = eta_i = "const"
 $
@@ -985,7 +987,7 @@ $
 
 对于$s$自由度系统，利用第二种正则变换充分条件
 $
-  sum_(i = 1)^s (p_i dd(q_i) - P_i dd(Q_i)) + (H - H^*) dd(t) = dd(F_2 (q_1, ..., q_s, P_1, ..., P_s, t))
+  sum_(i = 1)^s (p_i dd(q_i) + Q_i dd(P_i)) + (H - H^*) dd(t) = dd(F_2 (q_1, ..., q_s, P_1, ..., P_s, t))
 $
 希望在经过正则变换以后，得到$H^* = 0$，即所有正则变量都是循环坐标。这就要求生成函数
 $
@@ -1007,7 +1009,7 @@ $
 $
   H(q_1, pdv(S, q_1), ..., q_s, pdv(S, q_s), t) + pdv(S, t) = 0
 $
-这就是著名的*Hamilton-Jacobi方程*，$S$称为Hamilton主函数。
+这就是著名的*Hamilton-Jacobi方程*，$S$称为*Hamilton主函数*。
 #theorem(subname: [Hamilton-Jacobi方程])[
   Hamilton-Jacobi方程为
   $
@@ -1016,7 +1018,7 @@ $
   其中$S(q_1, eta_1, ..., q_s, eta_s, t)$是Hamilton主函数，$eta_i$是积分常数。
 ]
 
-一方面，Hamilton主函数是正则变换中的生成函数；另一方面，容易求得
+一方面，*Hamilton主函数是正则变换中的生成函数*；另一方面，容易求得
 $
   dv(S, t) = sum_i pdv(S, q_i) dot(q)_i + pdv(S, t) = sum_i p_i dot(q)_i - H
 $
@@ -1024,9 +1026,9 @@ $
 $
   S = integral L dd(t)
 $
-实际上，这就是积分限不确定的Hamilton作用量。
+实际上，这就是*积分限不确定的Hamilton作用量*。
 
-我们还可以利用其他的正则变换形式，得到类似于Hamilton-雅可比方程的方程，如，利用第一、三种和第四种正则变换形式推导。由第一种和第二种正则变换得到的Hamilton主函数同样都是积分限不确定的Hamilton作用量，但由第三种和第四种正则变换得到的Hamilton主函数，其含义不同。
+我们还可以利用其他的正则变换形式，得到类似于Hamilton-Jacobi方程的方程，如，利用第一、三种和第四种正则变换形式推导。由第一种和第二种正则变换得到的Hamilton主函数同样都是积分限不确定的Hamilton作用量，但由第三种和第四种正则变换得到的Hamilton主函数，其含义不同。
 
 === Hamilton-Jacobi方程的解法
 
@@ -1051,7 +1053,7 @@ $
 $
 是其隐函数形式。这两是也是正则变换关系，被称为*Hamilton-Jacobi定理*。
 
-对于某些问题，可设$S$具有分离变量的形式
+对于某些问题，可设*$S$具有分离变量的形式*
 $
   S(q,eta,t) = - E t + W + C
 $
@@ -1077,7 +1079,7 @@ $
   $
     H = p_r^2/(2m) + p_theta^2/(2m r^2) - alpha/r
   $
-  其中$p_theta$为角动量，是循环积分；同样，Hamilton量不显含时间，因此Hamilton量守恒，此时为能量守恒。
+  其中$p_theta$为角动量，是循环积分；同样，Hamilton量不显含时间，因此Hamilton量守恒此时为能量守恒。
 
   于是Hamilton-Jacobi方程为
   $
@@ -1112,7 +1114,7 @@ $
   $
   令$P_1=E,P_2=J$，即$P_1, P_2$分别是能量$E$和角动量$J$。根据生成函数的性质及上面结果
   $
-    Q_1 = pdv(S, P_1) = pdv(S, E) = - t plus.minus integral m/dd(r) sqrt(2m(E + alpha/r) - J^2/r^2)\
+    Q_1 = pdv(S, P_1) = pdv(S, E) = - t plus.minus integral (m dd(r))/sqrt(2m(E + alpha/r) - J^2/r^2)\
   $
   可设$Q_1=-t_0$，$t_0$是计算$t$的零点
   $
@@ -1136,7 +1138,7 @@ $
   $
 ]
 #newpara()
-Hamilton量不显含时间的情况，即$pdv(H, t) = 0$的情况下(这是相当常见的一大类情况)，可对Hamilton主函数进行分离变量
+*Hamilton量不显含时间的情况*，即$pdv(H, t) = 0$的情况下(这是相当常见的一大类情况)，可*对Hamilton主函数进行分离变量*
 $
   S(q_1, ..., q_s, P_1, ..., P_s, t) = - alpha_1 t + W(q_1, ..., q_s, P_1, ..., P_s) + C
 $
@@ -1160,7 +1162,7 @@ $
 $
   H(q_1, pdv(W, q_1), ..., q_s, pdv(W, q_s)) = H^* = alpha_1
 $
-称为Hamilton-Jacobi方程的第二种形式。此时生成函数$W$称为*Hamilton特性函数*。它的时间微分
+称为*Hamilton-Jacobi方程的第二种形式*。此时生成函数$W$称为*Hamilton特性函数*。它的时间微分
 $
   dv(W, t) = sum_i pdv(W, q_i) dot(q)_i = sum_i p_i dot(q)_i = L + H
 $
@@ -1233,7 +1235,7 @@ $
 === Hamilton-Jacobi方程的意义
 
 - 给出了解正则方程和正则变换的又一种方法，可与其他方法互为补充。
-  - 在处理简单问题时，看 不出其优越性，但处理较复杂问题，例如三体问题，Hamilton-Jacobi方程就有优势。
+  - 在处理简单问题时，看不出其优越性，但处理较复杂问题，例如三体问题，Hamilton-Jacobi方程就有优势。
 - 处理质点系力学问题，都会用到常微分方程(组)，例如，Newton方程、Lagrange方程、正则方程等，而Hamilton-Jacobi方程是偏微分方程，可用来处理无限多个自由度的力学体系问题，例如波、连续介质等。
   - 常微分方程(组)和偏微分方程之间的联系，或许是一种启示：粒子和波之间可能有某种联系。
   - 事实上，Hamilton-Jacobi方程在量子力学的建立过程中，起到重要的作用，Schrödinger方程的发现与Hamilton-Jacobi方程密切相关。
@@ -1248,7 +1250,7 @@ $
 $
   tilde(H) = tilde(H)(I)
 $
-这时$I$就是循环积
+这时$I$就是循环积分
 $
   dot(I) = - pdv(tilde(H), Psi) = 0 => I = "const"
 $
@@ -1271,7 +1273,7 @@ $
 $
   integral.cont p dd(q) = integral.cont I dd(Psi)
 $
-按上面的约定$Psi -> 0 tilde 2pi$，相当于在$(q,p)$相空间经历闭合路径，沿此闭合路径积分就是对一个周期运动进行积分。由于$I$是常数，得到作用量
+按上面的约定$Psi -> 0 tilde 2pi$，相当于在$(q,p)$相空间经历闭合路径，沿此闭合路径积分就是对一个周期运动进行积分。由于$I$是常数，得到*作用量*
 $
   I = 1/(2pi) integral.cont p dd(q) = 1/(2pi) integral.double_Omega dd(q, p)
 $
@@ -1410,7 +1412,7 @@ $
 $
   expval(dot(I)) approx - dot(alpha)/(2pi) (pdv(tilde(W)(q, 0, alpha(T)), alpha) - pdv(tilde(W)(q, 0, alpha(0)), alpha)) approx - dot(alpha)/(2pi) pdv(tilde(W), alpha, 2) T approx 0
 $
-即作用量在一个准周期内的变化是$alpha(t)$变化量的二阶小量。利用这个结果，就是所谓的*绝热近似*。
+即*作用量在一个准周期内的变化是$alpha(t)$变化量的二阶小量*。利用这个结果，就是所谓的*绝热近似*。
 
 #example(subname: [摆长缓慢变化的单摆])[
   摆长$l$缓慢变化的单摆能量如何变化。
@@ -1441,7 +1443,7 @@ $
   $
   也可以讨论最大幅角变化规律，因
   $
-    theta_m = sqrt(2 E/(m g l)) prop l^(-3/4)
+    theta_m = sqrt((2 E)/(m g l)) prop l^(-3/4)
   $
   所以有
   $
