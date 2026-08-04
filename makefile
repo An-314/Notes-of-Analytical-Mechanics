@@ -16,18 +16,38 @@ else
 endif
 # ----------------------------------------
 
-MAIN := main.pdf
-HW_SRC := $(wildcard HW/*.typ)
-HW_PDF := $(HW_SRC:.typ=.pdf)
+BUILD_DIR := builds
+MAIN_SRC := main.typ
+MAIN_PDF := $(BUILD_DIR)/main.pdf
 CHAPS := $(wildcard chap*.typ)
 
-all: $(MAIN) $(HW_PDF)
+# 基本变量
+BUILD_DIR := builds
 
-$(MAIN): main.typ $(CHAPS)
-	typst compile main.typ
+MAIN_SRC := main.typ
+MAIN_PDF := $(BUILD_DIR)/main.pdf
 
-HW/%.pdf: HW/%.typ
-	typst compile $<
+CHAPS := $(wildcard chap*.typ)
+
+# HW 部分
+HW_SRC := $(wildcard HW/*.typ)
+HW_PDF := $(patsubst HW/%.typ,$(BUILD_DIR)/HW/%.pdf,$(HW_SRC))
+
+.PHONY: all clean
+
+all: $(MAIN_PDF) $(HW_PDF)
+
+# 编译主文档
+$(MAIN_PDF): $(MAIN_SRC) $(CHAPS)
+	$(call MKDIR_P,$(dir $@))
+	typst compile $< $@
+
+# 编译每个 HW
+$(BUILD_DIR)/HW/%.pdf: HW/%.typ
+	$(call MKDIR_P,$(dir $@))
+	typst compile $< $@
 
 clean:
-	$(call RM_RF,$(MAIN) $(HW_PDF))
+	$(call RM_RF,$(BUILD_DIR))
+
+-include ./notes.mk
