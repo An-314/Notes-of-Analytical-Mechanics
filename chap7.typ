@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 = Hamilton动力学
 
@@ -22,11 +22,11 @@
 
 Legendre变换是一个实变量的实值凸函数的对合变换，它把一个变量的函数变换为另一个变量的函数。设$f(x)$是$x$的凸函数，定义$y = dv(f, x)$，则Legendre变换定义为
 $
-  g(y) = min_x (f(x) - x y) = eval(f(x) - x y)_(x: dv(f, x) = y)
+  g(y) = min_x (f(x) - x y) = evaluated(f(x) - x y)_(x: dv(f, x) = y)
 $
 此时$f(x)$和$g(y)$互为Legendre变换，即
 $
-  f(x) = min_y (g(y) + x y) = eval(g(y) + x y)_(y: dv(g, y) = -x)
+  f(x) = min_y (g(y) + x y) = evaluated(g(y) + x y)_(y: dv(g, y) = -x)
 $
 事实上，这就是说：如果$y = dv(f, x)$，则$x = -dv(g, y)$。对于二元函数
 $

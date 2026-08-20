@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 = 刚体绕定点的转动
 
@@ -1111,14 +1111,14 @@ $
       dot(u)^2 = (1 - u)^2 (beta (1 + u) - (a^2)(1 + u)) = (1 - u)^2 (beta - a^2)(1 + u) = 0
     $
     显然$u = +1$只能是重根，因此这个情形不合理。
-  - $u_1 = 1$是$f(u)$的根又是拐点，因此$f(1)=0, f'(1)=0, f''(1)=0$即这个根是三重根。这要求$a=b, alpha = beta$另外满足$a^2/beta = 2$。此时$theta = 0, eval(dot(theta))_(theta=0) = 0, eval(dot.double(theta))_(theta=0) = 0$，因此*陀螺将保持直立转动*的不稳定运动，会逐渐恢复到$theta = 0$的状态，之后再次偏离，如此反复
+  - $u_1 = 1$是$f(u)$的根又是拐点，因此$f(1)=0, f'(1)=0, f''(1)=0$即这个根是三重根。这要求$a=b, alpha = beta$另外满足$a^2/beta = 2$。此时$theta = 0, evaluated(dot(theta))_(theta=0) = 0, evaluated(dot.double(theta))_(theta=0) = 0$，因此*陀螺将保持直立转动*的不稳定运动，会逐渐恢复到$theta = 0$的状态，之后再次偏离，如此反复
   - $u_1 = cos theta_1$是切点，因此是重根。此时
     $
       f(u) = beta (u - u_1)^2 (u - u_2)
     $
-    容易得到$theta = theta_1, eval(dot(theta))_(theta=theta_1) = 0, eval(dot.double(theta))_(theta=theta_1) = 0$，因此*因此陀螺作无章动的进动*，进动角速度为
+    容易得到$theta = theta_1, evaluated(dot(theta))_(theta=theta_1) = 0, evaluated(dot.double(theta))_(theta=theta_1) = 0$，因此*因此陀螺作无章动的进动*，进动角速度为
     $
-      eval(dot(phi))_(theta=theta_1) = (b - a cos theta_1) / (sin^2 theta_1)
+      evaluated(dot(phi))_(theta=theta_1) = (b - a cos theta_1) / (sin^2 theta_1)
     $
 - $f(u)$在区间$[-1,+1]$有两个根且有解的可能情形
   #figure(

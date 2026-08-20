@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 = 绪论
 
@@ -15,7 +15,7 @@ $
 $
 则*限制在有限区域*
 $
-  overline(dv(, t) (sum_i vb(x)_i dot vb(p)_i)) = lim_(tau -> oo) 1/tau eval((sum_i vb(x)_i dot vb(p)_i))_0^tau = 0
+  overline(dv(, t) (sum_i vb(x)_i dot vb(p)_i)) = lim_(tau -> oo) 1/tau evaluated((sum_i vb(x)_i dot vb(p)_i))_0^tau = 0
 $
 就得到了Viral定理
 #theorem(subname: [Viral 定理])[

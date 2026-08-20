@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 = Hamilton原理与变分方法
 
@@ -73,7 +73,7 @@ $
 $
 利用分部积分
 $
-  integral_(x_1)^(x_2) pdv(f, y') dv(delta y, x) dd(x) = eval((pdv(f, y') delta y))_(x_1)^(x_2) - integral_(x_1)^(x_2) dv(, x)pdv(f, y') delta y dd(x)
+  integral_(x_1)^(x_2) pdv(f, y') dv(delta y, x) dd(x) = evaluated((pdv(f, y') delta y))_(x_1)^(x_2) - integral_(x_1)^(x_2) dv(, x)pdv(f, y') delta y dd(x)
 $
 由于端点固定，$delta y(x_1) = delta y(x_2) = 0$，所以
 $
@@ -403,7 +403,7 @@ $
 $
 利用Green公式可知
 $
-  integral.double_S (pdv(, x) (pdv(F, z_x) delta z) + pdv(, y) (pdv(F, z_y) delta z)) dd(x) dd(y) = integral.cont_Gamma (-pdv(F, z_y) dd(x) + pdv(F, z_x) dd(y)) = 0 \ (eval((delta z))_Gamma = 0)
+  integral.double_S (pdv(, x) (pdv(F, z_x) delta z) + pdv(, y) (pdv(F, z_y) delta z)) dd(x) dd(y) = integral.cont_Gamma (-pdv(F, z_y) dd(x) + pdv(F, z_x) dd(y)) = 0 \ (evaluated((delta z))_Gamma = 0)
 $
 且有
 $

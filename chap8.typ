@@ -1,5 +1,4 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.7": *
+#import "@preview/scripst:1.1.2": *
 
 = 正则变换与参考系变换
 
@@ -153,11 +152,11 @@ $
 是另一个适当的以新的正则变量为自变量的Hamilton量，那么这种变换就叫作正则变换。
 - $2s$个变量${q_i, p_i}$成为正则变量，就要求用它们来描述的力学体系的动力学方程为正则方程，其中Hamilton量为
   $
-    H = H(q_1, p_1, ..., q_s, p_s, t) = eval(sum_(i=1)^s p_i dot(q)_i - L(q_1, dot(q)_1, ..., q_s, dot(q)_s, t))_(dot(q)_i = dot(q)_i (q,p,t))\
+    H = H(q_1, p_1, ..., q_s, p_s, t) = evaluated(sum_(i=1)^s p_i dot(q)_i - L(q_1, dot(q)_1, ..., q_s, dot(q)_s, t))_(dot(q)_i = dot(q)_i (q,p,t))\
   $
   而新的$2s$个变量${Q_i, P_i}$也成为正则变量，就要求用它们来描述的同一力学体系的动力学方程也是正则方程，但其中的$H^*$可以是另一个Hamilton量
   $
-    H^* = H^*(Q_1, P_1, ..., Q_s, P_s, t) = eval(sum_(i=1)^s P_i dot(Q)_i - L^*(Q_1, dot(Q)_1, ..., Q_s, dot(Q)_s, t))_(dot(Q)_i = dot(Q)_i (Q,P,t))\
+    H^* = H^*(Q_1, P_1, ..., Q_s, P_s, t) = evaluated(sum_(i=1)^s P_i dot(Q)_i - L^*(Q_1, dot(Q)_1, ..., Q_s, dot(Q)_s, t))_(dot(Q)_i = dot(Q)_i (Q,P,t))\
   $
   一般说$H^* != H$，并且$sum_i P_i dot(Q)_i != sum_i p_i dot(q)_i$，以及$L^* != L$。
 - 考虑了正则变换，广义坐标和广义动量间已经没有不可逾越的界限。新的Hamilton量与正则变量的变换方式相关(但必定对新的正则变量给出新的正则方程)，$L^*$可能不再等于$T-V$(但对于新的广义坐标和广义速度给出新的Lagrange方程)。
@@ -1406,7 +1405,7 @@ $
 $
 由于$alpha(t)$缓慢随时间变化，因此可以近似地认为，一个周期$T$过后，其变化率基本不变，即$dot(alpha)(0) approx dot(alpha)(T)$，于是
 $
-  expval(dot(I)) & = - 1/(2 pi) dot(alpha) eval(pdv(tilde(W), alpha))_0^(2pi) approx - dot(alpha)/(2pi) (pdv(tilde(W)(q, 2pi, alpha(T)), alpha) - pdv(tilde(W)(q, 0, alpha(0)), alpha)) \
+  expval(dot(I)) & = - 1/(2 pi) dot(alpha) evaluated(pdv(tilde(W), alpha))_0^(2pi) approx - dot(alpha)/(2pi) (pdv(tilde(W)(q, 2pi, alpha(T)), alpha) - pdv(tilde(W)(q, 0, alpha(0)), alpha)) \
 $
 由于它是振动，而$tilde(W)$对于$Psi$是周期函数，因此上式可以简化为
 $

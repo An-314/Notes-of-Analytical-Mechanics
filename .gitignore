@@ -1,2 +1,6 @@
 files/
-*.pdf
+builds/
+files/
+HW/*.pdf
+notes.mk
+!HW/HW.pdf

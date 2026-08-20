@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 = 微振动
 
@@ -10,15 +10,15 @@
 
 考虑一维运动，粒子的势能形式为$V=V(q)$。对于其平衡点$q_0$，有
 $
-  eval(pdv(V, q))_(q=q_0) = 0
+  evaluated(pdv(V, q))_(q=q_0) = 0
 $
 在$q_0$附近做Taylor展开，有
 $
-  V(q) = V(q_0) + 1/2 eval(pdv(V, q, 2))_(q=q_0) (q - q_0)^2 + ...
+  V(q) = V(q_0) + 1/2 evaluated(pdv(V, q, 2))_(q=q_0) (q - q_0)^2 + ...
 $
 粒子稳定平衡条件为
 $
-  eval(pdv(V, q, 2))_(q=q_0) > 0
+  evaluated(pdv(V, q, 2))_(q=q_0) > 0
 $
 当势能函数$V(q)$在$q_0$附近呈现出一个向上的抛物线形状时，质点在平衡位置附近会做简谐振动。取到二阶项近似，有
 $
@@ -204,7 +204,7 @@ $
 $
   q_0 = A cos tau
 $
-由于$tau$中含有待定常量$phi$，因此初始条件已经隐含在$q_0$中了。不妨有$eval(q)_(tau = 0) = A, eval(q')_(tau = 0) = 0$。
+由于$tau$中含有待定常量$phi$，因此初始条件已经隐含在$q_0$中了。不妨有$evaluated(q)_(tau = 0) = A, evaluated(q')_(tau = 0) = 0$。
 $
   q''_1 + q_1 & = (2 omega_1)/omega_0 q_0 - q_0^2/omega_0^2 \
               & = 2 omega_1/omega_0 A cos tau - (A^2 (1 + cos 2 tau))/(2 omega_0^2)
@@ -383,15 +383,15 @@ $
 $
 设平衡位置$q_alpha = 0$则
 $
-  eval(pdv(V, q_alpha))_(q_1,q_2,...,q_s=0) = 0, alpha = 1,2,...,s
+  evaluated(pdv(V, q_alpha))_(q_1,q_2,...,q_s=0) = 0, alpha = 1,2,...,s
 $
 Taylor展开
 $
-  V = V(0,0,...,0) + 1/2 sum_(alpha,beta) eval(pdv(V, q_alpha, q_beta))_(0,0,...,0) q_alpha q_beta + ...
+  V = V(0,0,...,0) + 1/2 sum_(alpha,beta) evaluated(pdv(V, q_alpha, q_beta))_(0,0,...,0) q_alpha q_beta + ...
 $
 选择势能零点为$V(0,0,...,0) = 0$，令
 $
-  v_(alpha beta) = eval(pdv(V, q_alpha, q_beta))_(0,0,...,0) = v_(beta alpha)
+  v_(alpha beta) = evaluated(pdv(V, q_alpha, q_beta))_(0,0,...,0) = v_(beta alpha)
 $
 对于微小振动，略去高阶小量，对于稳定平衡点总有
 $

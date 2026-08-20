@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 #show: scripst.with(
   template: "book",
@@ -9,6 +9,8 @@
   content-depth: 3,
   matheq-depth: 3,
   lang: "zh",
+  font-size: 12pt,
+  par-leading: 0.8em,
 )
 
 #include "chap1.typ"

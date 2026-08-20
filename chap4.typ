@@ -1,4 +1,4 @@
-#import "@preview/scripst:1.1.1": *
+#import "@preview/scripst:1.1.2": *
 
 = 有心力
 
@@ -159,11 +159,11 @@ $
   $
   且有
   $
-    eval(Q_i)_(s_1 , s_2, ..., s_n -> 0) = q_i
+    evaluated(Q_i)_(s_1 , s_2, ..., s_n -> 0) = q_i
   $
   在$s_i=0$附近，考虑无穷小变换$delta s_i$，导致广义坐标的无穷小变化为
   $
-    Q_i = q_i + sum_j delta s_j eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0)
+    Q_i = q_i + sum_j delta s_j evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0)
   $
   系统的Lagrange量关于该变换不变，即
   $
@@ -172,11 +172,11 @@ $
   左式Taylor展开得
   $
     L(q_1, q_2, ..., q_k, dot(q)_1, dot(q)_2, ..., dot(q)_k, t) \
-    + sum_j sum_i (pdv(L, q_i) eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, s_j))_(s_1 , s_2, ..., s_n = 0)) delta s_j
+    + sum_j sum_i (pdv(L, q_i) evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) + pdv(L, dot(q)_i) evaluated(pdv(dot(Q)_i, s_j))_(s_1 , s_2, ..., s_n = 0)) delta s_j
   $
   从而有
   $
-    sum_i (pdv(L, q_i) eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, s_j))_(s_1 , s_2, ..., s_n = 0)) = 0
+    sum_i (pdv(L, q_i) evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) + pdv(L, dot(q)_i) evaluated(pdv(dot(Q)_i, s_j))_(s_1 , s_2, ..., s_n = 0)) = 0
   $
   且
   $
@@ -188,14 +188,14 @@ $
   $
   代入有
   $
-    dv(, t) sum_i pdv(L, dot(q)_i) eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) = 0\
-    sum_i p_i eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) = "const"
+    dv(, t) sum_i pdv(L, dot(q)_i) evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) = 0\
+    sum_i p_i evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) = "const"
   $
-  其中$eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0)$是无穷小变换的生成元。
+  其中$evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0)$是无穷小变换的生成元。
 
   这就证明了系统Lagrange量在$n$个连续变换参数$s_i$对应的对称变换下不变，就存在$n$个守恒量
   $
-    sum_i p_i eval(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) = "const"
+    sum_i p_i evaluated(pdv(Q_i, s_j))_(s_1 , s_2, ..., s_n = 0) = "const"
   $
 ]
 
@@ -245,7 +245,7 @@ $
     $
       L(q, dot(q)) & = L'(q', dot(q)') \
                    & = 1/2 m (dot(x)'^2 + dot(y)'^2 + dot(z)'^2) - e B dot(y)' x' - e B delta theta (x' dot(x)' - y' dot(y)') \
-                   & = L(q', dot(q')) - 1/2 e B delta theta dv(, t) eval((x'^2 - y'^2))_(theta -> 0)
+                   & = L(q', dot(q')) - 1/2 e B delta theta dv(, t) evaluated((x'^2 - y'^2))_(theta -> 0)
     $
     即
     $
@@ -255,7 +255,7 @@ $
     Taylor展开得
     $
       L(q', dot(q')) & = L(q, dot(q)) + sum_i delta q_i pdv(L, q_i) + sum_i delta dot(q)_i pdv(L, dot(q)_i) \
-      & = L(q, dot(q)) + delta theta sum_i (pdv(L, q_i) eval(pdv(Q_i, theta))_(theta -> 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, theta))_(theta -> 0))
+      & = L(q, dot(q)) + delta theta sum_i (pdv(L, q_i) evaluated(pdv(Q_i, theta))_(theta -> 0) + pdv(L, dot(q)_i) evaluated(pdv(dot(Q)_i, theta))_(theta -> 0))
     $
     以及
     $
@@ -263,18 +263,18 @@ $
     $
     对比有
     $
-      sum_i (pdv(L, q_i) eval(pdv(Q_i, theta))_(theta -> 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, theta))_(theta -> 0)) + dv(, t) f(q', t) = 0
+      sum_i (pdv(L, q_i) evaluated(pdv(Q_i, theta))_(theta -> 0) + pdv(L, dot(q)_i) evaluated(pdv(dot(Q)_i, theta))_(theta -> 0)) + dv(, t) f(q', t) = 0
     $
     其中
     $
       p_x = pdv(L, dot(x)) = m dot(x) , p_y = pdv(L, dot(y)) = m dot(y) - e B x, p_z = pdv(L, dot(z)) = m dot(z)\
-      eval(pdv(x', theta)) = y , eval(pdv(y', theta)) = - x , eval(pdv(z', theta)) = 0
+      evaluated(pdv(x', theta)) = y , evaluated(pdv(y', theta)) = - x , evaluated(pdv(z', theta)) = 0
     $
     最终得到
     $
-      sum_i p_i eval(pdv(Q_i, theta))_(theta -> 0) + f(q', t) & = m dot(x) y - (m dot(y) - e B x) x - 1/2 e B (x^2 - y^2) \
-                                                              & = m (x dot(y) - y dot(x)) + e B (x^2 + y^2)/2 \
-                                                              & = l_z + 1/2 e B (x^2 + y^2) = "const"
+      sum_i p_i evaluated(pdv(Q_i, theta))_(theta -> 0) + f(q', t) & = m dot(x) y - (m dot(y) - e B x) x - 1/2 e B (x^2 - y^2) \
+      & = m (x dot(y) - y dot(x)) + e B (x^2 + y^2)/2 \
+      & = l_z + 1/2 e B (x^2 + y^2) = "const"
     $
     #note[
       事实上这里Lagrange量并不严格不变，而是多了一个时间导数项，但形式一致，仍然可以应用Noether定理。
@@ -297,11 +297,11 @@ $
     $
     从而有
     $
-      sum_i (pdv(L, q_i) eval(pdv(Q_i, a_x))_(a_x -> 0) + pdv(L, dot(q)_i) eval(pdv(dot(Q)_i, a_x))_(a_x -> 0)) + dv(, t) f(q', t) = 0
+      sum_i (pdv(L, q_i) evaluated(pdv(Q_i, a_x))_(a_x -> 0) + pdv(L, dot(q)_i) evaluated(pdv(dot(Q)_i, a_x))_(a_x -> 0)) + dv(, t) f(q', t) = 0
     $
     且
     $
-      eval(pdv(f, a_x))_(a_x -> 0) = e B y
+      evaluated(pdv(f, a_x))_(a_x -> 0) = e B y
     $
     从而有
     $
